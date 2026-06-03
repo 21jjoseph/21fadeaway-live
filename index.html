@@ -582,6 +582,13 @@
     margin-top: 18px;
   }
 
+  .product-actions {
+    display: grid;
+    grid-template-columns: 68px auto;
+    align-items: center;
+    gap: 8px;
+  }
+
   .product-price {
     color: var(--ink);
     font-size: 1rem;
@@ -603,6 +610,27 @@
     padding: 8px 15px;
     font-size: 0.84rem;
     font-weight: 850;
+  }
+
+  .qty-select {
+    width: 68px;
+    min-height: 36px;
+    border: 1px solid var(--hairline-soft);
+    border-radius: 999px;
+    background: #101012;
+    color: var(--ink);
+    font: inherit;
+    font-size: 0.78rem;
+    font-weight: 850;
+    padding: 7px 10px;
+    outline: none;
+    color-scheme: dark;
+    cursor: pointer;
+  }
+
+  .qty-select:focus {
+    border-color: rgba(244, 241, 234, 0.28);
+    box-shadow: 0 0 0 3px rgba(177, 18, 38, 0.12);
   }
 
   .sold-label {
@@ -1387,6 +1415,12 @@
       margin-top: 12px;
     }
 
+    .product-actions {
+      width: 100%;
+      grid-template-columns: 58px minmax(0, 1fr);
+      gap: 7px;
+    }
+
     .product-price {
       font-size: 0.86rem;
     }
@@ -1400,6 +1434,13 @@
       min-height: 32px;
       padding: 7px 10px;
       font-size: 0.74rem;
+    }
+
+    .qty-select {
+      width: 58px;
+      min-height: 32px;
+      padding: 6px 8px;
+      font-size: 0.72rem;
     }
 
     .sold-label {
@@ -1593,23 +1634,23 @@
   <div class="products-grid" id="productsGrid">
     <div class="product-card">
       <div class="product-img-wrap"><div class="product-visual" style="--product-tone:#18181c"><div class="product-visual-inner">Chrome</div></div><div class="product-badge">New</div></div>
-      <div class="product-info"><div class="product-name">Chrome Reaper Tee</div><div class="product-desc">Heavyweight cotton. Oversized, clean silhouette.</div><div class="product-footer"><div class="product-price">159 <span>RON</span></div><button class="add-btn" type="button" data-add-product="1">Add</button></div></div>
+      <div class="product-info"><div class="product-name">Chrome Reaper Tee</div><div class="product-desc">Heavyweight cotton. Oversized, clean silhouette.</div><div class="product-footer"><div class="product-price">159 <span>RON</span></div><div class="product-actions"><select class="qty-select" data-product-qty aria-label="Quantity for Chrome Reaper Tee"><option value="1">1x</option><option value="2">2x</option><option value="3">3x</option><option value="4">4x</option><option value="5">5x</option></select><button class="add-btn" type="button" data-add-product="1">Add</button></div></div></div>
     </div>
     <div class="product-card">
       <div class="product-img-wrap"><div class="product-visual" style="--product-tone:#111114"><div class="product-visual-inner">Void</div></div><div class="product-badge limited">Limited</div></div>
-      <div class="product-info"><div class="product-name">Void Hoodie</div><div class="product-desc">450gsm fleece. Soft interior, structured hood.</div><div class="product-footer"><div class="product-price">289 <span>RON</span></div><button class="add-btn" type="button" data-add-product="2">Add</button></div></div>
+      <div class="product-info"><div class="product-name">Void Hoodie</div><div class="product-desc">450gsm fleece. Soft interior, structured hood.</div><div class="product-footer"><div class="product-price">289 <span>RON</span></div><div class="product-actions"><select class="qty-select" data-product-qty aria-label="Quantity for Void Hoodie"><option value="1">1x</option><option value="2">2x</option><option value="3">3x</option><option value="4">4x</option><option value="5">5x</option></select><button class="add-btn" type="button" data-add-product="2">Add</button></div></div></div>
     </div>
     <div class="product-card">
       <div class="product-img-wrap"><div class="product-visual" style="--product-tone:#1d1b20"><div class="product-visual-inner">21</div></div><div class="product-badge">New</div></div>
-      <div class="product-info"><div class="product-name">21 Logo Crewneck</div><div class="product-desc">Dropped shoulder. Minimal front mark.</div><div class="product-footer"><div class="product-price">219 <span>RON</span></div><button class="add-btn" type="button" data-add-product="3">Add</button></div></div>
+      <div class="product-info"><div class="product-name">21 Logo Crewneck</div><div class="product-desc">Dropped shoulder. Minimal front mark.</div><div class="product-footer"><div class="product-price">219 <span>RON</span></div><div class="product-actions"><select class="qty-select" data-product-qty aria-label="Quantity for 21 Logo Crewneck"><option value="1">1x</option><option value="2">2x</option><option value="3">3x</option><option value="4">4x</option><option value="5">5x</option></select><button class="add-btn" type="button" data-add-product="3">Add</button></div></div></div>
     </div>
     <div class="product-card">
       <div class="product-img-wrap"><div class="product-visual" style="--product-tone:#171316"><div class="product-visual-inner">Metal</div></div><div class="product-badge limited">Limited</div></div>
-      <div class="product-info"><div class="product-name">Metal Edge Cap</div><div class="product-desc">6-panel build. Adjustable matte hardware.</div><div class="product-footer"><div class="product-price">89 <span>RON</span></div><button class="add-btn" type="button" data-add-product="4">Add</button></div></div>
+      <div class="product-info"><div class="product-name">Metal Edge Cap</div><div class="product-desc">6-panel build. Adjustable matte hardware.</div><div class="product-footer"><div class="product-price">89 <span>RON</span></div><div class="product-actions"><select class="qty-select" data-product-qty aria-label="Quantity for Metal Edge Cap"><option value="1">1x</option><option value="2">2x</option><option value="3">3x</option><option value="4">4x</option><option value="5">5x</option></select><button class="add-btn" type="button" data-add-product="4">Add</button></div></div></div>
     </div>
     <div class="product-card">
       <div class="product-img-wrap"><div class="product-visual" style="--product-tone:#121217"><div class="product-visual-inner">Fadeaway</div></div><div class="product-badge">Drop</div></div>
-      <div class="product-info"><div class="product-name">Fadeaway Cargo</div><div class="product-desc">Ripstop nylon. Clean utility profile.</div><div class="product-footer"><div class="product-price">319 <span>RON</span></div><button class="add-btn" type="button" data-add-product="5">Add</button></div></div>
+      <div class="product-info"><div class="product-name">Fadeaway Cargo</div><div class="product-desc">Ripstop nylon. Clean utility profile.</div><div class="product-footer"><div class="product-price">319 <span>RON</span></div><div class="product-actions"><select class="qty-select" data-product-qty aria-label="Quantity for Fadeaway Cargo"><option value="1">1x</option><option value="2">2x</option><option value="3">3x</option><option value="4">4x</option><option value="5">5x</option></select><button class="add-btn" type="button" data-add-product="5">Add</button></div></div></div>
     </div>
     <div class="product-card">
       <div class="product-img-wrap"><div class="product-visual" style="--product-tone:#1a171a"><div class="product-visual-inner">Chrome</div></div><div class="product-badge sold">Sold out</div></div>
@@ -1617,11 +1658,11 @@
     </div>
     <div class="product-card">
       <div class="product-img-wrap"><div class="product-visual" style="--product-tone:#0e0e10"><div class="product-visual-inner">Spike</div></div><div class="product-badge limited">Limited</div></div>
-      <div class="product-info"><div class="product-name">Spike Collar</div><div class="product-desc">Zinc alloy. Adjustable polished finish.</div><div class="product-footer"><div class="product-price">79 <span>RON</span></div><button class="add-btn" type="button" data-add-product="7">Add</button></div></div>
+      <div class="product-info"><div class="product-name">Spike Collar</div><div class="product-desc">Zinc alloy. Adjustable polished finish.</div><div class="product-footer"><div class="product-price">79 <span>RON</span></div><div class="product-actions"><select class="qty-select" data-product-qty aria-label="Quantity for Spike Collar"><option value="1">1x</option><option value="2">2x</option><option value="3">3x</option><option value="4">4x</option><option value="5">5x</option></select><button class="add-btn" type="button" data-add-product="7">Add</button></div></div></div>
     </div>
     <div class="product-card">
       <div class="product-img-wrap"><div class="product-visual" style="--product-tone:#15151a"><div class="product-visual-inner">Reaper</div></div><div class="product-badge">New</div></div>
-      <div class="product-info"><div class="product-name">Reaper Shorts</div><div class="product-desc">360gsm cotton. Elastic waist.</div><div class="product-footer"><div class="product-price">169 <span>RON</span></div><button class="add-btn" type="button" data-add-product="8">Add</button></div></div>
+      <div class="product-info"><div class="product-name">Reaper Shorts</div><div class="product-desc">360gsm cotton. Elastic waist.</div><div class="product-footer"><div class="product-price">169 <span>RON</span></div><div class="product-actions"><select class="qty-select" data-product-qty aria-label="Quantity for Reaper Shorts"><option value="1">1x</option><option value="2">2x</option><option value="3">3x</option><option value="4">4x</option><option value="5">5x</option></select><button class="add-btn" type="button" data-add-product="8">Add</button></div></div></div>
     </div>
   </div>
 </section>
@@ -1794,7 +1835,10 @@ function handleProductAdd(event, fromTouch = false) {
     return true;
   }
 
-  addToCart(productId);
+  const productCard = addButton.closest(".product-card");
+  const qtySelect = productCard ? productCard.querySelector("[data-product-qty]") : null;
+  const quantity = qtySelect ? Number(qtySelect.value) : 1;
+  addToCart(productId, quantity);
   return true;
 }
 
@@ -2056,21 +2100,22 @@ function pulseCartButton() {
   setTimeout(() => navCart.classList.remove("cart-pulse"), 460);
 }
 
-function addToCart(id) {
+function addToCart(id, quantity = 1) {
   const product = products.find((p) => p.id === id);
   if (!product || product.sold) return;
 
+  const qty = Math.max(1, Math.min(20, Number(quantity) || 1));
   const existing = cart.find((item) => item.id === id);
   if (existing) {
-    existing.qty += 1;
+    existing.qty += qty;
   } else {
-    cart.push({ id: product.id, name: product.name, price: product.price, qty: 1, size: product.sizes[0], sizes: product.sizes });
+    cart.push({ id: product.id, name: product.name, price: product.price, qty, size: product.sizes[0], sizes: product.sizes });
   }
 
   resetOrderState();
   renderCart();
   pulseCartButton();
-  showNotif(`${product.name} added to bag`);
+  showNotif(qty > 1 ? `${qty} x ${product.name} added to bag` : `${product.name} added to bag`);
 }
 
 function removeFromCart(id) {
