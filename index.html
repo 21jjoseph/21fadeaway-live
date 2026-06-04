@@ -470,6 +470,7 @@
   .product-card {
     position: relative;
     overflow: hidden;
+    cursor: pointer;
     background:
       linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.032) 28%, rgba(255, 255, 255, 0.018) 58%, rgba(255, 255, 255, 0.012) 100%),
       linear-gradient(145deg, rgba(26, 26, 29, 0.92), rgba(13, 13, 15, 0.96));
@@ -491,6 +492,29 @@
     transform: translateY(-5px);
     border-color: rgba(244, 241, 234, 0.2);
     box-shadow: var(--shadow), var(--glow);
+  }
+
+  .product-card:active {
+    transform: translateY(-2px) scale(0.992);
+  }
+
+  .product-card.added {
+    animation: productAdded 0.58s var(--ease);
+  }
+
+  @keyframes productAdded {
+    0% {
+      box-shadow: 0 1px 0 rgba(244, 241, 234, 0.06) inset;
+    }
+
+    45% {
+      border-color: rgba(177, 18, 38, 0.72);
+      box-shadow: var(--shadow), 0 0 0 1px rgba(177, 18, 38, 0.26), 0 0 48px rgba(177, 18, 38, 0.3);
+    }
+
+    100% {
+      box-shadow: 0 1px 0 rgba(244, 241, 234, 0.06) inset;
+    }
   }
 
   .product-img-wrap {
@@ -584,7 +608,7 @@
 
   .product-actions {
     display: grid;
-    grid-template-columns: 68px auto;
+    grid-template-columns: 72px 68px auto;
     align-items: center;
     gap: 8px;
   }
@@ -612,6 +636,7 @@
     font-weight: 850;
   }
 
+  .product-size-select,
   .qty-select {
     width: 68px;
     min-height: 36px;
@@ -628,6 +653,18 @@
     cursor: pointer;
   }
 
+  .product-size-select {
+    width: 72px;
+  }
+
+  .add-btn.is-added {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+    box-shadow: 0 14px 34px rgba(177, 18, 38, 0.28);
+  }
+
+  .product-size-select:focus,
   .qty-select:focus {
     border-color: rgba(244, 241, 234, 0.28);
     box-shadow: 0 0 0 3px rgba(177, 18, 38, 0.12);
@@ -971,6 +1008,190 @@
   .cart-overlay.open {
     opacity: 1;
     pointer-events: all;
+  }
+
+  body.modal-lock {
+    overflow: hidden;
+  }
+
+  .product-modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 220;
+    background: rgba(0, 0, 0, 0.76);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.28s ease;
+  }
+
+  .product-modal-overlay.open {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .product-modal {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    z-index: 221;
+    width: min(920px, calc(100vw - 32px));
+    max-height: min(760px, calc(100vh - 32px));
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: 0;
+    overflow: hidden;
+    border: 1px solid rgba(244, 241, 234, 0.14);
+    border-radius: 8px;
+    background:
+      radial-gradient(ellipse 74% 58% at 18% 0%, rgba(177, 18, 38, 0.11), transparent 68%),
+      linear-gradient(145deg, rgba(20, 20, 23, 0.98), rgba(7, 7, 8, 0.98));
+    box-shadow: 0 38px 100px rgba(0, 0, 0, 0.72), 0 0 0 1px rgba(244, 241, 234, 0.035);
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%, -48%) scale(0.97);
+    transition: opacity 0.28s ease, transform 0.38s var(--ease);
+  }
+
+  .product-modal.open {
+    opacity: 1;
+    pointer-events: all;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    z-index: 2;
+    width: 38px;
+    height: 38px;
+    border: 1px solid var(--hairline);
+    border-radius: 999px;
+    background: rgba(5, 5, 5, 0.72);
+    color: var(--ink);
+    cursor: pointer;
+    font-size: 1.2rem;
+    line-height: 1;
+  }
+
+  .modal-close:hover {
+    border-color: rgba(244, 241, 234, 0.28);
+    background: rgba(244, 241, 234, 0.08);
+  }
+
+  .modal-media {
+    min-height: 520px;
+    display: grid;
+    place-items: center;
+    padding: 38px;
+    background:
+      radial-gradient(ellipse 78% 54% at 50% 22%, rgba(244, 241, 234, 0.14) 0%, rgba(244, 241, 234, 0.065) 38%, rgba(244, 241, 234, 0) 78%),
+      radial-gradient(ellipse 58% 48% at 20% 82%, rgba(177, 18, 38, 0.16) 0%, rgba(177, 18, 38, 0.055) 48%, rgba(177, 18, 38, 0) 82%),
+      linear-gradient(145deg, var(--modal-tone, #18181c), #09090a 76%);
+  }
+
+  .modal-blank {
+    width: min(70%, 310px);
+    aspect-ratio: 0.78;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(244, 241, 234, 0.13);
+    border-radius: 8px;
+    background:
+      radial-gradient(ellipse 80% 48% at 50% 12%, rgba(244, 241, 234, 0.1), transparent 72%),
+      linear-gradient(150deg, #232327, #0b0b0c 72%);
+    color: rgba(244, 241, 234, 0.86);
+    font-size: clamp(1.3rem, 3vw, 2.1rem);
+    font-weight: 850;
+    text-transform: uppercase;
+    box-shadow: 0 32px 80px rgba(0, 0, 0, 0.56);
+  }
+
+  .modal-copy {
+    display: grid;
+    align-content: center;
+    gap: 18px;
+    padding: clamp(30px, 5vw, 56px);
+  }
+
+  .modal-badge {
+    width: fit-content;
+    border: 1px solid rgba(177, 18, 38, 0.42);
+    border-radius: 999px;
+    color: var(--silver);
+    padding: 7px 12px;
+    font-size: 0.72rem;
+    font-weight: 850;
+  }
+
+  .modal-title {
+    color: var(--ink);
+    font-size: clamp(2rem, 4vw, 3.8rem);
+    font-weight: 850;
+    line-height: 0.98;
+  }
+
+  .modal-desc,
+  .modal-note {
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+
+  .modal-price {
+    color: var(--ink);
+    font-size: 1.22rem;
+    font-weight: 850;
+  }
+
+  .modal-controls {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 92px;
+    gap: 10px;
+  }
+
+  .modal-size-select,
+  .modal-qty-select {
+    width: 100%;
+    min-height: 44px;
+    border: 1px solid var(--hairline-soft);
+    border-radius: 999px;
+    background: #101012;
+    color: var(--ink);
+    color-scheme: dark;
+    font: inherit;
+    font-size: 0.86rem;
+    font-weight: 850;
+    padding: 10px 14px;
+    outline: none;
+  }
+
+  .modal-size-select:focus,
+  .modal-qty-select:focus {
+    border-color: rgba(244, 241, 234, 0.28);
+    box-shadow: 0 0 0 3px rgba(177, 18, 38, 0.12);
+  }
+
+  .modal-add-btn {
+    min-height: 48px;
+    border: 1px solid var(--ink);
+    border-radius: 999px;
+    background: var(--ink);
+    color: #050505;
+    cursor: pointer;
+    font: inherit;
+    font-size: 0.88rem;
+    font-weight: 850;
+    transition: transform 0.25s var(--ease), background 0.25s ease, color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .modal-add-btn:hover,
+  .modal-add-btn.is-added {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+    transform: translateY(-1px);
+    box-shadow: 0 14px 34px rgba(177, 18, 38, 0.28);
   }
 
   .cart-drawer {
@@ -1417,8 +1638,12 @@
 
     .product-actions {
       width: 100%;
-      grid-template-columns: 58px minmax(0, 1fr);
+      grid-template-columns: 1fr 58px;
       gap: 7px;
+    }
+
+    .product-actions .add-btn {
+      grid-column: 1 / -1;
     }
 
     .product-price {
@@ -1441,6 +1666,46 @@
       min-height: 32px;
       padding: 6px 8px;
       font-size: 0.72rem;
+    }
+
+    .product-size-select {
+      width: 100%;
+      min-height: 32px;
+      padding: 6px 8px;
+      font-size: 0.72rem;
+    }
+
+    .product-modal {
+      width: calc(100vw - 24px);
+      max-height: calc(100vh - 24px);
+      grid-template-columns: 1fr;
+      overflow-y: auto;
+    }
+
+    .modal-media {
+      min-height: 280px;
+      padding: 38px 24px 24px;
+    }
+
+    .modal-blank {
+      width: min(58%, 190px);
+    }
+
+    .modal-copy {
+      padding: 24px;
+      gap: 14px;
+    }
+
+    .modal-title {
+      font-size: clamp(1.8rem, 9vw, 2.6rem);
+    }
+
+    .modal-controls {
+      grid-template-columns: 1fr 78px;
+    }
+
+    .modal-add-btn {
+      min-height: 44px;
     }
 
     .sold-label {
@@ -1587,6 +1852,33 @@
   </div>
 </div>
 
+<!-- PRODUCT DETAIL MODAL -->
+<div class="product-modal-overlay" id="productModalOverlay"></div>
+<div class="product-modal" id="productModal" role="dialog" aria-modal="true" aria-labelledby="modalProductName" aria-hidden="true">
+  <button class="modal-close" id="modalClose" type="button" aria-label="Close product details">×</button>
+  <div class="modal-media" id="modalMedia">
+    <div class="modal-blank" id="modalVisual">21</div>
+  </div>
+  <div class="modal-copy">
+    <div class="modal-badge" id="modalBadge">Drop</div>
+    <h3 class="modal-title" id="modalProductName">Product</h3>
+    <p class="modal-desc" id="modalProductDesc">Product details.</p>
+    <div class="modal-price" id="modalProductPrice">0 RON</div>
+    <div class="modal-controls">
+      <select class="modal-size-select" id="modalSize" aria-label="Select product size"></select>
+      <select class="modal-qty-select" id="modalQty" aria-label="Select product quantity">
+        <option value="1">1x</option>
+        <option value="2">2x</option>
+        <option value="3">3x</option>
+        <option value="4">4x</option>
+        <option value="5">5x</option>
+      </select>
+    </div>
+    <button class="modal-add-btn" id="modalAdd" type="button">Add to bag</button>
+    <p class="modal-note">Blank product preview for now. Real product photos can replace this frame later without changing the shopping flow.</p>
+  </div>
+</div>
+
 <!-- NAV -->
 <nav>
   <a href="#" class="nav-logo">21 Fadeaway</a>
@@ -1634,23 +1926,23 @@
   <div class="products-grid" id="productsGrid">
     <div class="product-card">
       <div class="product-img-wrap"><div class="product-visual" style="--product-tone:#18181c"><div class="product-visual-inner">Chrome</div></div><div class="product-badge">New</div></div>
-      <div class="product-info"><div class="product-name">Chrome Reaper Tee</div><div class="product-desc">Heavyweight cotton. Oversized, clean silhouette.</div><div class="product-footer"><div class="product-price">159 <span>RON</span></div><div class="product-actions"><select class="qty-select" data-product-qty aria-label="Quantity for Chrome Reaper Tee"><option value="1">1x</option><option value="2">2x</option><option value="3">3x</option><option value="4">4x</option><option value="5">5x</option></select><button class="add-btn" type="button" data-add-product="1">Add</button></div></div></div>
+      <div class="product-info"><div class="product-name">Chrome Reaper Tee</div><div class="product-desc">Heavyweight cotton. Oversized, clean silhouette.</div><div class="product-footer"><div class="product-price">159 <span>RON</span></div><div class="product-actions"><select class="product-size-select" data-product-size aria-label="Size for Chrome Reaper Tee"><option value="XS">XS</option><option value="S">S</option><option value="M">M</option><option value="L">L</option><option value="XL">XL</option><option value="XXL">XXL</option></select><select class="qty-select" data-product-qty aria-label="Quantity for Chrome Reaper Tee"><option value="1">1x</option><option value="2">2x</option><option value="3">3x</option><option value="4">4x</option><option value="5">5x</option></select><button class="add-btn" type="button" data-add-product="1">Add</button></div></div></div>
     </div>
     <div class="product-card">
       <div class="product-img-wrap"><div class="product-visual" style="--product-tone:#111114"><div class="product-visual-inner">Void</div></div><div class="product-badge limited">Limited</div></div>
-      <div class="product-info"><div class="product-name">Void Hoodie</div><div class="product-desc">450gsm fleece. Soft interior, structured hood.</div><div class="product-footer"><div class="product-price">289 <span>RON</span></div><div class="product-actions"><select class="qty-select" data-product-qty aria-label="Quantity for Void Hoodie"><option value="1">1x</option><option value="2">2x</option><option value="3">3x</option><option value="4">4x</option><option value="5">5x</option></select><button class="add-btn" type="button" data-add-product="2">Add</button></div></div></div>
+      <div class="product-info"><div class="product-name">Void Hoodie</div><div class="product-desc">450gsm fleece. Soft interior, structured hood.</div><div class="product-footer"><div class="product-price">289 <span>RON</span></div><div class="product-actions"><select class="product-size-select" data-product-size aria-label="Size for Void Hoodie"><option value="XS">XS</option><option value="S">S</option><option value="M">M</option><option value="L">L</option><option value="XL">XL</option><option value="XXL">XXL</option></select><select class="qty-select" data-product-qty aria-label="Quantity for Void Hoodie"><option value="1">1x</option><option value="2">2x</option><option value="3">3x</option><option value="4">4x</option><option value="5">5x</option></select><button class="add-btn" type="button" data-add-product="2">Add</button></div></div></div>
     </div>
     <div class="product-card">
       <div class="product-img-wrap"><div class="product-visual" style="--product-tone:#1d1b20"><div class="product-visual-inner">21</div></div><div class="product-badge">New</div></div>
-      <div class="product-info"><div class="product-name">21 Logo Crewneck</div><div class="product-desc">Dropped shoulder. Minimal front mark.</div><div class="product-footer"><div class="product-price">219 <span>RON</span></div><div class="product-actions"><select class="qty-select" data-product-qty aria-label="Quantity for 21 Logo Crewneck"><option value="1">1x</option><option value="2">2x</option><option value="3">3x</option><option value="4">4x</option><option value="5">5x</option></select><button class="add-btn" type="button" data-add-product="3">Add</button></div></div></div>
+      <div class="product-info"><div class="product-name">21 Logo Crewneck</div><div class="product-desc">Dropped shoulder. Minimal front mark.</div><div class="product-footer"><div class="product-price">219 <span>RON</span></div><div class="product-actions"><select class="product-size-select" data-product-size aria-label="Size for 21 Logo Crewneck"><option value="XS">XS</option><option value="S">S</option><option value="M">M</option><option value="L">L</option><option value="XL">XL</option><option value="XXL">XXL</option></select><select class="qty-select" data-product-qty aria-label="Quantity for 21 Logo Crewneck"><option value="1">1x</option><option value="2">2x</option><option value="3">3x</option><option value="4">4x</option><option value="5">5x</option></select><button class="add-btn" type="button" data-add-product="3">Add</button></div></div></div>
     </div>
     <div class="product-card">
       <div class="product-img-wrap"><div class="product-visual" style="--product-tone:#171316"><div class="product-visual-inner">Metal</div></div><div class="product-badge limited">Limited</div></div>
-      <div class="product-info"><div class="product-name">Metal Edge Cap</div><div class="product-desc">6-panel build. Adjustable matte hardware.</div><div class="product-footer"><div class="product-price">89 <span>RON</span></div><div class="product-actions"><select class="qty-select" data-product-qty aria-label="Quantity for Metal Edge Cap"><option value="1">1x</option><option value="2">2x</option><option value="3">3x</option><option value="4">4x</option><option value="5">5x</option></select><button class="add-btn" type="button" data-add-product="4">Add</button></div></div></div>
+      <div class="product-info"><div class="product-name">Metal Edge Cap</div><div class="product-desc">6-panel build. Adjustable matte hardware.</div><div class="product-footer"><div class="product-price">89 <span>RON</span></div><div class="product-actions"><select class="product-size-select" data-product-size aria-label="Size for Metal Edge Cap"><option value="OS">OS</option></select><select class="qty-select" data-product-qty aria-label="Quantity for Metal Edge Cap"><option value="1">1x</option><option value="2">2x</option><option value="3">3x</option><option value="4">4x</option><option value="5">5x</option></select><button class="add-btn" type="button" data-add-product="4">Add</button></div></div></div>
     </div>
     <div class="product-card">
       <div class="product-img-wrap"><div class="product-visual" style="--product-tone:#121217"><div class="product-visual-inner">Fadeaway</div></div><div class="product-badge">Drop</div></div>
-      <div class="product-info"><div class="product-name">Fadeaway Cargo</div><div class="product-desc">Ripstop nylon. Clean utility profile.</div><div class="product-footer"><div class="product-price">319 <span>RON</span></div><div class="product-actions"><select class="qty-select" data-product-qty aria-label="Quantity for Fadeaway Cargo"><option value="1">1x</option><option value="2">2x</option><option value="3">3x</option><option value="4">4x</option><option value="5">5x</option></select><button class="add-btn" type="button" data-add-product="5">Add</button></div></div></div>
+      <div class="product-info"><div class="product-name">Fadeaway Cargo</div><div class="product-desc">Ripstop nylon. Clean utility profile.</div><div class="product-footer"><div class="product-price">319 <span>RON</span></div><div class="product-actions"><select class="product-size-select" data-product-size aria-label="Size for Fadeaway Cargo"><option value="XS">XS</option><option value="S">S</option><option value="M">M</option><option value="L">L</option><option value="XL">XL</option><option value="XXL">XXL</option></select><select class="qty-select" data-product-qty aria-label="Quantity for Fadeaway Cargo"><option value="1">1x</option><option value="2">2x</option><option value="3">3x</option><option value="4">4x</option><option value="5">5x</option></select><button class="add-btn" type="button" data-add-product="5">Add</button></div></div></div>
     </div>
     <div class="product-card">
       <div class="product-img-wrap"><div class="product-visual" style="--product-tone:#1a171a"><div class="product-visual-inner">Chrome</div></div><div class="product-badge sold">Sold out</div></div>
@@ -1658,11 +1950,11 @@
     </div>
     <div class="product-card">
       <div class="product-img-wrap"><div class="product-visual" style="--product-tone:#0e0e10"><div class="product-visual-inner">Spike</div></div><div class="product-badge limited">Limited</div></div>
-      <div class="product-info"><div class="product-name">Spike Collar</div><div class="product-desc">Zinc alloy. Adjustable polished finish.</div><div class="product-footer"><div class="product-price">79 <span>RON</span></div><div class="product-actions"><select class="qty-select" data-product-qty aria-label="Quantity for Spike Collar"><option value="1">1x</option><option value="2">2x</option><option value="3">3x</option><option value="4">4x</option><option value="5">5x</option></select><button class="add-btn" type="button" data-add-product="7">Add</button></div></div></div>
+      <div class="product-info"><div class="product-name">Spike Collar</div><div class="product-desc">Zinc alloy. Adjustable polished finish.</div><div class="product-footer"><div class="product-price">79 <span>RON</span></div><div class="product-actions"><select class="product-size-select" data-product-size aria-label="Size for Spike Collar"><option value="OS">OS</option></select><select class="qty-select" data-product-qty aria-label="Quantity for Spike Collar"><option value="1">1x</option><option value="2">2x</option><option value="3">3x</option><option value="4">4x</option><option value="5">5x</option></select><button class="add-btn" type="button" data-add-product="7">Add</button></div></div></div>
     </div>
     <div class="product-card">
       <div class="product-img-wrap"><div class="product-visual" style="--product-tone:#15151a"><div class="product-visual-inner">Reaper</div></div><div class="product-badge">New</div></div>
-      <div class="product-info"><div class="product-name">Reaper Shorts</div><div class="product-desc">360gsm cotton. Elastic waist.</div><div class="product-footer"><div class="product-price">169 <span>RON</span></div><div class="product-actions"><select class="qty-select" data-product-qty aria-label="Quantity for Reaper Shorts"><option value="1">1x</option><option value="2">2x</option><option value="3">3x</option><option value="4">4x</option><option value="5">5x</option></select><button class="add-btn" type="button" data-add-product="8">Add</button></div></div></div>
+      <div class="product-info"><div class="product-name">Reaper Shorts</div><div class="product-desc">360gsm cotton. Elastic waist.</div><div class="product-footer"><div class="product-price">169 <span>RON</span></div><div class="product-actions"><select class="product-size-select" data-product-size aria-label="Size for Reaper Shorts"><option value="XS">XS</option><option value="S">S</option><option value="M">M</option><option value="L">L</option><option value="XL">XL</option><option value="XXL">XXL</option></select><select class="qty-select" data-product-qty aria-label="Quantity for Reaper Shorts"><option value="1">1x</option><option value="2">2x</option><option value="3">3x</option><option value="4">4x</option><option value="5">5x</option></select><button class="add-btn" type="button" data-add-product="8">Add</button></div></div></div>
     </div>
   </div>
 </section>
@@ -1815,6 +2107,7 @@ const products = [
 
 const lookbookLabels = ["Editorial", "21", "Chrome", "Studio", "Fade", "Clean", "Drop", "Essential"];
 let cart = [];
+let activeModalProductId = null;
 
 const grid = document.getElementById("productsGrid");
 let lastAddTouch = 0;
@@ -1837,8 +2130,11 @@ function handleProductAdd(event, fromTouch = false) {
 
   const productCard = addButton.closest(".product-card");
   const qtySelect = productCard ? productCard.querySelector("[data-product-qty]") : null;
+  const sizeSelect = productCard ? productCard.querySelector("[data-product-size]") : null;
   const quantity = qtySelect ? Number(qtySelect.value) : 1;
-  addToCart(productId, quantity);
+  const size = sizeSelect ? sizeSelect.value : undefined;
+  addToCart(productId, quantity, size);
+  animateProductAdded(addButton, productCard);
   return true;
 }
 
@@ -1848,6 +2144,18 @@ document.addEventListener("touchend", (event) => {
 
 document.addEventListener("click", (event) => {
   handleProductAdd(event);
+});
+
+document.addEventListener("click", (event) => {
+  if (event.target.closest("button, select, a, input, textarea")) return;
+
+  const productCard = event.target.closest(".product-card");
+  if (!productCard || (grid && !grid.contains(productCard))) return;
+
+  const addButton = productCard.querySelector("[data-add-product]");
+  if (!addButton) return;
+
+  openProductModal(Number(addButton.dataset.addProduct));
 });
 
 const strip = document.getElementById("strip");
@@ -2100,37 +2408,166 @@ function pulseCartButton() {
   setTimeout(() => navCart.classList.remove("cart-pulse"), 460);
 }
 
-function addToCart(id, quantity = 1) {
+function animateProductAdded(addButton, productCard) {
+  if (productCard) {
+    productCard.classList.remove("added");
+    void productCard.offsetWidth;
+    productCard.classList.add("added");
+    setTimeout(() => productCard.classList.remove("added"), 620);
+  }
+
+  if (!addButton) return;
+
+  const originalText = addButton.textContent;
+  addButton.classList.add("is-added");
+  addButton.textContent = "Added";
+  setTimeout(() => {
+    addButton.classList.remove("is-added");
+    addButton.textContent = originalText;
+  }, 900);
+}
+
+function getProductFallbackSize(product) {
+  return product && product.sizes && product.sizes.length ? product.sizes[0] : "OS";
+}
+
+function createCartUid(id, size) {
+  return `${id}-${size}-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 7)}`;
+}
+
+function addToCart(id, quantity = 1, size) {
   const product = products.find((p) => p.id === id);
   if (!product || product.sold) return;
 
   const qty = Math.max(1, Math.min(20, Number(quantity) || 1));
-  const existing = cart.find((item) => item.id === id);
+  const selectedSize = product.sizes.includes(size) ? size : getProductFallbackSize(product);
+  const existing = cart.find((item) => item.id === id && item.size === selectedSize);
   if (existing) {
     existing.qty += qty;
   } else {
-    cart.push({ id: product.id, name: product.name, price: product.price, qty, size: product.sizes[0], sizes: product.sizes });
+    cart.push({ uid: createCartUid(product.id, selectedSize), id: product.id, name: product.name, price: product.price, qty, size: selectedSize, sizes: product.sizes });
   }
 
   resetOrderState();
   renderCart();
   pulseCartButton();
   showNotif(qty > 1 ? `${qty} x ${product.name} added to bag` : `${product.name} added to bag`);
+  return true;
 }
 
-function removeFromCart(id) {
-  cart = cart.filter((item) => item.id !== id);
+function removeFromCart(uid) {
+  cart = cart.filter((item) => item.uid !== uid);
   resetOrderState();
   renderCart();
 }
 
-function updateCartSize(id, size) {
-  const item = cart.find((cartItem) => cartItem.id === id);
+function updateCartSize(uid, size) {
+  const item = cart.find((cartItem) => cartItem.uid === uid);
   if (!item) return;
 
-  item.size = size;
+  const nextSize = item.sizes.includes(size) ? size : item.size;
+  const duplicate = cart.find((cartItem) => cartItem.uid !== uid && cartItem.id === item.id && cartItem.size === nextSize);
+
+  if (duplicate) {
+    duplicate.qty += item.qty;
+    cart = cart.filter((cartItem) => cartItem.uid !== uid);
+  } else {
+    item.uid = createCartUid(item.id, nextSize);
+    item.size = nextSize;
+  }
+
   resetOrderState();
   renderCart();
+}
+
+function getProductById(id) {
+  return products.find((product) => product.id === id);
+}
+
+function getProductCardById(id) {
+  return document.querySelector(`[data-add-product="${id}"]`)?.closest(".product-card") || null;
+}
+
+function syncCardSize(id, size) {
+  const card = getProductCardById(id);
+  const sizeSelect = card ? card.querySelector("[data-product-size]") : null;
+
+  if (sizeSelect && Array.from(sizeSelect.options).some((option) => option.value === size)) {
+    sizeSelect.value = size;
+  }
+}
+
+function openProductModal(id) {
+  const product = getProductById(id);
+  if (!product || product.sold) return;
+
+  const modal = document.getElementById("productModal");
+  const overlay = document.getElementById("productModalOverlay");
+  const modalMedia = document.getElementById("modalMedia");
+  const modalVisual = document.getElementById("modalVisual");
+  const modalBadge = document.getElementById("modalBadge");
+  const modalName = document.getElementById("modalProductName");
+  const modalDesc = document.getElementById("modalProductDesc");
+  const modalPrice = document.getElementById("modalProductPrice");
+  const modalSize = document.getElementById("modalSize");
+  const modalQty = document.getElementById("modalQty");
+
+  if (!modal || !overlay || !modalSize || !modalQty) return;
+
+  const card = getProductCardById(id);
+  const cardSize = card?.querySelector("[data-product-size]")?.value;
+  const cardQty = card?.querySelector("[data-product-qty]")?.value;
+  const selectedSize = product.sizes.includes(cardSize) ? cardSize : getProductFallbackSize(product);
+
+  activeModalProductId = id;
+  modalMedia.style.setProperty("--modal-tone", product.color);
+  modalVisual.textContent = product.name.split(" ")[0];
+  modalBadge.textContent = product.badge;
+  modalName.textContent = product.name;
+  modalDesc.textContent = product.desc;
+  modalPrice.textContent = formatCurrency(product.price);
+  modalSize.innerHTML = product.sizes.map((size) => `<option value="${size}">${size}</option>`).join("");
+  modalSize.value = selectedSize;
+  modalQty.value = cardQty || "1";
+
+  modal.classList.add("open");
+  overlay.classList.add("open");
+  modal.setAttribute("aria-hidden", "false");
+  document.body.classList.add("modal-lock");
+}
+
+function closeProductModal() {
+  const modal = document.getElementById("productModal");
+  const overlay = document.getElementById("productModalOverlay");
+
+  if (!modal || !overlay) return;
+
+  modal.classList.remove("open");
+  overlay.classList.remove("open");
+  modal.setAttribute("aria-hidden", "true");
+  document.body.classList.remove("modal-lock");
+  activeModalProductId = null;
+}
+
+function addModalProductToCart() {
+  const product = getProductById(activeModalProductId);
+  const modalSize = document.getElementById("modalSize");
+  const modalQty = document.getElementById("modalQty");
+  const modalAdd = document.getElementById("modalAdd");
+  if (!product || !modalSize || !modalQty) return;
+
+  addToCart(product.id, Number(modalQty.value), modalSize.value);
+  syncCardSize(product.id, modalSize.value);
+
+  if (modalAdd) {
+    const originalText = modalAdd.textContent;
+    modalAdd.classList.add("is-added");
+    modalAdd.textContent = "Added to bag";
+    setTimeout(() => {
+      modalAdd.classList.remove("is-added");
+      modalAdd.textContent = originalText;
+    }, 900);
+  }
 }
 
 function resetOrderState() {
@@ -2178,13 +2615,13 @@ function renderCart() {
       <div class="cart-item-img">21</div>
       <div>
         <div class="cart-item-name">${item.name}</div>
-        <div class="cart-item-meta">Qty ${item.qty}</div>
-        <select class="cart-item-size" aria-label="Size for ${item.name}" onchange="updateCartSize(${item.id}, this.value)">
+        <div class="cart-item-meta">Size ${item.size} · Qty ${item.qty}</div>
+        <select class="cart-item-size" aria-label="Size for ${item.name}" onchange="updateCartSize('${item.uid}', this.value)">
           ${item.sizes.map((size) => `<option value="${size}" ${size === item.size ? "selected" : ""}>${size}</option>`).join("")}
         </select>
       </div>
       <div class="cart-item-price">${formatCurrency(item.price * item.qty)}</div>
-      <button class="cart-item-remove" onclick="removeFromCart(${item.id})">x</button>
+      <button class="cart-item-remove" onclick="removeFromCart('${item.uid}')">x</button>
     </div>
   `).join("");
 }
@@ -2320,12 +2757,35 @@ if (navCartButton && navCartButton.addEventListener) {
   });
 }
 
+const productModalOverlay = document.getElementById("productModalOverlay");
+const modalCloseButton = document.getElementById("modalClose");
+const modalAddButton = document.getElementById("modalAdd");
+
+if (productModalOverlay && productModalOverlay.addEventListener) {
+  productModalOverlay.addEventListener("click", closeProductModal);
+}
+
+if (modalCloseButton && modalCloseButton.addEventListener) {
+  modalCloseButton.addEventListener("click", closeProductModal);
+}
+
+if (modalAddButton && modalAddButton.addEventListener) {
+  modalAddButton.addEventListener("click", addModalProductToCart);
+}
+
+document.addEventListener("keydown", (event) => {
+  if (event.key !== "Escape") return;
+  closeProductModal();
+});
+
 window.addToCart = addToCart;
 window.removeFromCart = removeFromCart;
 window.updateCartSize = updateCartSize;
 window.startCheckout = startCheckout;
 window.toggleCart = toggleCart;
 window.openCart = openCart;
+window.openProductModal = openProductModal;
+window.closeProductModal = closeProductModal;
 
 const checkoutForm = document.getElementById("checkoutForm");
 if (checkoutForm && checkoutForm.addEventListener) {
