@@ -5,26 +5,32 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>21FADEAWAY - Clean Drop</title>
 <style>
+  @import url("https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap");
 
   :root {
-    --page: #050505;
-    --page-2: #0b0b0d;
-    --surface: rgba(18, 18, 20, 0.86);
-    --surface-solid: #121214;
-    --surface-soft: #18181b;
+    --page: hsl(0 0% 2%);
+    --page-2: hsl(240 6% 5%);
+    --surface: hsl(240 6% 8% / 0.88);
+    --surface-solid: hsl(240 6% 8%);
+    --surface-soft: hsl(240 6% 11%);
     --ink: #f4f1ea;
-    --muted: #9a9690;
-    --muted-2: #68635f;
+    --muted: #b5b0a8;
+    --muted-2: #827b73;
     --hairline: rgba(244, 241, 234, 0.16);
     --hairline-soft: rgba(244, 241, 234, 0.08);
-    --accent: #b11226;
-    --accent-dark: #6e0b18;
+    --accent: hsl(351 78% 42%);
+    --accent-dark: hsl(349 82% 24%);
+    --accent-soft: hsl(351 78% 42% / 0.18);
     --silver: #d7d1c6;
-    --violet: #6d5a7a;
-    --sold: #ff4058;
+    --violet: hsl(279 16% 42%);
+    --sold: hsl(351 88% 62%);
     --radius: 8px;
-    --shadow: 0 28px 80px rgba(0, 0, 0, 0.55);
-    --glow: 0 0 42px rgba(177, 18, 38, 0.22);
+    --shadow-sm: 0 8px 22px rgba(0, 0, 0, 0.28), 0 1px 0 rgba(244, 241, 234, 0.05) inset;
+    --shadow-md: 0 18px 48px rgba(0, 0, 0, 0.42), 0 1px 0 rgba(244, 241, 234, 0.06) inset;
+    --shadow-lg: 0 38px 110px rgba(0, 0, 0, 0.68), 0 0 0 1px rgba(244, 241, 234, 0.045);
+    --shadow: var(--shadow-md);
+    --glow: 0 0 42px hsl(351 78% 42% / 0.22);
+    --focus-ring: 0 0 0 3px hsl(351 78% 42% / 0.24), 0 0 0 1px hsl(351 78% 58% / 0.72);
     --ease: cubic-bezier(0.16, 1, 0.3, 1);
   }
 
@@ -45,11 +51,13 @@
       radial-gradient(ellipse 78rem 52rem at 50% -14%, rgba(244, 241, 234, 0.11) 0%, rgba(244, 241, 234, 0.075) 18%, rgba(244, 241, 234, 0.034) 38%, rgba(244, 241, 234, 0.012) 58%, rgba(244, 241, 234, 0) 76%),
       radial-gradient(ellipse 50rem 38rem at 12% 28%, rgba(177, 18, 38, 0.14) 0%, rgba(177, 18, 38, 0.085) 22%, rgba(177, 18, 38, 0.035) 46%, rgba(177, 18, 38, 0.012) 64%, rgba(177, 18, 38, 0) 82%),
       radial-gradient(ellipse 54rem 40rem at 82% 18%, rgba(109, 90, 122, 0.11) 0%, rgba(109, 90, 122, 0.065) 24%, rgba(109, 90, 122, 0.024) 50%, rgba(109, 90, 122, 0) 78%),
-      linear-gradient(180deg, #050505 0%, #080809 24%, #0b0b0d 48%, #080809 74%, #050505 100%);
+      linear-gradient(135deg, hsl(0 0% 2%) 0%, hsl(240 6% 5%) 34%, hsl(351 18% 7%) 52%, hsl(240 6% 4%) 76%, hsl(0 0% 2%) 100%);
     color: var(--ink);
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", sans-serif;
+    font-family: "Outfit", -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", sans-serif;
     overflow-x: hidden;
     letter-spacing: 0;
+    text-rendering: geometricPrecision;
+    -webkit-font-smoothing: antialiased;
   }
 
   body::before {
@@ -1527,6 +1535,348 @@
 
   .notif.show {
     transform: translateX(-50%) translateY(0);
+  }
+
+  p,
+  .brand-body,
+  .about-copy,
+  .modal-desc,
+  .modal-note,
+  .checkout-note,
+  .order-success,
+  .payment-copy,
+  .footer-tagline,
+  .footer-copy {
+    line-height: 1.6;
+  }
+
+  h1,
+  h2,
+  h3,
+  .section-title,
+  .brand-headline,
+  .about-title,
+  .modal-title,
+  .cart-title {
+    letter-spacing: 0;
+    text-wrap: balance;
+  }
+
+  h1,
+  .brand-headline {
+    font-weight: 900;
+  }
+
+  h2,
+  .section-title,
+  .about-title {
+    font-weight: 850;
+  }
+
+  h3,
+  .product-name,
+  .modal-title,
+  .footer-col h4 {
+    font-weight: 800;
+  }
+
+  ::selection {
+    background: hsl(351 78% 42% / 0.42);
+    color: var(--ink);
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(351 78% 42% / 0.56) transparent;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(351 78% 42% / 0.48);
+    border: 2px solid transparent;
+    border-radius: 999px;
+    background-clip: padding-box;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(351 78% 48% / 0.78);
+    background-clip: padding-box;
+  }
+
+  a,
+  button,
+  select,
+  input,
+  textarea,
+  label,
+  .product-card,
+  .lookbook-strip,
+  .payment-method {
+    transition-duration: 0.25s;
+    transition-timing-function: ease;
+  }
+
+  a,
+  button,
+  select,
+  label,
+  [role="button"],
+  .product-card,
+  .payment-method {
+    cursor: pointer;
+  }
+
+  a:focus-visible,
+  button:focus-visible,
+  select:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  .product-card:focus-visible,
+  .payment-method:focus-within {
+    outline: 1px solid hsl(351 78% 58% / 0.82);
+    outline-offset: 4px;
+    box-shadow: var(--focus-ring);
+  }
+
+  .nav-links a,
+  .footer-col a,
+  .mobile-tabbar a {
+    position: relative;
+    display: inline-flex;
+    width: fit-content;
+    padding-bottom: 3px;
+  }
+
+  .nav-links a::after,
+  .footer-col a::after,
+  .mobile-tabbar a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, transparent, hsl(351 78% 58% / 0.88), transparent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.25s ease;
+  }
+
+  .nav-links a:hover::after,
+  .footer-col a:hover::after,
+  .mobile-tabbar a:hover::after,
+  .nav-links a:focus-visible::after,
+  .footer-col a:focus-visible::after,
+  .mobile-tabbar a:focus-visible::after {
+    transform: scaleX(1);
+  }
+
+  .nav-cart,
+  .btn-primary,
+  .btn-ghost,
+  .add-btn,
+  .checkout-btn,
+  .modal-add-btn,
+  .modal-close {
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
+  }
+
+  .nav-cart:hover,
+  .btn-primary:hover,
+  .btn-ghost:hover,
+  .add-btn:hover,
+  .checkout-btn:hover,
+  .modal-add-btn:hover {
+    transform: translateY(-1px) scale(1.03);
+    box-shadow: 0 18px 44px hsl(351 78% 42% / 0.28), var(--shadow-sm);
+  }
+
+  .nav-cart:active,
+  .btn-primary:active,
+  .btn-ghost:active,
+  .add-btn:active,
+  .checkout-btn:active,
+  .modal-add-btn:active,
+  .modal-close:active,
+  .mobile-tabbar a:active,
+  .mobile-tabbar button:active {
+    transform: scale(0.97);
+  }
+
+  .btn-primary,
+  .add-btn,
+  .checkout-btn,
+  .modal-add-btn {
+    background: linear-gradient(180deg, hsl(42 24% 96%), hsl(42 18% 83%));
+    border-color: hsl(42 20% 86%);
+    color: hsl(0 0% 3%);
+  }
+
+  .btn-primary:hover,
+  .add-btn:hover,
+  .checkout-btn:hover,
+  .modal-add-btn:hover,
+  .add-btn.is-added,
+  .modal-add-btn.is-added {
+    background: linear-gradient(180deg, hsl(351 78% 48%), hsl(349 78% 30%));
+    border-color: hsl(351 78% 48%);
+    color: #fff;
+  }
+
+  .btn-ghost,
+  .nav-cart {
+    background: linear-gradient(180deg, hsl(42 24% 92% / 0.12), hsl(42 24% 92% / 0.04));
+  }
+
+  .product-card,
+  .brand-logo-display,
+  .size-card,
+  .look-item,
+  .payment-method,
+  .order-success,
+  .payment-hold,
+  .checkout-field input,
+  .checkout-field select,
+  .checkout-field textarea,
+  .cart-item-img {
+    border-color: hsl(42 24% 88% / 0.11);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .product-card:hover,
+  .size-card:hover,
+  .look-item:hover,
+  .payment-method:hover {
+    transform: translateY(-4px);
+    border-color: hsl(42 24% 88% / 0.22);
+    box-shadow: var(--shadow-md), 0 0 34px hsl(351 78% 42% / 0.12);
+  }
+
+  .brand-logo-display {
+    box-shadow: var(--shadow-lg);
+  }
+
+  .product-modal,
+  .cart-drawer {
+    box-shadow: var(--shadow-lg);
+  }
+
+  .cart-overlay,
+  .product-modal-overlay {
+    backdrop-filter: blur(9px);
+    -webkit-backdrop-filter: blur(9px);
+  }
+
+  img,
+  .product-visual,
+  .product-visual-inner,
+  .modal-blank,
+  .look-bg {
+    border-radius: var(--radius);
+  }
+
+  img {
+    object-fit: cover;
+    background-color: hsl(240 6% 8%);
+    transition: transform 0.35s ease, filter 0.35s ease, opacity 0.35s ease;
+  }
+
+  .brand-logo-display:hover img,
+  .footer-brand:hover img {
+    transform: scale(1.035);
+  }
+
+  .product-visual,
+  .product-visual-inner,
+  .modal-blank,
+  .look-bg,
+  .cart-item-img {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .product-visual::after,
+  .modal-blank::after,
+  .look-bg::after,
+  .cart-item-img::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(110deg, transparent 0%, hsl(42 24% 92% / 0.045) 42%, hsl(42 24% 92% / 0.105) 50%, hsl(42 24% 92% / 0.045) 58%, transparent 100%);
+    transform: translateX(-120%);
+    animation: shimmer 4.8s ease-in-out infinite;
+    opacity: 0.72;
+  }
+
+  .product-card,
+  .brand-logo-display,
+  .section-header,
+  .about-wrap,
+  .size-card,
+  .look-item,
+  footer,
+  .footer-bottom {
+    animation: fadePolish 0.7s ease both;
+  }
+
+  @keyframes shimmer {
+    0%,
+    58% {
+      transform: translateX(-120%);
+    }
+
+    100% {
+      transform: translateX(120%);
+    }
+  }
+
+  @keyframes fadePolish {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  footer {
+    background:
+      radial-gradient(ellipse 58rem 20rem at 50% 0%, hsl(351 78% 42% / 0.075), transparent 68%),
+      linear-gradient(180deg, hsl(240 6% 5%), hsl(0 0% 2%));
+  }
+
+  footer::before {
+    content: "";
+    position: absolute;
+    left: clamp(20px, 5vw, 72px);
+    right: clamp(20px, 5vw, 72px);
+    top: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, hsl(351 78% 50% / 0.42), hsl(42 24% 88% / 0.22), transparent);
+  }
+
+  .footer-col h4 {
+    color: hsl(42 24% 92%);
+  }
+
+  .footer-copy {
+    font-size: 0.78rem;
+    opacity: 0.78;
   }
 
   @media (max-width: 1180px) and (min-width: 721px) {
