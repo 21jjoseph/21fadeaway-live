@@ -587,6 +587,20 @@
     border-color: rgba(177, 18, 38, 0.42);
   }
 
+  .product-badge.drop,
+  .product-badge.made {
+    color: var(--ink);
+    background:
+      linear-gradient(135deg, rgba(244, 241, 234, 0.13), rgba(177, 18, 38, 0.13)),
+      rgba(5, 5, 5, 0.72);
+    border-color: rgba(244, 241, 234, 0.18);
+  }
+
+  .product-badge.made {
+    color: rgba(244, 241, 234, 0.84);
+    border-color: rgba(177, 18, 38, 0.34);
+  }
+
   .product-info {
     padding: 20px;
   }
@@ -990,6 +1004,164 @@
     font-weight: 650;
     line-height: 1.45;
     margin-top: 8px;
+  }
+
+  .early-access {
+    position: relative;
+    z-index: 1;
+    padding: 76px clamp(20px, 5vw, 72px);
+    background:
+      radial-gradient(ellipse 52rem 18rem at 50% 12%, rgba(244, 241, 234, 0.075), transparent 70%),
+      radial-gradient(ellipse 38rem 18rem at 10% 88%, rgba(177, 18, 38, 0.105), transparent 72%),
+      linear-gradient(180deg, rgba(9, 9, 10, 0.94), rgba(5, 5, 5, 0.98));
+    border-top: 1px solid rgba(244, 241, 234, 0.06);
+    content-visibility: auto;
+    contain-intrinsic-size: 360px;
+  }
+
+  .early-access-wrap {
+    max-width: 1120px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+    gap: clamp(24px, 5vw, 74px);
+    align-items: center;
+  }
+
+  .early-access-kicker {
+    color: rgba(244, 241, 234, 0.52);
+    font-size: 0.72rem;
+    font-weight: 900;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .early-access-title {
+    color: var(--ink);
+    font-size: clamp(2.1rem, 5vw, 5.2rem);
+    font-weight: 900;
+    letter-spacing: -0.01em;
+    line-height: 0.92;
+    margin-top: 14px;
+  }
+
+  .early-access-copy {
+    max-width: 560px;
+    color: var(--muted);
+    font-size: clamp(0.98rem, 1.45vw, 1.15rem);
+    font-weight: 560;
+    line-height: 1.65;
+    margin-top: 18px;
+  }
+
+  .early-access-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin-top: 24px;
+  }
+
+  .early-access-tags span {
+    border: 1px solid rgba(244, 241, 234, 0.12);
+    border-radius: 999px;
+    background: rgba(244, 241, 234, 0.045);
+    color: rgba(244, 241, 234, 0.78);
+    padding: 8px 11px;
+    font-size: 0.72rem;
+    font-weight: 820;
+  }
+
+  .early-access-card {
+    border: 1px solid rgba(244, 241, 234, 0.13);
+    border-radius: 8px;
+    background:
+      radial-gradient(ellipse 80% 85% at 0% 0%, rgba(177, 18, 38, 0.16), transparent 68%),
+      linear-gradient(145deg, rgba(244, 241, 234, 0.08), rgba(244, 241, 234, 0.026)),
+      rgba(7, 7, 8, 0.86);
+    box-shadow: 0 34px 90px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(244, 241, 234, 0.07);
+    padding: clamp(18px, 3vw, 28px);
+  }
+
+  .early-access-form {
+    display: grid;
+    gap: 12px;
+  }
+
+  .early-access-field {
+    display: grid;
+    gap: 7px;
+  }
+
+  .early-access-field label {
+    color: var(--ink);
+    font-size: 0.75rem;
+    font-weight: 850;
+  }
+
+  .early-access-field input {
+    width: 100%;
+    min-height: 46px;
+    border: 1px solid rgba(244, 241, 234, 0.13);
+    border-radius: 8px;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.018)),
+      rgba(5, 5, 5, 0.76);
+    color: var(--ink);
+    color-scheme: dark;
+    font: inherit;
+    outline: none;
+    padding: 12px 13px;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .early-access-field input:focus {
+    border-color: rgba(244, 241, 234, 0.3);
+    box-shadow: 0 0 0 3px rgba(177, 18, 38, 0.14);
+  }
+
+  .early-access-btn {
+    min-height: 48px;
+    border: 1px solid rgba(244, 241, 234, 0.92);
+    border-radius: 8px;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(207, 201, 191, 0.92));
+    color: #050505;
+    font: inherit;
+    font-size: 0.86rem;
+    font-weight: 900;
+    cursor: pointer;
+    transition: transform 0.25s var(--ease), box-shadow 0.25s ease, opacity 0.25s ease;
+  }
+
+  .early-access-btn:hover {
+    transform: translateY(-1px) scale(1.02);
+    box-shadow: 0 18px 48px rgba(244, 241, 234, 0.15);
+  }
+
+  .early-access-btn:active {
+    transform: scale(0.98);
+  }
+
+  .early-access-btn:disabled {
+    cursor: wait;
+    opacity: 0.72;
+  }
+
+  .early-access-status {
+    min-height: 18px;
+    color: var(--muted);
+    font-size: 0.78rem;
+    font-weight: 650;
+    line-height: 1.45;
+  }
+
+  .early-access-status.show {
+    color: var(--ink);
+  }
+
+  .early-access-status a {
+    color: var(--ink);
+    font-weight: 850;
   }
 
   footer {
@@ -1661,8 +1833,12 @@
     display: none;
     border: 1px solid rgba(244, 241, 234, 0.12);
     border-radius: 8px;
-    background: rgba(244, 241, 234, 0.04);
-    padding: 14px;
+    background:
+      radial-gradient(ellipse 90% 105% at 0% 0%, rgba(177, 18, 38, 0.16), transparent 62%),
+      linear-gradient(145deg, rgba(244, 241, 234, 0.07), rgba(244, 241, 234, 0.026)),
+      rgba(5, 5, 5, 0.88);
+    box-shadow: 0 28px 80px rgba(0, 0, 0, 0.42), inset 0 1px 0 rgba(244, 241, 234, 0.075);
+    padding: 16px;
   }
 
   .order-success a {
@@ -1672,6 +1848,101 @@
 
   .order-success.show {
     display: block;
+    animation: orderConfirmIn 0.42s var(--ease) both;
+  }
+
+  .order-confirm {
+    display: grid;
+    gap: 14px;
+  }
+
+  .order-confirm-head {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .order-confirm-mark {
+    width: 38px;
+    height: 38px;
+    flex: 0 0 38px;
+    display: grid;
+    place-items: center;
+    border-radius: 999px;
+    border: 1px solid rgba(244, 241, 234, 0.22);
+    background:
+      radial-gradient(circle at 30% 20%, rgba(244, 241, 234, 0.26), transparent 46%),
+      linear-gradient(145deg, rgba(177, 18, 38, 0.84), rgba(79, 7, 16, 0.94));
+    color: #fff;
+    box-shadow: 0 14px 34px rgba(177, 18, 38, 0.22);
+    font-size: 1rem;
+    font-weight: 900;
+  }
+
+  .order-confirm-title {
+    color: var(--ink);
+    font-size: 1rem;
+    font-weight: 900;
+    line-height: 1.2;
+  }
+
+  .order-confirm-copy,
+  .order-confirm-next {
+    color: var(--muted);
+    font-size: 0.82rem;
+    font-weight: 580;
+    line-height: 1.5;
+    margin-top: 5px;
+  }
+
+  .order-confirm-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .order-confirm-cell {
+    border: 1px solid rgba(244, 241, 234, 0.1);
+    border-radius: 8px;
+    background: rgba(244, 241, 234, 0.045);
+    padding: 10px;
+    min-width: 0;
+  }
+
+  .order-confirm-label {
+    display: block;
+    color: rgba(244, 241, 234, 0.52);
+    font-size: 0.66rem;
+    font-weight: 850;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .order-confirm-value {
+    display: block;
+    color: var(--ink);
+    font-size: 0.8rem;
+    font-weight: 850;
+    line-height: 1.25;
+    margin-top: 6px;
+    overflow-wrap: anywhere;
+  }
+
+  .order-confirm-next {
+    border-left: 2px solid rgba(177, 18, 38, 0.74);
+    padding-left: 12px;
+  }
+
+  @keyframes orderConfirmIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px) scale(0.985);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
   }
 
   .checkout-btn {
@@ -2019,6 +2290,7 @@
   .about-wrap,
   .size-card,
   .look-item,
+  .early-access,
   footer,
   .footer-bottom {
     animation: fadePolish 0.7s ease both;
@@ -2135,10 +2407,29 @@
     section.brand,
     section.about,
     section.sizing,
+    section.early-access,
     section.lookbook {
       content-visibility: visible;
       contain-intrinsic-size: auto;
       padding: 70px 18px;
+    }
+
+    .early-access-wrap {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    .early-access-title {
+      font-size: clamp(2.45rem, 16vw, 4rem);
+    }
+
+    .early-access-tags span {
+      font-size: 0.68rem;
+      padding: 7px 9px;
+    }
+
+    .order-confirm-grid {
+      grid-template-columns: 1fr;
     }
 
     nav {
@@ -2705,7 +2996,7 @@
 
   <div class="products-grid" id="productsGrid">
     <div class="product-card">
-      <div class="product-img-wrap"><div class="product-visual" style="--product-tone:#18181c"><div class="product-visual-inner">Chrome</div></div><div class="product-badge">New</div></div>
+      <div class="product-img-wrap"><div class="product-visual" style="--product-tone:#18181c"><div class="product-visual-inner">Chrome</div></div><div class="product-badge drop">Drop 01</div></div>
       <div class="product-info"><div class="product-name">Chrome Reaper Tee</div><div class="product-desc">Heavyweight cotton. Oversized, clean silhouette.</div><div class="product-footer"><div class="product-price">159 <span>RON</span></div><div class="product-actions"><select class="product-size-select" data-product-size aria-label="Size for Chrome Reaper Tee"><option value="XS">XS</option><option value="S">S</option><option value="M">M</option><option value="L">L</option><option value="XL">XL</option><option value="XXL">XXL</option></select><select class="qty-select" data-product-qty aria-label="Quantity for Chrome Reaper Tee"><option value="1">1x</option><option value="2">2x</option><option value="3">3x</option><option value="4">4x</option><option value="5">5x</option></select><button class="add-btn" type="button" data-add-product="1">Add</button></div></div></div>
     </div>
     <div class="product-card">
@@ -2713,7 +3004,7 @@
       <div class="product-info"><div class="product-name">Void Hoodie</div><div class="product-desc">450gsm fleece. Soft interior, structured hood.</div><div class="product-footer"><div class="product-price">289 <span>RON</span></div><div class="product-actions"><select class="product-size-select" data-product-size aria-label="Size for Void Hoodie"><option value="XS">XS</option><option value="S">S</option><option value="M">M</option><option value="L">L</option><option value="XL">XL</option><option value="XXL">XXL</option></select><select class="qty-select" data-product-qty aria-label="Quantity for Void Hoodie"><option value="1">1x</option><option value="2">2x</option><option value="3">3x</option><option value="4">4x</option><option value="5">5x</option></select><button class="add-btn" type="button" data-add-product="2">Add</button></div></div></div>
     </div>
     <div class="product-card">
-      <div class="product-img-wrap"><div class="product-visual" style="--product-tone:#1d1b20"><div class="product-visual-inner">21</div></div><div class="product-badge">New</div></div>
+      <div class="product-img-wrap"><div class="product-visual" style="--product-tone:#1d1b20"><div class="product-visual-inner">21</div></div><div class="product-badge made">Made to order</div></div>
       <div class="product-info"><div class="product-name">21 Logo Crewneck</div><div class="product-desc">Dropped shoulder. Minimal front mark.</div><div class="product-footer"><div class="product-price">219 <span>RON</span></div><div class="product-actions"><select class="product-size-select" data-product-size aria-label="Size for 21 Logo Crewneck"><option value="XS">XS</option><option value="S">S</option><option value="M">M</option><option value="L">L</option><option value="XL">XL</option><option value="XXL">XXL</option></select><select class="qty-select" data-product-qty aria-label="Quantity for 21 Logo Crewneck"><option value="1">1x</option><option value="2">2x</option><option value="3">3x</option><option value="4">4x</option><option value="5">5x</option></select><button class="add-btn" type="button" data-add-product="3">Add</button></div></div></div>
     </div>
     <div class="product-card">
@@ -2721,7 +3012,7 @@
       <div class="product-info"><div class="product-name">Metal Edge Cap</div><div class="product-desc">6-panel build. Adjustable matte hardware.</div><div class="product-footer"><div class="product-price">89 <span>RON</span></div><div class="product-actions"><select class="product-size-select" data-product-size aria-label="Size for Metal Edge Cap"><option value="OS">OS</option></select><select class="qty-select" data-product-qty aria-label="Quantity for Metal Edge Cap"><option value="1">1x</option><option value="2">2x</option><option value="3">3x</option><option value="4">4x</option><option value="5">5x</option></select><button class="add-btn" type="button" data-add-product="4">Add</button></div></div></div>
     </div>
     <div class="product-card">
-      <div class="product-img-wrap"><div class="product-visual" style="--product-tone:#121217"><div class="product-visual-inner">Fadeaway</div></div><div class="product-badge">Drop</div></div>
+      <div class="product-img-wrap"><div class="product-visual" style="--product-tone:#121217"><div class="product-visual-inner">Fadeaway</div></div><div class="product-badge drop">Drop 01</div></div>
       <div class="product-info"><div class="product-name">Fadeaway Cargo</div><div class="product-desc">Ripstop nylon. Clean utility profile.</div><div class="product-footer"><div class="product-price">319 <span>RON</span></div><div class="product-actions"><select class="product-size-select" data-product-size aria-label="Size for Fadeaway Cargo"><option value="XS">XS</option><option value="S">S</option><option value="M">M</option><option value="L">L</option><option value="XL">XL</option><option value="XXL">XXL</option></select><select class="qty-select" data-product-qty aria-label="Quantity for Fadeaway Cargo"><option value="1">1x</option><option value="2">2x</option><option value="3">3x</option><option value="4">4x</option><option value="5">5x</option></select><button class="add-btn" type="button" data-add-product="5">Add</button></div></div></div>
     </div>
     <div class="product-card">
@@ -2733,7 +3024,7 @@
       <div class="product-info"><div class="product-name">Spike Collar</div><div class="product-desc">Zinc alloy. Adjustable polished finish.</div><div class="product-footer"><div class="product-price">79 <span>RON</span></div><div class="product-actions"><select class="product-size-select" data-product-size aria-label="Size for Spike Collar"><option value="OS">OS</option></select><select class="qty-select" data-product-qty aria-label="Quantity for Spike Collar"><option value="1">1x</option><option value="2">2x</option><option value="3">3x</option><option value="4">4x</option><option value="5">5x</option></select><button class="add-btn" type="button" data-add-product="7">Add</button></div></div></div>
     </div>
     <div class="product-card">
-      <div class="product-img-wrap"><div class="product-visual" style="--product-tone:#15151a"><div class="product-visual-inner">Reaper</div></div><div class="product-badge">New</div></div>
+      <div class="product-img-wrap"><div class="product-visual" style="--product-tone:#15151a"><div class="product-visual-inner">Reaper</div></div><div class="product-badge made">Made to order</div></div>
       <div class="product-info"><div class="product-name">Reaper Shorts</div><div class="product-desc">360gsm cotton. Elastic waist.</div><div class="product-footer"><div class="product-price">169 <span>RON</span></div><div class="product-actions"><select class="product-size-select" data-product-size aria-label="Size for Reaper Shorts"><option value="XS">XS</option><option value="S">S</option><option value="M">M</option><option value="L">L</option><option value="XL">XL</option><option value="XXL">XXL</option></select><select class="qty-select" data-product-qty aria-label="Quantity for Reaper Shorts"><option value="1">1x</option><option value="2">2x</option><option value="3">3x</option><option value="4">4x</option><option value="5">5x</option></select><button class="add-btn" type="button" data-add-product="8">Add</button></div></div></div>
     </div>
   </div>
@@ -2829,6 +3120,36 @@
   </div>
 </section>
 
+<!-- EARLY ACCESS -->
+<section class="early-access" id="early-access">
+  <div class="early-access-wrap">
+    <div class="early-access-copy-block">
+      <p class="early-access-kicker">Early access</p>
+      <h2 class="early-access-title">First in<br>the drop.</h2>
+      <p class="early-access-copy">Inscrie-te pentru acces la drop-uri, restock-uri si piese limitate inainte sa fie publice. Fara spam, doar semnale importante.</p>
+      <div class="early-access-tags">
+        <span>Private drop alerts</span>
+        <span>Restock notice</span>
+        <span>Limited pieces</span>
+      </div>
+    </div>
+    <div class="early-access-card">
+      <form class="early-access-form" id="earlyAccessForm">
+        <div class="early-access-field">
+          <label for="earlyAccessName">Name</label>
+          <input id="earlyAccessName" name="name" type="text" autocomplete="name" placeholder="Your name">
+        </div>
+        <div class="early-access-field">
+          <label for="earlyAccessEmail">Email</label>
+          <input id="earlyAccessEmail" name="email" type="email" autocomplete="email" placeholder="you@email.com" required>
+        </div>
+        <button class="early-access-btn" type="submit">Join early access</button>
+        <p class="early-access-status" id="earlyAccessStatus" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
 <!-- FOOTER -->
 <footer>
   <div class="footer-brand">
@@ -2859,7 +3180,7 @@
       <li><a href="#">Instagram</a></li>
       <li><a href="#">TikTok</a></li>
       <li><a href="#">Discord</a></li>
-      <li><a href="#">Newsletter</a></li>
+      <li><a href="#early-access">Newsletter</a></li>
     </ul>
   </div>
 </footer>
@@ -2875,16 +3196,17 @@ const oneSize = ["OS"];
 const orderStorageKey = "21fadeawayOrderRequests";
 const orderEmailAddress = "joseph21fadeaway@gmail.com";
 const orderEmailEndpoint = "https://formsubmit.co/ajax/joseph21fadeaway@gmail.com";
+const earlyAccessStorageKey = "21fadeawayEarlyAccess";
 
 const products = [
-  { id: 1, name: "Chrome Reaper Tee", desc: "Heavyweight cotton. Oversized, clean silhouette.", price: 159, badge: "New", color: "#18181c", sizes: apparelSizes },
+  { id: 1, name: "Chrome Reaper Tee", desc: "Heavyweight cotton. Oversized, clean silhouette.", price: 159, badge: "Drop 01", color: "#18181c", sizes: apparelSizes },
   { id: 2, name: "Void Hoodie", desc: "450gsm fleece. Soft interior, structured hood.", price: 289, badge: "Limited", color: "#111114", sizes: apparelSizes },
-  { id: 3, name: "21 Logo Crewneck", desc: "Dropped shoulder. Minimal front mark.", price: 219, badge: "New", color: "#1d1b20", sizes: apparelSizes },
+  { id: 3, name: "21 Logo Crewneck", desc: "Dropped shoulder. Minimal front mark.", price: 219, badge: "Made to order", color: "#1d1b20", sizes: apparelSizes },
   { id: 4, name: "Metal Edge Cap", desc: "6-panel build. Adjustable matte hardware.", price: 89, badge: "Limited", color: "#171316", sizes: oneSize },
-  { id: 5, name: "Fadeaway Cargo", desc: "Ripstop nylon. Clean utility profile.", price: 319, badge: "Drop", color: "#121217", sizes: apparelSizes },
+  { id: 5, name: "Fadeaway Cargo", desc: "Ripstop nylon. Clean utility profile.", price: 319, badge: "Drop 01", color: "#121217", sizes: apparelSizes },
   { id: 6, name: "Chrome Logo Tee", desc: "280gsm cotton. Regular fit.", price: 139, badge: "Sold out", color: "#1a171a", sold: true, sizes: apparelSizes },
   { id: 7, name: "Spike Collar", desc: "Zinc alloy. Adjustable polished finish.", price: 79, badge: "Limited", color: "#0e0e10", sizes: oneSize },
-  { id: 8, name: "Reaper Shorts", desc: "360gsm cotton. Elastic waist.", price: 169, badge: "New", color: "#15151a", sizes: apparelSizes }
+  { id: 8, name: "Reaper Shorts", desc: "360gsm cotton. Elastic waist.", price: 169, badge: "Made to order", color: "#15151a", sizes: apparelSizes }
 ];
 
 const lookbookLabels = ["Editorial", "21", "Chrome", "Studio", "Fade", "Clean", "Drop", "Essential"];
@@ -3603,6 +3925,44 @@ function buildOrderLines(items) {
   return items.map((item) => `${item.qty} x ${item.name} / Size ${item.size} / ${formatCurrency(item.price * item.qty)}`).join("\n");
 }
 
+function buildOrderConfirmationHtml(order, options = {}) {
+  const isFallback = Boolean(options.fallbackUrl);
+  const title = isFallback ? "Order request prepared." : "Order request sent.";
+  const copy = isFallback
+    ? `Email service may need first-time confirmation. <a href="${options.fallbackUrl}">Open email fallback</a>.`
+    : `Your order request was sent to ${escapeHtml(orderEmailAddress)}.`;
+  const nextStep = order.payment.method === "Card"
+    ? "Next step: we will confirm the order and send the Stripe/payment link when card payment is connected."
+    : "Next step: we will confirm availability and delivery details before shipping with ramburs.";
+
+  return `
+    <div class="order-confirm">
+      <div class="order-confirm-head">
+        <span class="order-confirm-mark" aria-hidden="true">✓</span>
+        <div>
+          <div class="order-confirm-title">${title}</div>
+          <div class="order-confirm-copy">${copy}</div>
+        </div>
+      </div>
+      <div class="order-confirm-grid">
+        <div class="order-confirm-cell">
+          <span class="order-confirm-label">Order</span>
+          <span class="order-confirm-value">${escapeHtml(order.id)}</span>
+        </div>
+        <div class="order-confirm-cell">
+          <span class="order-confirm-label">Total</span>
+          <span class="order-confirm-value">${formatCurrency(order.total)}</span>
+        </div>
+        <div class="order-confirm-cell">
+          <span class="order-confirm-label">Payment</span>
+          <span class="order-confirm-value">${escapeHtml(order.payment.method)}</span>
+        </div>
+      </div>
+      <div class="order-confirm-next">${nextStep}</div>
+    </div>
+  `;
+}
+
 function buildOrderEmailPayload(order) {
   return {
     _subject: `21FADEAWAY order ${order.id}`,
@@ -3665,6 +4025,102 @@ async function sendOrderEmail(order) {
   return response.json();
 }
 
+function buildEarlyAccessMailtoUrl(entry) {
+  const subject = encodeURIComponent("21FADEAWAY early access signup");
+  const body = encodeURIComponent([
+    "Early access signup",
+    "",
+    `Name: ${entry.name || "Not provided"}`,
+    `Email: ${entry.email}`,
+    `Created at: ${entry.createdAt}`
+  ].join("\n"));
+
+  return `mailto:${orderEmailAddress}?subject=${subject}&body=${body}`;
+}
+
+async function sendEarlyAccessEntry(entry) {
+  const response = await fetch(orderEmailEndpoint, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    },
+    body: JSON.stringify({
+      _subject: "21FADEAWAY early access signup",
+      _template: "table",
+      _captcha: "false",
+      signup_type: "early_access",
+      name: entry.name,
+      email: entry.email,
+      created_at: entry.createdAt
+    })
+  });
+
+  if (!response.ok) {
+    throw new Error("Early access signup could not be sent");
+  }
+
+  return response.json();
+}
+
+async function submitEarlyAccess(event) {
+  event.preventDefault();
+
+  const form = event.currentTarget;
+  const status = document.getElementById("earlyAccessStatus");
+  const button = form.querySelector(".early-access-btn");
+  const formData = new FormData(form);
+  const entry = {
+    name: String(formData.get("name") || "").trim(),
+    email: String(formData.get("email") || "").trim(),
+    createdAt: new Date().toISOString()
+  };
+
+  if (!entry.email) {
+    if (status) {
+      status.textContent = "Add your email first.";
+      status.classList.add("show");
+    }
+    return;
+  }
+
+  try {
+    const savedEntries = JSON.parse(localStorage.getItem(earlyAccessStorageKey) || "[]");
+    savedEntries.push(entry);
+    localStorage.setItem(earlyAccessStorageKey, JSON.stringify(savedEntries));
+  } catch (error) {
+    console.warn("Early access entry could not be saved locally", error);
+  }
+
+  if (button) {
+    button.disabled = true;
+    button.textContent = "Joining...";
+  }
+
+  try {
+    await sendEarlyAccessEntry(entry);
+    if (status) {
+      status.innerHTML = "You're on the early access list. Drop alerts will go to your email.";
+      status.classList.add("show");
+    }
+    form.reset();
+    showNotif("Early access joined");
+    if (button) button.textContent = "Joined";
+  } catch (error) {
+    const fallbackUrl = buildEarlyAccessMailtoUrl(entry);
+    if (status) {
+      status.innerHTML = `Saved locally. Email service may need first-time confirmation. <a href="${fallbackUrl}">Open email fallback</a>.`;
+      status.classList.add("show");
+    }
+    console.warn("Early access signup could not be sent automatically", error);
+    showNotif("Early access saved");
+    if (button) {
+      button.disabled = false;
+      button.textContent = "Try again";
+    }
+  }
+}
+
 async function submitOrder(event) {
   event.preventDefault();
   if (cart.length === 0) return;
@@ -3717,26 +4173,14 @@ async function submitOrder(event) {
 
   try {
     await sendOrderEmail(order);
-    orderSuccess.innerHTML = `
-      <strong>Order request sent by email.</strong><br>
-      ${order.id}<br>
-      Total: ${formatCurrency(total)}<br>
-      Payment: ${paymentMethod}<br>
-      Sent to: ${orderEmailAddress}
-    `;
+    orderSuccess.innerHTML = buildOrderConfirmationHtml(order);
     showNotif("Order sent to email");
     if (submitButton) {
       submitButton.textContent = "Order request sent";
     }
   } catch (error) {
     const mailtoUrl = buildMailtoUrl(order);
-    orderSuccess.innerHTML = `
-      <strong>Order request prepared.</strong><br>
-      ${order.id}<br>
-      Total: ${formatCurrency(total)}<br>
-      Payment: ${paymentMethod}<br>
-      Email service may need first-time confirmation. <a href="${mailtoUrl}">Open email fallback</a>.
-    `;
+    orderSuccess.innerHTML = buildOrderConfirmationHtml(order, { fallbackUrl: mailtoUrl });
     console.warn("Order email could not be sent automatically", error);
     showNotif("Order prepared");
     if (submitButton) {
@@ -3866,6 +4310,11 @@ window.closeProductModal = closeProductModal;
 const checkoutForm = document.getElementById("checkoutForm");
 if (checkoutForm && checkoutForm.addEventListener) {
   checkoutForm.addEventListener("submit", submitOrder);
+}
+
+const earlyAccessForm = document.getElementById("earlyAccessForm");
+if (earlyAccessForm && earlyAccessForm.addEventListener) {
+  earlyAccessForm.addEventListener("submit", submitEarlyAccess);
 }
 
 function updatePaymentHint() {
