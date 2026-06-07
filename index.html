@@ -290,11 +290,11 @@
 
   .hero-bg-grid {
     background:
-      linear-gradient(118deg, rgba(255, 255, 255, 0) 8%, rgba(207, 205, 198, 0.105) 22%, rgba(255, 255, 255, 0) 39%),
-      linear-gradient(292deg, rgba(255, 255, 255, 0) 14%, rgba(177, 18, 38, 0.13) 34%, rgba(72, 67, 70, 0.095) 49%, rgba(255, 255, 255, 0) 68%),
+      radial-gradient(ellipse 58% 34% at 34% 42%, rgba(177, 18, 38, 0.105) 0%, rgba(78, 70, 76, 0.065) 42%, rgba(255, 255, 255, 0) 74%),
+      radial-gradient(ellipse 62% 38% at 70% 50%, rgba(80, 83, 88, 0.11) 0%, rgba(32, 29, 33, 0.09) 44%, rgba(255, 255, 255, 0) 78%),
       linear-gradient(180deg, rgba(18, 18, 20, 0) 0%, rgba(18, 18, 20, 0.62) 64%, rgba(5, 5, 5, 0.96) 100%);
-    filter: blur(8px);
-    opacity: 0.58;
+    filter: blur(22px);
+    opacity: 0.62;
     transform: translate3d(-2%, -1%, 0) scale(1.02);
     animation: none;
   }
@@ -309,10 +309,9 @@
 
   .hero-bg-grid::before {
     background:
-      linear-gradient(78deg, rgba(255, 255, 255, 0) 8%, rgba(214, 210, 202, 0.09) 29%, rgba(255, 255, 255, 0) 52%),
-      linear-gradient(146deg, rgba(255, 255, 255, 0) 20%, rgba(177, 18, 38, 0.075) 44%, rgba(255, 255, 255, 0) 70%);
-    filter: blur(10px);
-    opacity: 0.3;
+      radial-gradient(ellipse 46% 30% at 50% 48%, rgba(136, 24, 38, 0.105) 0%, rgba(84, 80, 86, 0.055) 48%, rgba(255, 255, 255, 0) 82%);
+    filter: blur(28px);
+    opacity: 0.34;
     transform: translate3d(4%, 3%, 0) rotate(-4deg);
     animation: none;
   }
@@ -327,12 +326,7 @@
   }
 
   .hero-scanlines::before {
-    background:
-      repeating-linear-gradient(90deg, rgba(244, 241, 234, 0.018) 0 1px, rgba(244, 241, 234, 0) 1px 120px),
-      repeating-linear-gradient(0deg, rgba(244, 241, 234, 0.012) 0 1px, rgba(244, 241, 234, 0) 1px 160px);
-    mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0), black 20%, black 68%, rgba(0, 0, 0, 0));
-    opacity: 0.18;
-    transform: translate3d(0, 0, 0);
+    display: none;
   }
 
   .hero-liquid {
@@ -366,10 +360,9 @@
     top: 42%;
     transform: translate(-50%, -50%);
     background:
-      radial-gradient(ellipse 50% 42% at 50% 48%, rgba(244, 241, 234, 0.16) 0%, rgba(244, 241, 234, 0.072) 34%, rgba(244, 241, 234, 0.018) 62%, transparent 82%),
-      linear-gradient(90deg, transparent 0%, rgba(177, 18, 38, 0.045) 44%, rgba(244, 241, 234, 0.05) 50%, rgba(177, 18, 38, 0.045) 56%, transparent 100%);
-    filter: blur(26px);
-    opacity: 0.9;
+      radial-gradient(ellipse 48% 40% at 50% 48%, rgba(177, 18, 38, 0.08) 0%, rgba(36, 34, 38, 0.12) 42%, transparent 82%);
+    filter: blur(34px);
+    opacity: 0.72;
     pointer-events: none;
   }
 
@@ -4933,19 +4926,17 @@ function setupHeroLiquid() {
   let animationFrame = 0;
   let isVisible = true;
   let lastTime = 0;
-  const pointer = { x: 0.5, y: 0.5, tx: 0.5, ty: 0.5, active: false };
-  const ripples = [];
-  const trails = [];
-  let lastRippleTime = 0;
-  let lastRippleX = 0;
-  let lastRippleY = 0;
-  const drops = Array.from({ length: 7 }, (_, index) => ({
-    x: 0.16 + (index * 0.12) % 0.76,
-    y: 0.3 + ((index * 0.17) % 0.44),
-    r: 92 + index * 16,
-    phase: index * 1.7,
-    speed: 0.28 + index * 0.035,
-    red: index % 3 === 0
+  const pointer = { x: 0.5, y: 0.5, tx: 0.5, ty: 0.5, vx: 0, vy: 0, active: false };
+  const wakes = [];
+  let lastWakeTime = 0;
+  let lastWakeX = 0;
+  let lastWakeY = 0;
+  const sheets = Array.from({ length: 6 }, (_, index) => ({
+    y: 0.24 + index * 0.105,
+    depth: 0.035 + index * 0.008,
+    phase: index * 1.74,
+    speed: 0.18 + index * 0.026,
+    red: index % 3 === 1
   }));
 
   function resizeLiquid() {
@@ -4960,113 +4951,131 @@ function setupHeroLiquid() {
     context.setTransform(dpr, 0, 0, dpr, 0, 0);
   }
 
-  function addRipple(clientX, clientY, force = 1) {
+  function addDisturbance(clientX, clientY, force = 1) {
     const rect = hero.getBoundingClientRect();
     const x = clientX - rect.left;
     const y = clientY - rect.top;
     if (x < 0 || y < 0 || x > rect.width || y > rect.height) return;
 
+    const now = performance.now();
+    const previousX = lastWakeX || x;
+    const previousY = lastWakeY || y;
+    const distance = Math.hypot(x - previousX, y - previousY);
+    const timeSinceWake = now - lastWakeTime;
+
     pointer.tx = x / Math.max(1, rect.width);
     pointer.ty = y / Math.max(1, rect.height);
+    pointer.vx = (x - previousX) / Math.max(18, timeSinceWake || 18);
+    pointer.vy = (y - previousY) / Math.max(18, timeSinceWake || 18);
     pointer.active = true;
 
-    const now = performance.now();
-    const distance = Math.hypot(x - lastRippleX, y - lastRippleY);
-    const timeSinceRipple = now - lastRippleTime;
-    if (timeSinceRipple < 18 && distance < 12) return;
+    if (timeSinceWake < 14 && distance < 9) return;
 
-    const velocity = distance / Math.max(16, timeSinceRipple || 16);
+    const velocity = distance / Math.max(16, timeSinceWake || 16);
     const liquidForce = Math.min(1.6, Math.max(0.52, force + velocity * 0.28));
+    const angle = Math.atan2(y - previousY, x - previousX || 0.001);
+    const normal = angle + Math.PI * 0.5;
+    const bend = Math.min(36, 8 + distance * 0.22) * (Math.random() > 0.5 ? 1 : -1);
 
-    ripples.push({
+    wakes.push({
       x,
       y,
+      px: previousX,
+      py: previousY,
+      cx: (x + previousX) * 0.5 + Math.cos(normal) * bend,
+      cy: (y + previousY) * 0.5 + Math.sin(normal) * bend,
+      angle,
       age: 0,
-      life: 1.55,
+      life: 0.95 + liquidForce * 0.28,
       force: liquidForce,
-      seed: Math.random() * Math.PI * 2,
-      stretch: 0.72 + Math.random() * 0.16
+      width: Math.min(58, 18 + velocity * 16 + liquidForce * 8),
+      seed: Math.random() * Math.PI * 2
     });
 
-    trails.push({
-      x,
-      y,
-      px: lastRippleX || x,
-      py: lastRippleY || y,
-      age: 0,
-      life: 0.58,
-      force: liquidForce
-    });
+    lastWakeX = x;
+    lastWakeY = y;
+    lastWakeTime = now;
 
-    lastRippleX = x;
-    lastRippleY = y;
-    lastRippleTime = now;
-
-    if (ripples.length > 22) {
-      ripples.shift();
-    }
-
-    if (trails.length > 28) {
-      trails.shift();
+    if (wakes.length > 38) {
+      wakes.shift();
     }
   }
 
-  function drawLiquidRing(x, y, radius, amplitude, alpha, phase, stretch = 0.78) {
-    const points = 58;
+  function drawOrganicBlob(x, y, radius, alpha, phase, force = 1) {
+    const points = 42;
     context.beginPath();
 
     for (let point = 0; point <= points; point++) {
       const angle = (point / points) * Math.PI * 2;
       const wobble =
-        Math.sin(angle * 3 + phase) * amplitude +
-        Math.sin(angle * 7 - phase * 0.72) * amplitude * 0.42 +
-        Math.cos(angle * 11 + phase * 0.36) * amplitude * 0.18;
-      const localRadius = radius + wobble;
-      const horizontalPull = 1 + Math.sin(angle * 2 + phase) * 0.035;
-      const px = x + Math.cos(angle) * localRadius * horizontalPull;
-      const py = y + Math.sin(angle) * localRadius * stretch;
+        Math.sin(angle * 2 + phase) * radius * 0.16 +
+        Math.sin(angle * 5 - phase * 0.7) * radius * 0.075 +
+        Math.cos(angle * 9 + phase * 0.4) * radius * 0.04;
+      const stretchX = 1.24 + Math.sin(phase) * 0.12;
+      const stretchY = 0.52 + Math.cos(phase * 0.8) * 0.08;
+      const localRadius = radius + wobble * force;
+      const px = x + Math.cos(angle) * localRadius * stretchX;
+      const py = y + Math.sin(angle) * localRadius * stretchY;
 
       if (point === 0) context.moveTo(px, py);
       else context.lineTo(px, py);
     }
 
     context.closePath();
-    context.strokeStyle = `rgba(244, 241, 234, ${alpha})`;
-    context.lineWidth = Math.max(0.65, 1.6 * alpha + 0.55);
-    context.stroke();
-    context.strokeStyle = `rgba(177, 18, 38, ${alpha * 0.34})`;
-    context.lineWidth = Math.max(0.5, 1.2 * alpha + 0.35);
-    context.stroke();
+    const gradient = context.createRadialGradient(x, y, 0, x, y, radius * 1.4);
+    gradient.addColorStop(0, `rgba(146, 34, 48, ${alpha * 0.9})`);
+    gradient.addColorStop(0.42, `rgba(92, 88, 94, ${alpha * 0.62})`);
+    gradient.addColorStop(1, "rgba(0, 0, 0, 0)");
+    context.fillStyle = gradient;
+    context.fill();
   }
 
-  function drawSurfaceWaves(time) {
-    for (let wave = 0; wave < 4; wave++) {
-      const baseY = height * (0.34 + wave * 0.105);
-      const amplitude = 10 + wave * 3;
-      const phase = time * (0.48 + wave * 0.09) + wave * 1.8;
-      const pointerPull = pointer.active ? (pointer.y - 0.5) * (22 - wave * 3) : 0;
+  function drawLiquidSheet(time) {
+    sheets.forEach((sheet, sheetIndex) => {
+      const baseY = height * sheet.y;
+      const thickness = height * sheet.depth;
+      const phase = time * sheet.speed + sheet.phase;
+      const pointerPull = pointer.active ? (pointer.y - 0.5) * (28 - sheetIndex * 3) : 0;
 
       context.beginPath();
-      for (let step = 0; step <= 92; step++) {
-        const x = (step / 92) * width;
+      for (let step = 0; step <= 56; step++) {
+        const x = (step / 56) * width;
         const distanceFromPointer = Math.abs(x / Math.max(1, width) - pointer.x);
-        const wake = Math.max(0, 1 - distanceFromPointer * 4.5);
+        const wake = Math.max(0, 1 - distanceFromPointer * 5.2);
         const y =
           baseY +
-          Math.sin(step * 0.15 + phase) * amplitude +
-          Math.sin(step * 0.045 - phase * 1.2) * amplitude * 0.75 +
-          wake * pointerPull * Math.sin(phase + wave);
+          Math.sin(step * 0.18 + phase) * (10 + sheetIndex * 2.5) +
+          Math.sin(step * 0.055 - phase * 2.1) * (8 + sheetIndex * 1.5) +
+          wake * pointerPull * Math.sin(phase + sheetIndex);
 
         if (step === 0) context.moveTo(x, y);
         else context.lineTo(x, y);
       }
 
-      context.strokeStyle = wave % 2
-        ? "rgba(177, 18, 38, 0.035)"
-        : "rgba(244, 241, 234, 0.045)";
-      context.lineWidth = 1;
-      context.stroke();
-    }
+      for (let step = 56; step >= 0; step--) {
+        const x = (step / 56) * width;
+        const y =
+          baseY +
+          thickness +
+          Math.sin(step * 0.16 + phase + 1.2) * (8 + sheetIndex * 2) +
+          Math.sin(step * 0.05 - phase * 1.7) * (7 + sheetIndex);
+        context.lineTo(x, y);
+      }
+
+      context.closePath();
+      const gradient = context.createLinearGradient(0, baseY - thickness, width, baseY + thickness * 2);
+      if (sheet.red) {
+        gradient.addColorStop(0, "rgba(116, 18, 30, 0)");
+        gradient.addColorStop(0.45, "rgba(116, 18, 30, 0.055)");
+        gradient.addColorStop(1, "rgba(74, 70, 76, 0)");
+      } else {
+        gradient.addColorStop(0, "rgba(78, 80, 86, 0)");
+        gradient.addColorStop(0.48, "rgba(78, 80, 86, 0.052)");
+        gradient.addColorStop(1, "rgba(38, 36, 40, 0)");
+      }
+      context.fillStyle = gradient;
+      context.fill();
+    });
   }
 
   function drawLiquid(timestamp) {
@@ -5079,92 +5088,79 @@ function setupHeroLiquid() {
 
     context.clearRect(0, 0, width, height);
     context.globalCompositeOperation = "source-over";
-    context.fillStyle = "rgba(0, 0, 0, 0.045)";
+    context.fillStyle = "rgba(0, 0, 0, 0.035)";
     context.fillRect(0, 0, width, height);
     context.globalCompositeOperation = "lighter";
 
     const time = timestamp * 0.001;
-    drawSurfaceWaves(time);
+    drawLiquidSheet(time);
 
-    drops.forEach((drop) => {
-      const driftX = Math.sin(time * drop.speed + drop.phase) * 34;
-      const driftY = Math.cos(time * (drop.speed * 0.82) + drop.phase) * 24;
-      const pullX = (pointer.x - 0.5) * 54;
-      const pullY = (pointer.y - 0.5) * 38;
-      const x = drop.x * width + driftX + pullX;
-      const y = drop.y * height + driftY + pullY;
-      const radius = Math.min(width, height) * 0.13 + drop.r;
-      const gradient = context.createRadialGradient(x, y, 0, x, y, radius);
-      if (drop.red) {
-        gradient.addColorStop(0, "rgba(177, 18, 38, 0.18)");
-        gradient.addColorStop(0.38, "rgba(177, 18, 38, 0.07)");
-      } else {
-        gradient.addColorStop(0, "rgba(244, 241, 234, 0.12)");
-        gradient.addColorStop(0.38, "rgba(130, 132, 138, 0.055)");
-      }
-      gradient.addColorStop(1, "rgba(0, 0, 0, 0)");
-      context.fillStyle = gradient;
-      context.beginPath();
-      context.ellipse(x, y, radius * 1.22, radius * 0.58, Math.sin(time + drop.phase) * 0.35, 0, Math.PI * 2);
-      context.fill();
-    });
-
-    for (let index = trails.length - 1; index >= 0; index--) {
-      const trail = trails[index];
-      trail.age += delta;
-      const progress = trail.age / trail.life;
-      if (progress >= 1) {
-        trails.splice(index, 1);
-        continue;
-      }
-
-      const alpha = (1 - progress) * 0.16 * trail.force;
-      const midX = (trail.x + trail.px) * 0.5 + Math.sin(time * 4 + index) * 8;
-      const midY = (trail.y + trail.py) * 0.5 + Math.cos(time * 3 + index) * 6;
-      context.beginPath();
-      context.moveTo(trail.px, trail.py);
-      context.quadraticCurveTo(midX, midY, trail.x, trail.y);
-      context.strokeStyle = `rgba(244, 241, 234, ${alpha})`;
-      context.lineWidth = 7 * (1 - progress) + 1;
-      context.lineCap = "round";
-      context.stroke();
-      context.strokeStyle = `rgba(177, 18, 38, ${alpha * 0.42})`;
-      context.lineWidth = 3 * (1 - progress) + 0.5;
-      context.stroke();
+    if (pointer.active) {
+      const x = pointer.x * width;
+      const y = pointer.y * height;
+      const pulse = 1 + Math.sin(time * 2.8) * 0.04;
+      drawOrganicBlob(x, y, Math.min(width, height) * 0.16 * pulse, 0.1, time * 1.8, 0.8);
     }
 
-    for (let index = ripples.length - 1; index >= 0; index--) {
-      const ripple = ripples[index];
-      ripple.age += delta;
-      const progress = ripple.age / ripple.life;
+    for (let index = wakes.length - 1; index >= 0; index--) {
+      const wake = wakes[index];
+      wake.age += delta;
+      const progress = wake.age / wake.life;
       if (progress >= 1) {
-        ripples.splice(index, 1);
+        wakes.splice(index, 1);
         continue;
       }
 
-      const radius = 18 + progress * 230 * ripple.force;
-      const alpha = Math.pow(1 - progress, 1.25) * 0.18 * ripple.force;
-      const phase = time * 4.2 + ripple.seed;
-      const gradient = context.createRadialGradient(ripple.x, ripple.y, radius * 0.08, ripple.x, ripple.y, radius);
-      gradient.addColorStop(0, `rgba(244, 241, 234, ${alpha * 0.36})`);
-      gradient.addColorStop(0.28, `rgba(177, 18, 38, ${alpha * 0.22})`);
-      gradient.addColorStop(0.64, `rgba(244, 241, 234, ${alpha * 0.08})`);
-      gradient.addColorStop(1, "rgba(0, 0, 0, 0)");
-      context.fillStyle = gradient;
-      context.beginPath();
-      context.ellipse(ripple.x, ripple.y, radius * 1.05, radius * ripple.stretch, Math.sin(phase) * 0.18, 0, Math.PI * 2);
-      context.fill();
+      const fadeOut = Math.pow(1 - progress, 1.55);
+      const swell = Math.sin(progress * Math.PI);
+      const alpha = fadeOut * 0.18 * wake.force;
+      const driftX = Math.cos(wake.angle + Math.PI * 0.5) * Math.sin(time * 3 + wake.seed) * 10 * swell;
+      const driftY = Math.sin(wake.angle + Math.PI * 0.5) * Math.cos(time * 2.4 + wake.seed) * 8 * swell;
+      const cx = wake.cx + driftX;
+      const cy = wake.cy + driftY;
+      const widthNow = wake.width * (1 + swell * 1.15);
 
-      drawLiquidRing(ripple.x, ripple.y, radius * 0.72, 6 + ripple.force * 5, alpha * 0.78, phase, ripple.stretch);
-      drawLiquidRing(ripple.x, ripple.y, radius * 1.03, 9 + ripple.force * 7, alpha * 0.48, phase + 1.6, ripple.stretch);
-      if (progress < 0.54) {
-        drawLiquidRing(ripple.x, ripple.y, radius * 0.38, 4 + ripple.force * 4, alpha * 0.54, phase - 0.9, ripple.stretch);
+      context.save();
+      context.lineCap = "round";
+      context.lineJoin = "round";
+      context.shadowBlur = 24 * fadeOut;
+      context.shadowColor = `rgba(116, 18, 30, ${alpha * 0.8})`;
+
+      const strokeGradient = context.createLinearGradient(wake.px, wake.py, wake.x, wake.y);
+      strokeGradient.addColorStop(0, `rgba(64, 62, 68, ${alpha * 0.42})`);
+      strokeGradient.addColorStop(0.46, `rgba(146, 34, 48, ${alpha})`);
+      strokeGradient.addColorStop(1, `rgba(86, 84, 92, ${alpha * 0.52})`);
+
+      context.beginPath();
+      context.moveTo(wake.px, wake.py);
+      context.quadraticCurveTo(cx, cy, wake.x, wake.y);
+      context.strokeStyle = strokeGradient;
+      context.lineWidth = widthNow;
+      context.stroke();
+
+      context.shadowBlur = 0;
+      for (let fold = -1; fold <= 1; fold += 2) {
+        const offset = fold * widthNow * 0.34;
+        const ox = Math.cos(wake.angle + Math.PI * 0.5) * offset;
+        const oy = Math.sin(wake.angle + Math.PI * 0.5) * offset;
+        context.beginPath();
+        context.moveTo(wake.px + ox * 0.45, wake.py + oy * 0.45);
+        context.quadraticCurveTo(cx + ox, cy + oy, wake.x + ox * 0.25, wake.y + oy * 0.25);
+        context.strokeStyle = `rgba(118, 113, 121, ${alpha * 0.3})`;
+        context.lineWidth = Math.max(0.7, 1.4 * fadeOut);
+        context.stroke();
+      }
+
+      context.restore();
+
+      if (progress < 0.72) {
+        drawOrganicBlob(wake.x, wake.y, widthNow * 0.8, alpha * 0.55, time * 2.2 + wake.seed, wake.force);
       }
     }
 
     context.globalCompositeOperation = "source-over";
     const fade = context.createLinearGradient(0, 0, 0, height);
-    fade.addColorStop(0, "rgba(0, 0, 0, 0.18)");
+    fade.addColorStop(0, "rgba(0, 0, 0, 0.2)");
     fade.addColorStop(0.48, "rgba(0, 0, 0, 0)");
     fade.addColorStop(1, "rgba(0, 0, 0, 0.34)");
     context.fillStyle = fade;
@@ -5190,8 +5186,8 @@ function setupHeroLiquid() {
   resizeLiquid();
   startLiquid();
 
-  hero.addEventListener("pointermove", (event) => addRipple(event.clientX, event.clientY, event.pressure || 0.72), { passive: true });
-  hero.addEventListener("pointerenter", (event) => addRipple(event.clientX, event.clientY, 0.65), { passive: true });
+  hero.addEventListener("pointermove", (event) => addDisturbance(event.clientX, event.clientY, event.pressure || 0.72), { passive: true });
+  hero.addEventListener("pointerenter", (event) => addDisturbance(event.clientX, event.clientY, 0.65), { passive: true });
   hero.addEventListener("pointerleave", () => {
     pointer.active = false;
     pointer.tx = 0.5;
