@@ -893,6 +893,7 @@
   }
 
   .look-item {
+    position: relative;
     width: clamp(230px, 25vw, 360px);
     height: clamp(280px, 32vw, 430px);
     flex-shrink: 0;
@@ -900,13 +901,45 @@
     border-radius: 8px;
     background: var(--surface-solid);
     border: 1px solid var(--hairline-soft);
+    cursor: pointer;
   }
 
-  .look-item,
   .look-bg,
   .look-overlay {
     pointer-events: none;
     -webkit-user-drag: none;
+  }
+
+  .look-item {
+    pointer-events: auto;
+    -webkit-user-drag: none;
+  }
+
+  .look-item::after {
+    content: "Shop";
+    position: absolute;
+    right: 16px;
+    bottom: 16px;
+    z-index: 2;
+    border: 1px solid hsl(42 24% 92% / 0.16);
+    border-radius: 999px;
+    background: hsl(0 0% 3% / 0.58);
+    color: var(--ink);
+    padding: 7px 11px;
+    font-size: 0.7rem;
+    font-weight: 850;
+    opacity: 0.78;
+    transform: translateY(4px);
+    transition: opacity 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .look-item:hover::after,
+  .look-item:focus-visible::after {
+    opacity: 1;
+    transform: translateY(0);
+    border-color: hsl(351 78% 48% / 0.46);
   }
 
   .look-bg {
@@ -1365,6 +1398,78 @@
     gap: 14px;
   }
 
+  .checkout-steps {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 7px;
+    margin-bottom: 2px;
+  }
+
+  .checkout-step {
+    position: relative;
+    display: grid;
+    gap: 6px;
+    min-width: 0;
+    border: 1px solid hsl(42 24% 88% / 0.09);
+    border-radius: 8px;
+    background:
+      linear-gradient(180deg, hsl(42 24% 92% / 0.055), hsl(42 24% 92% / 0.018)),
+      hsl(240 6% 6% / 0.72);
+    color: var(--muted-2);
+    padding: 10px 8px;
+    overflow: hidden;
+  }
+
+  .checkout-step::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 100% 80% at 0% 0%, hsl(351 78% 42% / 0.13), transparent 62%);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+  }
+
+  .checkout-step-index,
+  .checkout-step-label {
+    position: relative;
+    z-index: 1;
+  }
+
+  .checkout-step-index {
+    display: inline-grid;
+    place-items: center;
+    width: 21px;
+    height: 21px;
+    border-radius: 999px;
+    background: hsl(42 24% 92% / 0.07);
+    color: var(--muted);
+    font-size: 0.68rem;
+    font-weight: 850;
+  }
+
+  .checkout-step-label {
+    font-size: 0.68rem;
+    font-weight: 850;
+    line-height: 1.15;
+  }
+
+  .checkout-step.is-active,
+  .checkout-step.is-complete {
+    border-color: hsl(351 78% 48% / 0.38);
+    color: var(--ink);
+  }
+
+  .checkout-step.is-active::before,
+  .checkout-step.is-complete::before {
+    opacity: 1;
+  }
+
+  .checkout-step.is-active .checkout-step-index,
+  .checkout-step.is-complete .checkout-step-index {
+    background: linear-gradient(180deg, hsl(351 78% 52%), hsl(349 78% 30%));
+    color: #fff;
+  }
+
   .checkout-note,
   .order-success {
     color: var(--muted);
@@ -1376,6 +1481,72 @@
   .checkout-form {
     display: grid;
     gap: 12px;
+  }
+
+  .checkout-step-panel {
+    display: none;
+    gap: 12px;
+  }
+
+  .checkout-step-panel.is-active {
+    display: grid;
+  }
+
+  .checkout-stage-title {
+    color: var(--ink);
+    font-size: 1.08rem;
+    font-weight: 850;
+    line-height: 1.2;
+  }
+
+  .checkout-review {
+    display: grid;
+    gap: 10px;
+    border: 1px solid hsl(42 24% 88% / 0.1);
+    border-radius: 8px;
+    background:
+      radial-gradient(ellipse 85% 100% at 0% 0%, hsl(351 78% 42% / 0.1), transparent 70%),
+      hsl(240 6% 6% / 0.64);
+    padding: 13px;
+  }
+
+  .checkout-review-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    color: var(--muted);
+    font-size: 0.82rem;
+    font-weight: 650;
+    line-height: 1.4;
+  }
+
+  .checkout-review-row strong {
+    color: var(--ink);
+    font-weight: 850;
+    text-align: right;
+  }
+
+  .checkout-actions {
+    display: grid;
+    grid-template-columns: 1fr 1.35fr;
+    gap: 10px;
+    margin-top: 2px;
+  }
+
+  .checkout-actions .checkout-btn {
+    margin-top: 0;
+  }
+
+  .checkout-back-btn {
+    border-color: hsl(42 24% 88% / 0.18);
+    background:
+      linear-gradient(180deg, hsl(42 24% 92% / 0.08), hsl(42 24% 92% / 0.025)),
+      transparent;
+    color: var(--ink);
+  }
+
+  .checkout-next-btn {
+    margin-top: 0;
   }
 
   .checkout-field {
@@ -2239,6 +2410,14 @@
       grid-template-columns: 1fr;
     }
 
+    .checkout-steps {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .checkout-actions {
+      grid-template-columns: 1fr;
+    }
+
     .mobile-tabbar {
       position: fixed;
       left: 14px;
@@ -2340,64 +2519,105 @@
     </div>
     <button class="checkout-btn" id="checkoutToggle" onclick="startCheckout()">Checkout</button>
     <div class="checkout-panel" id="checkoutPanel">
-      <p class="checkout-note">Submit an order request now. Payment will be connected later through Stripe.</p>
+      <div class="checkout-steps" id="checkoutSteps" aria-label="Checkout progress">
+        <div class="checkout-step" data-checkout-step="0">
+          <span class="checkout-step-index">1</span>
+          <span class="checkout-step-label">Bag</span>
+        </div>
+        <div class="checkout-step" data-checkout-step="1">
+          <span class="checkout-step-index">2</span>
+          <span class="checkout-step-label">Delivery</span>
+        </div>
+        <div class="checkout-step" data-checkout-step="2">
+          <span class="checkout-step-index">3</span>
+          <span class="checkout-step-label">Payment</span>
+        </div>
+        <div class="checkout-step" data-checkout-step="3">
+          <span class="checkout-step-index">4</span>
+          <span class="checkout-step-label">Confirm</span>
+        </div>
+      </div>
+      <p class="checkout-note">Complete the order request in steps. Stripe card payment will be connected later.</p>
       <div class="order-success" id="orderSuccess"></div>
       <form class="checkout-form" id="checkoutForm">
-        <div class="checkout-field">
-          <label for="customerName">Full name</label>
-          <input id="customerName" name="customerName" autocomplete="name" required>
-        </div>
-        <div class="checkout-row">
+        <div class="checkout-step-panel is-active" data-checkout-panel="1">
+          <div class="checkout-stage-title">Delivery details</div>
           <div class="checkout-field">
-            <label for="customerEmail">Email</label>
-            <input id="customerEmail" name="customerEmail" type="email" autocomplete="email" required>
+            <label for="customerName">Full name</label>
+            <input id="customerName" name="customerName" autocomplete="name" required>
           </div>
-          <div class="checkout-field">
-            <label for="customerPhone">Phone</label>
-            <input id="customerPhone" name="customerPhone" autocomplete="tel" required>
-          </div>
-        </div>
-        <div class="checkout-field">
-          <label for="customerAddress">Shipping address</label>
-          <textarea id="customerAddress" name="customerAddress" autocomplete="shipping street-address" required></textarea>
-        </div>
-        <div class="checkout-row">
-          <div class="checkout-field">
-            <label for="customerCity">City</label>
-            <input id="customerCity" name="customerCity" autocomplete="shipping locality" required>
+          <div class="checkout-row">
+            <div class="checkout-field">
+              <label for="customerEmail">Email</label>
+              <input id="customerEmail" name="customerEmail" type="email" autocomplete="email" required>
+            </div>
+            <div class="checkout-field">
+              <label for="customerPhone">Phone</label>
+              <input id="customerPhone" name="customerPhone" autocomplete="tel" required>
+            </div>
           </div>
           <div class="checkout-field">
-            <label for="customerCountry">Country</label>
-            <select id="customerCountry" name="customerCountry" autocomplete="shipping country-name" required>
-              <option value="Romania">Romania</option>
-              <option value="European Union">European Union</option>
-              <option value="United Kingdom">United Kingdom</option>
-              <option value="United States">United States</option>
-              <option value="Other">Other</option>
-            </select>
+            <label for="customerAddress">Shipping address</label>
+            <textarea id="customerAddress" name="customerAddress" autocomplete="shipping street-address" required></textarea>
+          </div>
+          <div class="checkout-row">
+            <div class="checkout-field">
+              <label for="customerCity">City</label>
+              <input id="customerCity" name="customerCity" autocomplete="shipping locality" required>
+            </div>
+            <div class="checkout-field">
+              <label for="customerCountry">Country</label>
+              <select id="customerCountry" name="customerCountry" autocomplete="shipping country-name" required>
+                <option value="Romania">Romania</option>
+                <option value="European Union">European Union</option>
+                <option value="United Kingdom">United Kingdom</option>
+                <option value="United States">United States</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="checkout-actions">
+            <button class="checkout-btn checkout-back-btn" type="button" onclick="setCheckoutStep(0)">Bag</button>
+            <button class="checkout-btn checkout-next-btn" type="button" onclick="goCheckoutPayment()">Payment</button>
           </div>
         </div>
-        <div class="checkout-field">
-          <label>Payment method</label>
-          <div class="payment-methods">
-            <label class="payment-method">
-              <input type="radio" name="paymentMethod" value="Ramburs" checked>
-              <span>
-                <span class="payment-title">Ramburs</span>
-                <span class="payment-copy">Clientul plătește cash la livrare. Recomandat pentru testele de acum.</span>
-              </span>
-            </label>
-            <label class="payment-method">
-              <input type="radio" name="paymentMethod" value="Card">
-              <span>
-                <span class="payment-title">Card</span>
-                <span class="payment-copy">Comanda se trimite acum, iar plata cu cardul va fi confirmată prin Stripe/payment link.</span>
-              </span>
-            </label>
+
+        <div class="checkout-step-panel" data-checkout-panel="2">
+          <div class="checkout-stage-title">Payment method</div>
+          <div class="checkout-field">
+            <label>Payment method</label>
+            <div class="payment-methods">
+              <label class="payment-method">
+                <input type="radio" name="paymentMethod" value="Ramburs" checked>
+                <span>
+                  <span class="payment-title">Ramburs</span>
+                  <span class="payment-copy">Clientul plătește cash la livrare. Recomandat pentru testele de acum.</span>
+                </span>
+              </label>
+              <label class="payment-method">
+                <input type="radio" name="paymentMethod" value="Card">
+                <span>
+                  <span class="payment-title">Card</span>
+                  <span class="payment-copy">Comanda se trimite acum, iar plata cu cardul va fi confirmată prin Stripe/payment link.</span>
+                </span>
+              </label>
+            </div>
+          </div>
+          <div class="payment-hold" id="paymentHint">Payment: ramburs. Order request will be emailed for manual confirmation.</div>
+          <div class="checkout-actions">
+            <button class="checkout-btn checkout-back-btn" type="button" onclick="setCheckoutStep(1)">Back</button>
+            <button class="checkout-btn checkout-next-btn" type="button" onclick="goCheckoutReview()">Review</button>
           </div>
         </div>
-        <div class="payment-hold" id="paymentHint">Payment: ramburs. Order request will be emailed for manual confirmation.</div>
-        <button class="checkout-btn checkout-submit" id="orderSubmit" type="submit">Send order request</button>
+
+        <div class="checkout-step-panel" data-checkout-panel="3">
+          <div class="checkout-stage-title">Confirm order request</div>
+          <div class="checkout-review" id="checkoutReview"></div>
+          <div class="checkout-actions">
+            <button class="checkout-btn checkout-back-btn" type="button" onclick="setCheckoutStep(2)">Back</button>
+            <button class="checkout-btn checkout-submit" id="orderSubmit" type="submit">Send order request</button>
+          </div>
+        </div>
       </form>
     </div>
   </div>
@@ -2556,14 +2776,14 @@
   </div>
   <div class="lookbook-strip" id="strip" aria-label="Interactive lookbook carousel">
     <div class="lookbook-set">
-      <div class="look-item"><div class="look-bg"><div class="look-overlay">Editorial</div></div></div>
-      <div class="look-item"><div class="look-bg"><div class="look-overlay">21</div></div></div>
-      <div class="look-item"><div class="look-bg"><div class="look-overlay">Chrome</div></div></div>
-      <div class="look-item"><div class="look-bg"><div class="look-overlay">Studio</div></div></div>
-      <div class="look-item"><div class="look-bg"><div class="look-overlay">Fade</div></div></div>
-      <div class="look-item"><div class="look-bg"><div class="look-overlay">Clean</div></div></div>
-      <div class="look-item"><div class="look-bg"><div class="look-overlay">Drop</div></div></div>
-      <div class="look-item"><div class="look-bg"><div class="look-overlay">Essential</div></div></div>
+      <div class="look-item" data-look-product="1" role="button" tabindex="0" aria-label="Open Editorial look product"><div class="look-bg"><div class="look-overlay">Editorial</div></div></div>
+      <div class="look-item" data-look-product="3" role="button" tabindex="0" aria-label="Open 21 look product"><div class="look-bg"><div class="look-overlay">21</div></div></div>
+      <div class="look-item" data-look-product="1" role="button" tabindex="0" aria-label="Open Chrome look product"><div class="look-bg"><div class="look-overlay">Chrome</div></div></div>
+      <div class="look-item" data-look-product="2" role="button" tabindex="0" aria-label="Open Studio look product"><div class="look-bg"><div class="look-overlay">Studio</div></div></div>
+      <div class="look-item" data-look-product="5" role="button" tabindex="0" aria-label="Open Fade look product"><div class="look-bg"><div class="look-overlay">Fade</div></div></div>
+      <div class="look-item" data-look-product="8" role="button" tabindex="0" aria-label="Open Clean look product"><div class="look-bg"><div class="look-overlay">Clean</div></div></div>
+      <div class="look-item" data-look-product="4" role="button" tabindex="0" aria-label="Open Drop look product"><div class="look-bg"><div class="look-overlay">Drop</div></div></div>
+      <div class="look-item" data-look-product="3" role="button" tabindex="0" aria-label="Open Essential look product"><div class="look-bg"><div class="look-overlay">Essential</div></div></div>
     </div>
   </div>
 </section>
@@ -2668,8 +2888,19 @@ const products = [
 ];
 
 const lookbookLabels = ["Editorial", "21", "Chrome", "Studio", "Fade", "Clean", "Drop", "Essential"];
+const lookbookProductMap = {
+  Editorial: 1,
+  "21": 3,
+  Chrome: 1,
+  Studio: 2,
+  Fade: 5,
+  Clean: 8,
+  Drop: 4,
+  Essential: 3
+};
 let cart = [];
 let activeModalProductId = null;
+let activeCheckoutStep = 0;
 
 const grid = document.getElementById("productsGrid");
 let lastAddTouch = 0;
@@ -2729,7 +2960,7 @@ function setupLookbookMarquee() {
   lookbookMarqueeStarted = true;
 
   const itemMarkup = lookbookLabels.map((label) => `
-    <div class="look-item">
+    <div class="look-item" data-look-product="${lookbookProductMap[label] || 1}" role="button" tabindex="0" aria-label="Open ${label} look product">
       <div class="look-bg">
         <div class="look-overlay">${label}</div>
       </div>
@@ -2750,6 +2981,7 @@ function setupLookbookMarquee() {
   let activeTouchId = null;
   let isHorizontalDrag = false;
   let dragLocked = false;
+  let didDragLookbook = false;
   let holdUntil = 0;
   let isPageVisible = !document.hidden;
   let measureFrame = 0;
@@ -2810,6 +3042,7 @@ function setupLookbookMarquee() {
     dragStartY = y;
     isHorizontalDrag = false;
     dragLocked = false;
+    didDragLookbook = false;
     holdUntil = Number.POSITIVE_INFINITY;
     strip.classList.add("is-dragging");
   }
@@ -2833,6 +3066,7 @@ function setupLookbookMarquee() {
     const delta = x - lastDragX;
     lastDragX = x;
     offset += delta;
+    didDragLookbook = true;
     normalizeOffset();
     applyOffset();
     return true;
@@ -2848,6 +3082,20 @@ function setupLookbookMarquee() {
     holdUntil = performance.now() + dragResumeDelay;
     lastTime = 0;
     strip.classList.remove("is-dragging");
+    setTimeout(() => {
+      didDragLookbook = false;
+    }, 240);
+  }
+
+  function openLookbookProduct(target) {
+    const item = target.closest(".look-item");
+    if (!item || !strip.contains(item) || didDragLookbook) return;
+
+    const productId = Number(item.dataset.lookProduct);
+    if (!productId) return;
+
+    holdUntil = performance.now() + 900;
+    openProductModal(productId);
   }
 
   function startDrag(event) {
@@ -2931,6 +3179,13 @@ function setupLookbookMarquee() {
   strip.addEventListener("touchmove", moveTouchDrag, { passive: false });
   strip.addEventListener("touchend", endTouchDrag);
   strip.addEventListener("touchcancel", endTouchDrag);
+  strip.addEventListener("click", (event) => openLookbookProduct(event.target));
+  strip.addEventListener("keydown", (event) => {
+    if (event.key !== "Enter" && event.key !== " ") return;
+
+    event.preventDefault();
+    openLookbookProduct(event.target);
+  });
   window.addEventListener("resize", queueMeasure, { passive: true });
   document.addEventListener("visibilitychange", () => {
     isPageVisible = !document.hidden;
@@ -3145,6 +3400,97 @@ function addModalProductToCart() {
   }
 }
 
+function escapeHtml(value) {
+  return String(value || "").replace(/[&<>"']/g, (char) => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#039;"
+  }[char]));
+}
+
+function setCheckoutStep(step) {
+  const nextStep = Math.max(0, Math.min(3, Number(step) || 0));
+  const checkoutPanel = document.getElementById("checkoutPanel");
+  const checkoutToggle = document.getElementById("checkoutToggle");
+
+  activeCheckoutStep = nextStep;
+
+  document.querySelectorAll("[data-checkout-step]").forEach((item) => {
+    const itemStep = Number(item.dataset.checkoutStep);
+    item.classList.toggle("is-active", itemStep === nextStep);
+    item.classList.toggle("is-complete", itemStep < nextStep);
+  });
+
+  document.querySelectorAll("[data-checkout-panel]").forEach((panel) => {
+    panel.classList.toggle("is-active", Number(panel.dataset.checkoutPanel) === nextStep);
+  });
+
+  if (checkoutPanel) checkoutPanel.classList.add("open");
+  if (checkoutToggle) {
+    checkoutToggle.textContent = nextStep === 0 ? "Checkout" : "Checkout details";
+  }
+
+  if (nextStep === 3) {
+    updateCheckoutReview();
+  }
+}
+
+function validateCheckoutFields(ids) {
+  for (const id of ids) {
+    const field = document.getElementById(id);
+    if (!field) continue;
+
+    if (!field.checkValidity()) {
+      field.reportValidity();
+      field.focus();
+      return false;
+    }
+  }
+
+  return true;
+}
+
+function validateDeliveryStep() {
+  return validateCheckoutFields(["customerName", "customerEmail", "customerPhone", "customerAddress", "customerCity", "customerCountry"]);
+}
+
+function goCheckoutPayment() {
+  if (!validateDeliveryStep()) return;
+  setCheckoutStep(2);
+}
+
+function goCheckoutReview() {
+  if (!validateDeliveryStep()) return;
+  updateCheckoutReview();
+  setCheckoutStep(3);
+}
+
+function updateCheckoutReview() {
+  const review = document.getElementById("checkoutReview");
+  const form = document.getElementById("checkoutForm");
+  if (!review || !form) return;
+
+  const formData = new FormData(form);
+  const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+  const paymentMethod = getSelectedPaymentMethod(form);
+  const itemSummary = cart.map((item) => `${item.qty} x ${item.name} / ${item.size}`).join("<br>");
+  const addressSummary = [
+    formData.get("customerAddress"),
+    formData.get("customerCity"),
+    formData.get("customerCountry")
+  ].filter(Boolean).map(escapeHtml).join(", ");
+
+  review.innerHTML = `
+    <div class="checkout-review-row"><span>Items</span><strong>${itemSummary || "Bag empty"}</strong></div>
+    <div class="checkout-review-row"><span>Total</span><strong>${formatCurrency(total)}</strong></div>
+    <div class="checkout-review-row"><span>Customer</span><strong>${escapeHtml(formData.get("customerName"))}</strong></div>
+    <div class="checkout-review-row"><span>Delivery</span><strong>${addressSummary || "Not completed"}</strong></div>
+    <div class="checkout-review-row"><span>Payment</span><strong>${escapeHtml(paymentMethod)}</strong></div>
+  `;
+}
+
 function resetOrderState() {
   const orderSuccess = document.getElementById("orderSuccess");
   const submitButton = document.getElementById("orderSubmit");
@@ -3157,6 +3503,10 @@ function resetOrderState() {
   if (submitButton) {
     submitButton.disabled = false;
     submitButton.textContent = "Send order request";
+  }
+
+  if (activeCheckoutStep === 3) {
+    updateCheckoutReview();
   }
 }
 
@@ -3174,6 +3524,7 @@ function renderCart() {
   if (!itemsDiv || !footer || !checkoutPanel || !orderSuccess || !checkoutToggle || !cartTotal) return;
 
   if (cart.length === 0) {
+    activeCheckoutStep = 0;
     footer.style.display = "none";
     checkoutPanel.classList.remove("open");
     checkoutToggle.textContent = "Checkout";
@@ -3185,6 +3536,7 @@ function renderCart() {
 
   footer.style.display = "block";
   cartTotal.textContent = formatCurrency(total);
+  updateCheckoutReview();
   itemsDiv.innerHTML = cart.map((item) => `
     <div class="cart-item">
       <div class="cart-item-img">21</div>
@@ -3204,12 +3556,9 @@ function renderCart() {
 function startCheckout() {
   if (cart.length === 0) return;
 
-  const checkoutPanel = document.getElementById("checkoutPanel");
-  const checkoutToggle = document.getElementById("checkoutToggle");
   const customerName = document.getElementById("customerName");
 
-  if (checkoutPanel) checkoutPanel.classList.add("open");
-  if (checkoutToggle) checkoutToggle.textContent = "Checkout details";
+  setCheckoutStep(1);
   if (customerName) customerName.focus();
 }
 
@@ -3291,6 +3640,11 @@ async function sendOrderEmail(order) {
 async function submitOrder(event) {
   event.preventDefault();
   if (cart.length === 0) return;
+
+  if (!validateDeliveryStep()) {
+    setCheckoutStep(1);
+    return;
+  }
 
   const form = event.currentTarget;
   const formData = new FormData(form);
@@ -3473,6 +3827,9 @@ window.addToCart = addToCart;
 window.removeFromCart = removeFromCart;
 window.updateCartSize = updateCartSize;
 window.startCheckout = startCheckout;
+window.setCheckoutStep = setCheckoutStep;
+window.goCheckoutPayment = goCheckoutPayment;
+window.goCheckoutReview = goCheckoutReview;
 window.toggleCart = toggleCart;
 window.openCart = openCart;
 window.openProductModal = openProductModal;
@@ -3491,6 +3848,8 @@ function updatePaymentHint() {
   paymentHint.textContent = paymentMethod === "Card"
     ? "Payment: card selected. Order will be emailed now; Stripe/payment link is pending manual setup."
     : "Payment: ramburs. Order request will be emailed for manual confirmation.";
+
+  updateCheckoutReview();
 }
 
 document.querySelectorAll('input[name="paymentMethod"]').forEach((input) => {
