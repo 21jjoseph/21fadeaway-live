@@ -2969,13 +2969,17 @@ function setupLookbookMarquee() {
 
   strip.innerHTML = Array.from({ length: 3 }, () => `<div class="lookbook-set">${itemMarkup}</div>`).join("");
 
-  const speed = 0.035;
-  const dragResumeDelay = 320;
+  const speed = 0.028;
+  const dragResumeDelay = 90;
+  const smoothFactor = 0.18;
   let setWidth = 0;
   let offset = 0;
+  let displayOffset = 0;
+  let velocity = 0;
   let lastTime = 0;
   let isDragging = false;
   let lastDragX = 0;
+  let lastDragTime = 0;
   let dragStartX = 0;
   let dragStartY = 0;
   let activeTouchId = null;
@@ -2986,8 +2990,18 @@ function setupLookbookMarquee() {
   let isPageVisible = !document.hidden;
   let measureFrame = 0;
 
-  function applyOffset() {
-    strip.style.transform = `translate3d(${offset}px, 0, 0)`;
+  function applyOffset(snap = false) {
+    if (snap) {
+      displayOffset = offset;
+    } else {
+      const difference = offset - displayOffset;
+      displayOffset += difference * smoothFactor;
+      if (Math.abs(difference) < 0.05) {
+        displayOffset = offset;
+      }
+    }
+
+    strip.style.transform = `translate3d(${displayOffset}px, 0, 0)`;
   }
 
   function normalizeOffset() {
@@ -2995,10 +3009,12 @@ function setupLookbookMarquee() {
 
     while (offset >= 0) {
       offset -= setWidth;
+      displayOffset -= setWidth;
     }
 
     while (offset <= -setWidth * 2) {
       offset += setWidth;
+      displayOffset += setWidth;
     }
   }
 
@@ -3014,8 +3030,10 @@ function setupLookbookMarquee() {
     const ratio = setWidth ? offset / setWidth : -1;
     setWidth = nextWidth;
     offset = ratio * setWidth;
+    displayOffset = offset;
+    velocity = 0;
     normalizeOffset();
-    applyOffset();
+    applyOffset(true);
   }
 
   function animateLookbook(timestamp) {
@@ -3027,17 +3045,23 @@ function setupLookbookMarquee() {
     lastTime = timestamp;
 
     if (isPageVisible && !isDragging && timestamp >= holdUntil) {
-      offset += speed * delta;
+      offset += (speed + velocity) * delta;
+      velocity *= Math.pow(0.92, delta / 16.67);
+      if (Math.abs(velocity) < 0.001) {
+        velocity = 0;
+      }
       normalizeOffset();
-      applyOffset();
     }
 
+    applyOffset();
     requestAnimationFrame(animateLookbook);
   }
 
   function beginDrag(x, y) {
     isDragging = true;
     lastDragX = x;
+    lastDragTime = performance.now();
+    velocity = 0;
     dragStartX = x;
     dragStartY = y;
     isHorizontalDrag = false;
@@ -3063,12 +3087,16 @@ function setupLookbookMarquee() {
       return false;
     }
 
+    const now = performance.now();
     const delta = x - lastDragX;
+    const timeDelta = Math.max(16, now - lastDragTime);
     lastDragX = x;
+    lastDragTime = now;
+    velocity = Math.max(-0.85, Math.min(0.85, delta / timeDelta));
     offset += delta;
     didDragLookbook = true;
     normalizeOffset();
-    applyOffset();
+    applyOffset(true);
     return true;
   }
 
