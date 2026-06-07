@@ -1025,6 +1025,114 @@
     margin-top: 8px;
   }
 
+  .fit-finder {
+    max-width: 1100px;
+    margin: 22px auto 0;
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: 14px;
+    border: 1px solid rgba(244, 241, 234, 0.11);
+    border-radius: 8px;
+    background:
+      radial-gradient(ellipse 75% 85% at 0% 0%, rgba(177, 18, 38, 0.11), transparent 68%),
+      linear-gradient(145deg, rgba(244, 241, 234, 0.062), rgba(244, 241, 234, 0.022)),
+      rgba(7, 7, 8, 0.82);
+    box-shadow: 0 28px 72px rgba(0, 0, 0, 0.36), inset 0 1px 0 rgba(244, 241, 234, 0.055);
+    padding: clamp(16px, 3vw, 24px);
+  }
+
+  .fit-finder-kicker {
+    color: rgba(244, 241, 234, 0.52);
+    font-size: 0.7rem;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .fit-finder-title {
+    color: var(--ink);
+    font-size: clamp(1.45rem, 3vw, 2.6rem);
+    font-weight: 900;
+    line-height: 0.98;
+    margin-top: 10px;
+  }
+
+  .fit-finder-copy {
+    color: var(--muted);
+    font-size: 0.88rem;
+    font-weight: 580;
+    line-height: 1.6;
+    margin-top: 12px;
+  }
+
+  .fit-finder-form {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    align-content: start;
+  }
+
+  .fit-field {
+    display: grid;
+    gap: 7px;
+  }
+
+  .fit-field label {
+    color: var(--ink);
+    font-size: 0.72rem;
+    font-weight: 850;
+  }
+
+  .fit-field input,
+  .fit-field select {
+    width: 100%;
+    min-height: 42px;
+    border: 1px solid rgba(244, 241, 234, 0.13);
+    border-radius: 8px;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.018)),
+      rgba(5, 5, 5, 0.76);
+    color: var(--ink);
+    color-scheme: dark;
+    font: inherit;
+    font-size: 0.88rem;
+    font-weight: 760;
+    outline: none;
+    padding: 10px 11px;
+  }
+
+  .fit-field input:focus,
+  .fit-field select:focus {
+    border-color: rgba(244, 241, 234, 0.3);
+    box-shadow: 0 0 0 3px rgba(177, 18, 38, 0.14);
+  }
+
+  .fit-result {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    align-items: center;
+    border: 1px solid rgba(244, 241, 234, 0.1);
+    border-radius: 8px;
+    background: rgba(244, 241, 234, 0.04);
+    padding: 12px;
+  }
+
+  .fit-result-copy {
+    color: var(--muted);
+    font-size: 0.82rem;
+    font-weight: 650;
+    line-height: 1.45;
+  }
+
+  .fit-result-size {
+    color: var(--ink);
+    font-size: 1.35rem;
+    font-weight: 950;
+    white-space: nowrap;
+  }
+
   .early-access {
     position: relative;
     z-index: 1;
@@ -1382,6 +1490,64 @@
     line-height: 1.65;
   }
 
+  .modal-story {
+    display: grid;
+    gap: 10px;
+    border: 1px solid rgba(244, 241, 234, 0.1);
+    border-radius: 8px;
+    background:
+      radial-gradient(ellipse 80% 90% at 0% 0%, rgba(177, 18, 38, 0.1), transparent 70%),
+      rgba(244, 241, 234, 0.035);
+    padding: 13px;
+  }
+
+  .modal-story-title {
+    color: var(--ink);
+    font-size: 0.78rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .modal-story-copy {
+    color: var(--muted);
+    font-size: 0.84rem;
+    font-weight: 580;
+    line-height: 1.55;
+  }
+
+  .modal-story-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .modal-story-cell {
+    border: 1px solid rgba(244, 241, 234, 0.085);
+    border-radius: 8px;
+    background: rgba(5, 5, 5, 0.32);
+    padding: 9px;
+    min-width: 0;
+  }
+
+  .modal-story-label {
+    display: block;
+    color: rgba(244, 241, 234, 0.46);
+    font-size: 0.62rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .modal-story-value {
+    display: block;
+    color: var(--ink);
+    font-size: 0.76rem;
+    font-weight: 820;
+    line-height: 1.25;
+    margin-top: 5px;
+  }
+
   .modal-price {
     color: var(--ink);
     font-size: 1.22rem;
@@ -1575,6 +1741,41 @@
     color: var(--ink);
     font-size: 1.05rem;
     font-weight: 850;
+  }
+
+  .shipping-progress {
+    display: grid;
+    gap: 9px;
+    margin-top: 14px;
+    border: 1px solid rgba(244, 241, 234, 0.1);
+    border-radius: 8px;
+    background:
+      radial-gradient(ellipse 80% 90% at 0% 0%, rgba(177, 18, 38, 0.11), transparent 70%),
+      rgba(244, 241, 234, 0.035);
+    padding: 12px;
+  }
+
+  .shipping-progress-text {
+    color: var(--muted);
+    font-size: 0.8rem;
+    font-weight: 720;
+    line-height: 1.35;
+  }
+
+  .shipping-progress-track {
+    height: 7px;
+    overflow: hidden;
+    border-radius: 999px;
+    background: rgba(244, 241, 234, 0.1);
+  }
+
+  .shipping-progress-fill {
+    width: 0%;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, rgba(177, 18, 38, 0.9), rgba(244, 241, 234, 0.86));
+    box-shadow: 0 0 22px rgba(177, 18, 38, 0.22);
+    transition: width 0.38s var(--ease);
   }
 
   .checkout-panel {
@@ -2542,6 +2743,19 @@
       grid-template-columns: 1fr;
     }
 
+    .fit-finder {
+      grid-template-columns: 1fr;
+    }
+
+    .fit-finder-form {
+      grid-template-columns: 1fr;
+    }
+
+    .fit-result {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
     .products-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 10px;
@@ -2662,6 +2876,10 @@
 
     .modal-title {
       font-size: clamp(1.8rem, 9vw, 2.6rem);
+    }
+
+    .modal-story-grid {
+      grid-template-columns: 1fr;
     }
 
     .modal-controls {
@@ -2841,6 +3059,12 @@
       <span class="cart-total-label">Total</span>
       <span class="cart-total-val" id="cartTotal">0 RON</span>
     </div>
+    <div class="shipping-progress" id="shippingProgress">
+      <div class="shipping-progress-text" id="shippingProgressText">Mai ai 400 RON pana la livrare gratuita.</div>
+      <div class="shipping-progress-track" aria-hidden="true">
+        <div class="shipping-progress-fill" id="shippingProgressFill"></div>
+      </div>
+    </div>
     <button class="checkout-btn" id="checkoutToggle" onclick="startCheckout()">Checkout</button>
     <div class="checkout-panel" id="checkoutPanel">
       <div class="checkout-steps" id="checkoutSteps" aria-label="Checkout progress">
@@ -2959,6 +3183,24 @@
     <h3 class="modal-title" id="modalProductName">Product</h3>
     <p class="modal-desc" id="modalProductDesc">Product details.</p>
     <div class="modal-price" id="modalProductPrice">0 RON</div>
+    <div class="modal-story" id="modalStory">
+      <div class="modal-story-title">Product story</div>
+      <div class="modal-story-copy" id="modalStoryCopy"></div>
+      <div class="modal-story-grid">
+        <div class="modal-story-cell">
+          <span class="modal-story-label">Material</span>
+          <span class="modal-story-value" id="modalMaterial"></span>
+        </div>
+        <div class="modal-story-cell">
+          <span class="modal-story-label">Fit</span>
+          <span class="modal-story-value" id="modalFit"></span>
+        </div>
+        <div class="modal-story-cell">
+          <span class="modal-story-label">Weight</span>
+          <span class="modal-story-value" id="modalWeight"></span>
+        </div>
+      </div>
+    </div>
     <div class="modal-controls">
       <select class="modal-size-select" id="modalSize" aria-label="Select product size"></select>
       <select class="modal-qty-select" id="modalQty" aria-label="Select product quantity">
@@ -3151,6 +3393,35 @@
     <div class="size-card"><div class="size-tag">XL</div><div class="size-dim">Chest: 124cm<br>Length: 80cm</div></div>
     <div class="size-card"><div class="size-tag">XXL</div><div class="size-dim">Chest: 132cm<br>Length: 83cm</div></div>
   </div>
+  <div class="fit-finder" id="fit-finder">
+    <div>
+      <p class="fit-finder-kicker">Fit finder</p>
+      <h3 class="fit-finder-title">Find your size.</h3>
+      <p class="fit-finder-copy">Alege inaltimea, greutatea si vibe-ul de fit. Recomandarea este orientativa pentru piesele oversized 21FADEAWAY.</p>
+    </div>
+    <div class="fit-finder-form">
+      <div class="fit-field">
+        <label for="fitHeight">Height</label>
+        <input id="fitHeight" type="number" min="140" max="215" value="178" inputmode="numeric" aria-label="Height in centimeters">
+      </div>
+      <div class="fit-field">
+        <label for="fitWeight">Weight</label>
+        <input id="fitWeight" type="number" min="40" max="150" value="75" inputmode="numeric" aria-label="Weight in kilograms">
+      </div>
+      <div class="fit-field">
+        <label for="fitPreference">Fit</label>
+        <select id="fitPreference" aria-label="Fit preference">
+          <option value="clean">Clean oversized</option>
+          <option value="true">True to size</option>
+          <option value="baggy">Extra baggy</option>
+        </select>
+      </div>
+      <div class="fit-result" id="fitResult">
+        <span class="fit-result-copy" id="fitResultCopy">Recommended size for a clean oversized look.</span>
+        <span class="fit-result-size" id="fitResultSize">L</span>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- EARLY ACCESS -->
@@ -3230,16 +3501,17 @@ const orderStorageKey = "21fadeawayOrderRequests";
 const orderEmailAddress = "joseph21fadeaway@gmail.com";
 const orderEmailEndpoint = "https://formsubmit.co/ajax/joseph21fadeaway@gmail.com";
 const earlyAccessStorageKey = "21fadeawayEarlyAccess";
+const freeShippingTarget = 400;
 
 const products = [
-  { id: 1, name: "Chrome Reaper Tee", desc: "Heavyweight cotton. Oversized, clean silhouette.", price: 159, badge: "Drop 01", color: "#18181c", sizes: apparelSizes },
-  { id: 2, name: "Void Hoodie", desc: "450gsm fleece. Soft interior, structured hood.", price: 289, badge: "Limited", color: "#111114", sizes: apparelSizes },
-  { id: 3, name: "21 Logo Crewneck", desc: "Dropped shoulder. Minimal front mark.", price: 219, badge: "Made to order", color: "#1d1b20", sizes: apparelSizes },
-  { id: 4, name: "Metal Edge Cap", desc: "6-panel build. Adjustable matte hardware.", price: 89, badge: "Limited", color: "#171316", sizes: oneSize },
-  { id: 5, name: "Fadeaway Cargo", desc: "Ripstop nylon. Clean utility profile.", price: 319, badge: "Drop 01", color: "#121217", sizes: apparelSizes },
-  { id: 6, name: "Chrome Logo Tee", desc: "280gsm cotton. Regular fit.", price: 139, badge: "Sold out", color: "#1a171a", sold: true, sizes: apparelSizes },
-  { id: 7, name: "Spike Collar", desc: "Zinc alloy. Adjustable polished finish.", price: 79, badge: "Limited", color: "#0e0e10", sizes: oneSize },
-  { id: 8, name: "Reaper Shorts", desc: "360gsm cotton. Elastic waist.", price: 169, badge: "Made to order", color: "#15151a", sizes: apparelSizes }
+  { id: 1, name: "Chrome Reaper Tee", desc: "Heavyweight cotton. Oversized, clean silhouette.", price: 159, badge: "Drop 01", color: "#18181c", sizes: apparelSizes, story: "Built as the daily statement tee: clean front shape, dark graphic energy, easy to layer under hoodies or jackets.", material: "Heavy cotton", fit: "Oversized", weight: "280gsm" },
+  { id: 2, name: "Void Hoodie", desc: "450gsm fleece. Soft interior, structured hood.", price: 289, badge: "Limited", color: "#111114", sizes: apparelSizes, story: "A cold-weather core piece with a heavy handfeel, made to sit strong on the shoulders and keep the silhouette sharp.", material: "Fleece cotton", fit: "Boxy oversized", weight: "450gsm" },
+  { id: 3, name: "21 Logo Crewneck", desc: "Dropped shoulder. Minimal front mark.", price: 219, badge: "Made to order", color: "#1d1b20", sizes: apparelSizes, story: "Minimal from distance, intentional up close. A disciplined logo piece for everyday rotation.", material: "Brushed cotton", fit: "Relaxed", weight: "380gsm" },
+  { id: 4, name: "Metal Edge Cap", desc: "6-panel build. Adjustable matte hardware.", price: 89, badge: "Limited", color: "#171316", sizes: oneSize, story: "A quiet accessory with metal detail, designed to finish the outfit without shouting over it.", material: "Cotton twill", fit: "Adjustable", weight: "Structured" },
+  { id: 5, name: "Fadeaway Cargo", desc: "Ripstop nylon. Clean utility profile.", price: 319, badge: "Drop 01", color: "#121217", sizes: apparelSizes, story: "Utility pants with a controlled shape: enough function for the street, clean enough for a full black fit.", material: "Ripstop nylon", fit: "Relaxed straight", weight: "Midweight" },
+  { id: 6, name: "Chrome Logo Tee", desc: "280gsm cotton. Regular fit.", price: 139, badge: "Sold out", color: "#1a171a", sold: true, sizes: apparelSizes, story: "Archive logo tee from the first visual direction. Kept here as proof of the brand system evolving.", material: "Cotton jersey", fit: "Regular", weight: "280gsm" },
+  { id: 7, name: "Spike Collar", desc: "Zinc alloy. Adjustable polished finish.", price: 79, badge: "Limited", color: "#0e0e10", sizes: oneSize, story: "Neo-gothic accent piece for controlled aggression: small detail, strong attitude.", material: "Zinc alloy", fit: "Adjustable", weight: "Accessory" },
+  { id: 8, name: "Reaper Shorts", desc: "360gsm cotton. Elastic waist.", price: 169, badge: "Made to order", color: "#15151a", sizes: apparelSizes, story: "Heavy shorts built for movement, summer drops, and clean proportions with oversized tops.", material: "Heavy cotton", fit: "Relaxed", weight: "360gsm" }
 ];
 
 const lookbookLabels = ["Editorial", "21", "Chrome", "Studio", "Fade", "Clean", "Drop", "Essential"];
@@ -3722,6 +3994,10 @@ function openProductModal(id) {
   const modalName = document.getElementById("modalProductName");
   const modalDesc = document.getElementById("modalProductDesc");
   const modalPrice = document.getElementById("modalProductPrice");
+  const modalStoryCopy = document.getElementById("modalStoryCopy");
+  const modalMaterial = document.getElementById("modalMaterial");
+  const modalFit = document.getElementById("modalFit");
+  const modalWeight = document.getElementById("modalWeight");
   const modalSize = document.getElementById("modalSize");
   const modalQty = document.getElementById("modalQty");
 
@@ -3739,6 +4015,10 @@ function openProductModal(id) {
   modalName.textContent = product.name;
   modalDesc.textContent = product.desc;
   modalPrice.textContent = formatCurrency(product.price);
+  if (modalStoryCopy) modalStoryCopy.textContent = product.story || "Built for the 21FADEAWAY uniform: clean shape, dark energy, and a fit that feels intentional.";
+  if (modalMaterial) modalMaterial.textContent = product.material || "Premium cotton";
+  if (modalFit) modalFit.textContent = product.fit || "Oversized";
+  if (modalWeight) modalWeight.textContent = product.weight || "Midweight";
   modalSize.innerHTML = product.sizes.map((size) => `<option value="${size}">${size}</option>`).join("");
   modalSize.value = selectedSize;
   modalQty.value = cardQty || "1";
@@ -3893,6 +4173,20 @@ function resetOrderState() {
   }
 }
 
+function updateShippingProgress(total) {
+  const progressText = document.getElementById("shippingProgressText");
+  const progressFill = document.getElementById("shippingProgressFill");
+  if (!progressText || !progressFill) return;
+
+  const progress = Math.max(0, Math.min(100, (total / freeShippingTarget) * 100));
+  const remaining = Math.max(0, freeShippingTarget - total);
+
+  progressFill.style.width = `${progress}%`;
+  progressText.textContent = remaining > 0
+    ? `Mai ai ${formatCurrency(remaining)} pana la livrare gratuita.`
+    : "Ai deblocat livrarea gratuita.";
+}
+
 function renderCart() {
   const count = cart.reduce((total, item) => total + item.qty, 0);
   const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
@@ -3919,6 +4213,7 @@ function renderCart() {
 
   footer.style.display = "block";
   cartTotal.textContent = formatCurrency(total);
+  updateShippingProgress(total);
   updateCheckoutReview();
   itemsDiv.innerHTML = cart.map((item) => `
     <div class="cart-item">
@@ -4262,6 +4557,40 @@ function formatCurrency(value) {
   return value + " RON";
 }
 
+function getFitRecommendation(height, weight, preference) {
+  const sizes = ["XS", "S", "M", "L", "XL", "XXL"];
+  let index = 2;
+
+  if (height < 165 || weight < 58) index = 1;
+  if (height >= 172 || weight >= 68) index = 2;
+  if (height >= 178 || weight >= 78) index = 3;
+  if (height >= 186 || weight >= 92) index = 4;
+  if (height >= 194 || weight >= 108) index = 5;
+
+  if (preference === "true") index -= 1;
+  if (preference === "baggy") index += 1;
+
+  return sizes[Math.max(0, Math.min(sizes.length - 1, index))];
+}
+
+function updateFitFinder() {
+  const heightInput = document.getElementById("fitHeight");
+  const weightInput = document.getElementById("fitWeight");
+  const preferenceInput = document.getElementById("fitPreference");
+  const resultSize = document.getElementById("fitResultSize");
+  const resultCopy = document.getElementById("fitResultCopy");
+  if (!heightInput || !weightInput || !preferenceInput || !resultSize || !resultCopy) return;
+
+  const height = Number(heightInput.value) || 178;
+  const weight = Number(weightInput.value) || 75;
+  const preference = preferenceInput.value;
+  const size = getFitRecommendation(height, weight, preference);
+  const preferenceLabel = preferenceInput.options[preferenceInput.selectedIndex]?.textContent || "Clean oversized";
+
+  resultSize.textContent = size;
+  resultCopy.textContent = `${preferenceLabel}: recomandam ${size} pentru ${height}cm / ${weight}kg.`;
+}
+
 const navCartButton = document.getElementById("navCart");
 const mobileBagButton = document.getElementById("mobileBagButton");
 let lastCartTouch = 0;
@@ -4350,6 +4679,14 @@ if (earlyAccessForm && earlyAccessForm.addEventListener) {
   earlyAccessForm.addEventListener("submit", submitEarlyAccess);
 }
 
+["fitHeight", "fitWeight", "fitPreference"].forEach((id) => {
+  const field = document.getElementById(id);
+  if (field && field.addEventListener) {
+    field.addEventListener("input", updateFitFinder);
+    field.addEventListener("change", updateFitFinder);
+  }
+});
+
 function updatePaymentHint() {
   const paymentHint = document.getElementById("paymentHint");
   if (!paymentHint || !checkoutForm) return;
@@ -4367,6 +4704,7 @@ document.querySelectorAll('input[name="paymentMethod"]').forEach((input) => {
 });
 
 updatePaymentHint();
+updateFitFinder();
 
 renderCart();
 
