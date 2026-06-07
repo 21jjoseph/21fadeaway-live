@@ -4935,6 +4935,10 @@ function setupHeroLiquid() {
   let lastTime = 0;
   const pointer = { x: 0.5, y: 0.5, tx: 0.5, ty: 0.5, active: false };
   const ripples = [];
+  const trails = [];
+  let lastRippleTime = 0;
+  let lastRippleX = 0;
+  let lastRippleY = 0;
   const drops = Array.from({ length: 7 }, (_, index) => ({
     x: 0.16 + (index * 0.12) % 0.76,
     y: 0.3 + ((index * 0.17) % 0.44),
@@ -4966,16 +4970,102 @@ function setupHeroLiquid() {
     pointer.ty = y / Math.max(1, rect.height);
     pointer.active = true;
 
+    const now = performance.now();
+    const distance = Math.hypot(x - lastRippleX, y - lastRippleY);
+    const timeSinceRipple = now - lastRippleTime;
+    if (timeSinceRipple < 18 && distance < 12) return;
+
+    const velocity = distance / Math.max(16, timeSinceRipple || 16);
+    const liquidForce = Math.min(1.6, Math.max(0.52, force + velocity * 0.28));
+
     ripples.push({
       x,
       y,
       age: 0,
-      life: 1.35,
-      force: Math.min(1.4, Math.max(0.45, force))
+      life: 1.55,
+      force: liquidForce,
+      seed: Math.random() * Math.PI * 2,
+      stretch: 0.72 + Math.random() * 0.16
     });
 
-    if (ripples.length > 18) {
+    trails.push({
+      x,
+      y,
+      px: lastRippleX || x,
+      py: lastRippleY || y,
+      age: 0,
+      life: 0.58,
+      force: liquidForce
+    });
+
+    lastRippleX = x;
+    lastRippleY = y;
+    lastRippleTime = now;
+
+    if (ripples.length > 22) {
       ripples.shift();
+    }
+
+    if (trails.length > 28) {
+      trails.shift();
+    }
+  }
+
+  function drawLiquidRing(x, y, radius, amplitude, alpha, phase, stretch = 0.78) {
+    const points = 58;
+    context.beginPath();
+
+    for (let point = 0; point <= points; point++) {
+      const angle = (point / points) * Math.PI * 2;
+      const wobble =
+        Math.sin(angle * 3 + phase) * amplitude +
+        Math.sin(angle * 7 - phase * 0.72) * amplitude * 0.42 +
+        Math.cos(angle * 11 + phase * 0.36) * amplitude * 0.18;
+      const localRadius = radius + wobble;
+      const horizontalPull = 1 + Math.sin(angle * 2 + phase) * 0.035;
+      const px = x + Math.cos(angle) * localRadius * horizontalPull;
+      const py = y + Math.sin(angle) * localRadius * stretch;
+
+      if (point === 0) context.moveTo(px, py);
+      else context.lineTo(px, py);
+    }
+
+    context.closePath();
+    context.strokeStyle = `rgba(244, 241, 234, ${alpha})`;
+    context.lineWidth = Math.max(0.65, 1.6 * alpha + 0.55);
+    context.stroke();
+    context.strokeStyle = `rgba(177, 18, 38, ${alpha * 0.34})`;
+    context.lineWidth = Math.max(0.5, 1.2 * alpha + 0.35);
+    context.stroke();
+  }
+
+  function drawSurfaceWaves(time) {
+    for (let wave = 0; wave < 4; wave++) {
+      const baseY = height * (0.34 + wave * 0.105);
+      const amplitude = 10 + wave * 3;
+      const phase = time * (0.48 + wave * 0.09) + wave * 1.8;
+      const pointerPull = pointer.active ? (pointer.y - 0.5) * (22 - wave * 3) : 0;
+
+      context.beginPath();
+      for (let step = 0; step <= 92; step++) {
+        const x = (step / 92) * width;
+        const distanceFromPointer = Math.abs(x / Math.max(1, width) - pointer.x);
+        const wake = Math.max(0, 1 - distanceFromPointer * 4.5);
+        const y =
+          baseY +
+          Math.sin(step * 0.15 + phase) * amplitude +
+          Math.sin(step * 0.045 - phase * 1.2) * amplitude * 0.75 +
+          wake * pointerPull * Math.sin(phase + wave);
+
+        if (step === 0) context.moveTo(x, y);
+        else context.lineTo(x, y);
+      }
+
+      context.strokeStyle = wave % 2
+        ? "rgba(177, 18, 38, 0.035)"
+        : "rgba(244, 241, 234, 0.045)";
+      context.lineWidth = 1;
+      context.stroke();
     }
   }
 
@@ -4994,6 +5084,8 @@ function setupHeroLiquid() {
     context.globalCompositeOperation = "lighter";
 
     const time = timestamp * 0.001;
+    drawSurfaceWaves(time);
+
     drops.forEach((drop) => {
       const driftX = Math.sin(time * drop.speed + drop.phase) * 34;
       const driftY = Math.cos(time * (drop.speed * 0.82) + drop.phase) * 24;
@@ -5017,6 +5109,30 @@ function setupHeroLiquid() {
       context.fill();
     });
 
+    for (let index = trails.length - 1; index >= 0; index--) {
+      const trail = trails[index];
+      trail.age += delta;
+      const progress = trail.age / trail.life;
+      if (progress >= 1) {
+        trails.splice(index, 1);
+        continue;
+      }
+
+      const alpha = (1 - progress) * 0.16 * trail.force;
+      const midX = (trail.x + trail.px) * 0.5 + Math.sin(time * 4 + index) * 8;
+      const midY = (trail.y + trail.py) * 0.5 + Math.cos(time * 3 + index) * 6;
+      context.beginPath();
+      context.moveTo(trail.px, trail.py);
+      context.quadraticCurveTo(midX, midY, trail.x, trail.y);
+      context.strokeStyle = `rgba(244, 241, 234, ${alpha})`;
+      context.lineWidth = 7 * (1 - progress) + 1;
+      context.lineCap = "round";
+      context.stroke();
+      context.strokeStyle = `rgba(177, 18, 38, ${alpha * 0.42})`;
+      context.lineWidth = 3 * (1 - progress) + 0.5;
+      context.stroke();
+    }
+
     for (let index = ripples.length - 1; index >= 0; index--) {
       const ripple = ripples[index];
       ripple.age += delta;
@@ -5026,19 +5142,24 @@ function setupHeroLiquid() {
         continue;
       }
 
-      const radius = 28 + progress * 190 * ripple.force;
-      const alpha = (1 - progress) * 0.22 * ripple.force;
+      const radius = 18 + progress * 230 * ripple.force;
+      const alpha = Math.pow(1 - progress, 1.25) * 0.18 * ripple.force;
+      const phase = time * 4.2 + ripple.seed;
       const gradient = context.createRadialGradient(ripple.x, ripple.y, radius * 0.08, ripple.x, ripple.y, radius);
-      gradient.addColorStop(0, `rgba(244, 241, 234, ${alpha})`);
-      gradient.addColorStop(0.42, `rgba(177, 18, 38, ${alpha * 0.5})`);
+      gradient.addColorStop(0, `rgba(244, 241, 234, ${alpha * 0.36})`);
+      gradient.addColorStop(0.28, `rgba(177, 18, 38, ${alpha * 0.22})`);
+      gradient.addColorStop(0.64, `rgba(244, 241, 234, ${alpha * 0.08})`);
       gradient.addColorStop(1, "rgba(0, 0, 0, 0)");
-      context.strokeStyle = `rgba(244, 241, 234, ${alpha * 0.75})`;
-      context.lineWidth = 1.2;
       context.fillStyle = gradient;
       context.beginPath();
-      context.arc(ripple.x, ripple.y, radius, 0, Math.PI * 2);
+      context.ellipse(ripple.x, ripple.y, radius * 1.05, radius * ripple.stretch, Math.sin(phase) * 0.18, 0, Math.PI * 2);
       context.fill();
-      context.stroke();
+
+      drawLiquidRing(ripple.x, ripple.y, radius * 0.72, 6 + ripple.force * 5, alpha * 0.78, phase, ripple.stretch);
+      drawLiquidRing(ripple.x, ripple.y, radius * 1.03, 9 + ripple.force * 7, alpha * 0.48, phase + 1.6, ripple.stretch);
+      if (progress < 0.54) {
+        drawLiquidRing(ripple.x, ripple.y, radius * 0.38, 4 + ripple.force * 4, alpha * 0.54, phase - 0.9, ripple.stretch);
+      }
     }
 
     context.globalCompositeOperation = "source-over";
