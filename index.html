@@ -2978,6 +2978,17 @@
     }
   }
 
+  @keyframes productShimmerFast {
+    0%,
+    29% {
+      transform: translateX(-120%);
+    }
+
+    100% {
+      transform: translateX(120%);
+    }
+  }
+
   @keyframes fadePolish {
     from {
       opacity: 0;
@@ -3922,6 +3933,12 @@
   }
 
   .products-grid .product-visual::after {
+    animation: productShimmerFast 4.8s ease-in-out infinite !important;
+    opacity: 0.46 !important;
+  }
+
+  .products-grid .product-card:has(.product-actions:hover) .product-visual::after,
+  .products-grid .product-card:has(.product-actions:focus-within) .product-visual::after {
     animation: none !important;
     opacity: 0 !important;
   }
