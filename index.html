@@ -557,6 +557,7 @@
   }
 
   .product-visual {
+    position: relative;
     width: 100%;
     height: 100%;
     display: grid;
@@ -585,6 +586,66 @@
     font-size: clamp(1rem, 2vw, 1.45rem);
     font-weight: 850;
     line-height: 1;
+  }
+
+  .space-chrome {
+    background:
+      radial-gradient(ellipse 62% 34% at 50% 16%, rgba(218, 222, 226, 0.09), rgba(218, 222, 226, 0) 68%),
+      radial-gradient(ellipse 56% 36% at 20% 78%, rgba(177, 18, 38, 0.075), rgba(177, 18, 38, 0) 72%);
+  }
+
+  .space-chrome .section-title {
+    color: #f2f3f3;
+    text-shadow: 0 0 30px rgba(218, 222, 226, 0.16), 0 0 80px rgba(177, 18, 38, 0.08);
+  }
+
+  .space-chrome .section-title::before,
+  .space-chrome .section-title::after {
+    color: rgba(218, 222, 226, 0.8);
+    text-shadow: 0 0 24px rgba(177, 18, 38, 0.28);
+  }
+
+  .chrome-product {
+    background:
+      linear-gradient(180deg, rgba(235, 238, 240, 0.065), rgba(120, 124, 130, 0.024) 44%, rgba(8, 8, 9, 0.96)),
+      linear-gradient(145deg, rgba(26, 27, 30, 0.96), rgba(8, 8, 10, 0.98));
+  }
+
+  .chrome-product::before {
+    border-color: rgba(218, 222, 226, 0.07);
+    box-shadow: 0 0 44px rgba(177, 18, 38, 0.05) inset;
+  }
+
+  .space-chrome-visual {
+    background:
+      radial-gradient(ellipse 74% 50% at 50% 18%, rgba(236, 239, 240, 0.21) 0%, rgba(180, 184, 188, 0.095) 28%, rgba(255, 255, 255, 0) 68%),
+      linear-gradient(118deg, rgba(255, 255, 255, 0) 6%, rgba(213, 217, 220, 0.18) 22%, rgba(255, 255, 255, 0.035) 34%, rgba(177, 18, 38, 0.08) 48%, rgba(255, 255, 255, 0) 72%),
+      linear-gradient(152deg, var(--product-tone, #17181b) 0%, #0d0d10 40%, #050506 100%);
+  }
+
+  .space-chrome-visual::before {
+    content: "";
+    position: absolute;
+    inset: 18px;
+    border-radius: 7px;
+    border: 1px solid rgba(220, 224, 226, 0.08);
+    background:
+      linear-gradient(105deg, transparent 0%, rgba(236, 239, 240, 0.14) 36%, transparent 48%),
+      radial-gradient(ellipse 58% 42% at 50% 74%, rgba(177, 18, 38, 0.1), transparent 74%);
+    pointer-events: none;
+  }
+
+  .space-chrome-visual .product-visual-inner {
+    position: relative;
+    z-index: 1;
+    background:
+      linear-gradient(112deg, rgba(255, 255, 255, 0.12), rgba(124, 128, 134, 0.06) 28%, rgba(15, 15, 17, 0.98) 54%, rgba(205, 210, 214, 0.09) 78%, rgba(0, 0, 0, 0.95)),
+      linear-gradient(180deg, #202126, #080809);
+    border-color: rgba(224, 228, 230, 0.16);
+    color: rgba(242, 243, 243, 0.92);
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.58), 0 0 42px rgba(177, 18, 38, 0.08);
+    font-size: clamp(0.9rem, 1.7vw, 1.25rem);
+    letter-spacing: 0.08em;
   }
 
   .product-badge {
@@ -3528,51 +3589,35 @@
   </div>
   <div class="hero-ticker">
     <span class="ticker-inner">
-      21FADEAWAY &nbsp;&nbsp;///&nbsp;&nbsp; LIMITED DROP &nbsp;&nbsp;///&nbsp;&nbsp; CHROME METAL &nbsp;&nbsp;///&nbsp;&nbsp; SS-2025 &nbsp;&nbsp;///&nbsp;&nbsp; EXCLUSIVE PIECES &nbsp;&nbsp;///&nbsp;&nbsp; 21FADEAWAY &nbsp;&nbsp;///&nbsp;&nbsp; LIMITED DROP &nbsp;&nbsp;///&nbsp;&nbsp; CHROME METAL &nbsp;&nbsp;///&nbsp;&nbsp; SS-2025 &nbsp;&nbsp;///&nbsp;&nbsp; EXCLUSIVE PIECES &nbsp;&nbsp;///&nbsp;&nbsp;
+      21FADEAWAY &nbsp;&nbsp;///&nbsp;&nbsp; SPACE CHROME &nbsp;&nbsp;///&nbsp;&nbsp; BLACK / SILVER / RED &nbsp;&nbsp;///&nbsp;&nbsp; TEE COLLECTION &nbsp;&nbsp;///&nbsp;&nbsp; COMING DROP &nbsp;&nbsp;///&nbsp;&nbsp; 21FADEAWAY &nbsp;&nbsp;///&nbsp;&nbsp; SPACE CHROME &nbsp;&nbsp;///&nbsp;&nbsp; BLACK / SILVER / RED &nbsp;&nbsp;///&nbsp;&nbsp; TEE COLLECTION &nbsp;&nbsp;///&nbsp;&nbsp; COMING DROP &nbsp;&nbsp;///&nbsp;&nbsp;
     </span>
   </div>
 </section>
 
 <!-- PRODUCTS -->
-<section class="products" id="products">
+<section class="products space-chrome" id="products">
   <div class="section-header">
-    <h2 class="section-title">Current drop.</h2>
-    <span class="section-sub">8 piese selectate. Siluete curate, materiale grele, detalii metalice.</span>
+    <h2 class="section-title">Space Chrome.</h2>
+    <span class="section-sub">Colectie de tricouri in negru, argintiu si accente rosii controlate.</span>
     <div class="section-line"></div>
   </div>
 
   <div class="products-grid" id="productsGrid">
-    <div class="product-card">
-      <div class="product-img-wrap"><div class="product-visual" style="--product-tone:#18181c"><div class="product-visual-inner">Chrome</div></div><div class="product-badge drop">Drop 01</div></div>
-      <div class="product-info"><div class="product-name">Chrome Reaper Tee</div><div class="product-desc">Heavyweight cotton. Oversized, clean silhouette.</div><div class="product-footer"><div class="product-price">159 <span>RON</span></div><div class="product-actions"><select class="product-size-select" data-product-size aria-label="Size for Chrome Reaper Tee"><option value="XS">XS</option><option value="S">S</option><option value="M">M</option><option value="L">L</option><option value="XL">XL</option><option value="XXL">XXL</option></select><select class="qty-select" data-product-qty aria-label="Quantity for Chrome Reaper Tee"><option value="1">1x</option><option value="2">2x</option><option value="3">3x</option><option value="4">4x</option><option value="5">5x</option></select><button class="add-btn" type="button" data-add-product="1">Add</button></div></div></div>
+    <div class="product-card chrome-product">
+      <div class="product-img-wrap"><div class="product-visual space-chrome-visual" style="--product-tone:#17191d"><div class="product-visual-inner">Space<br>Chrome</div></div><div class="product-badge drop">Space Chrome</div></div>
+      <div class="product-info"><div class="product-name">Space Chrome Tee</div><div class="product-desc">Black tee concept with silver chrome identity and clean oversized shape.</div><div class="product-footer"><div class="product-price">159 <span>RON</span></div><div class="product-actions"><select class="product-size-select" data-product-size aria-label="Size for Space Chrome Tee"><option value="XS">XS</option><option value="S">S</option><option value="M">M</option><option value="L">L</option><option value="XL">XL</option><option value="XXL">XXL</option></select><select class="qty-select" data-product-qty aria-label="Quantity for Space Chrome Tee"><option value="1">1x</option><option value="2">2x</option><option value="3">3x</option><option value="4">4x</option><option value="5">5x</option></select><button class="add-btn" type="button" data-add-product="1">Add</button></div></div></div>
     </div>
-    <div class="product-card">
-      <div class="product-img-wrap"><div class="product-visual" style="--product-tone:#111114"><div class="product-visual-inner">Void</div></div><div class="product-badge limited">Limited</div></div>
-      <div class="product-info"><div class="product-name">Void Hoodie</div><div class="product-desc">450gsm fleece. Soft interior, structured hood.</div><div class="product-footer"><div class="product-price">289 <span>RON</span></div><div class="product-actions"><select class="product-size-select" data-product-size aria-label="Size for Void Hoodie"><option value="XS">XS</option><option value="S">S</option><option value="M">M</option><option value="L">L</option><option value="XL">XL</option><option value="XXL">XXL</option></select><select class="qty-select" data-product-qty aria-label="Quantity for Void Hoodie"><option value="1">1x</option><option value="2">2x</option><option value="3">3x</option><option value="4">4x</option><option value="5">5x</option></select><button class="add-btn" type="button" data-add-product="2">Add</button></div></div></div>
+    <div class="product-card chrome-product">
+      <div class="product-img-wrap"><div class="product-visual space-chrome-visual" style="--product-tone:#111216"><div class="product-visual-inner">Orbit<br>Tee</div></div><div class="product-badge limited">Chrome line</div></div>
+      <div class="product-info"><div class="product-name">Orbit Chrome Tee</div><div class="product-desc">Dark space-inspired tee placeholder for the first graphic direction.</div><div class="product-footer"><div class="product-price">169 <span>RON</span></div><div class="product-actions"><select class="product-size-select" data-product-size aria-label="Size for Orbit Chrome Tee"><option value="XS">XS</option><option value="S">S</option><option value="M">M</option><option value="L">L</option><option value="XL">XL</option><option value="XXL">XXL</option></select><select class="qty-select" data-product-qty aria-label="Quantity for Orbit Chrome Tee"><option value="1">1x</option><option value="2">2x</option><option value="3">3x</option><option value="4">4x</option><option value="5">5x</option></select><button class="add-btn" type="button" data-add-product="2">Add</button></div></div></div>
     </div>
-    <div class="product-card">
-      <div class="product-img-wrap"><div class="product-visual" style="--product-tone:#1d1b20"><div class="product-visual-inner">21</div></div><div class="product-badge made">Made to order</div></div>
-      <div class="product-info"><div class="product-name">21 Logo Crewneck</div><div class="product-desc">Dropped shoulder. Minimal front mark.</div><div class="product-footer"><div class="product-price">219 <span>RON</span></div><div class="product-actions"><select class="product-size-select" data-product-size aria-label="Size for 21 Logo Crewneck"><option value="XS">XS</option><option value="S">S</option><option value="M">M</option><option value="L">L</option><option value="XL">XL</option><option value="XXL">XXL</option></select><select class="qty-select" data-product-qty aria-label="Quantity for 21 Logo Crewneck"><option value="1">1x</option><option value="2">2x</option><option value="3">3x</option><option value="4">4x</option><option value="5">5x</option></select><button class="add-btn" type="button" data-add-product="3">Add</button></div></div></div>
+    <div class="product-card chrome-product">
+      <div class="product-img-wrap"><div class="product-visual space-chrome-visual" style="--product-tone:#1b1c20"><div class="product-visual-inner">Void<br>Silver</div></div><div class="product-badge made">Preview</div></div>
+      <div class="product-info"><div class="product-name">Void Silver Tee</div><div class="product-desc">Minimal black tee with cold silver treatment and quiet red reflection.</div><div class="product-footer"><div class="product-price">169 <span>RON</span></div><div class="product-actions"><select class="product-size-select" data-product-size aria-label="Size for Void Silver Tee"><option value="XS">XS</option><option value="S">S</option><option value="M">M</option><option value="L">L</option><option value="XL">XL</option><option value="XXL">XXL</option></select><select class="qty-select" data-product-qty aria-label="Quantity for Void Silver Tee"><option value="1">1x</option><option value="2">2x</option><option value="3">3x</option><option value="4">4x</option><option value="5">5x</option></select><button class="add-btn" type="button" data-add-product="3">Add</button></div></div></div>
     </div>
-    <div class="product-card">
-      <div class="product-img-wrap"><div class="product-visual" style="--product-tone:#171316"><div class="product-visual-inner">Metal</div></div><div class="product-badge limited">Limited</div></div>
-      <div class="product-info"><div class="product-name">Metal Edge Cap</div><div class="product-desc">6-panel build. Adjustable matte hardware.</div><div class="product-footer"><div class="product-price">89 <span>RON</span></div><div class="product-actions"><select class="product-size-select" data-product-size aria-label="Size for Metal Edge Cap"><option value="OS">OS</option></select><select class="qty-select" data-product-qty aria-label="Quantity for Metal Edge Cap"><option value="1">1x</option><option value="2">2x</option><option value="3">3x</option><option value="4">4x</option><option value="5">5x</option></select><button class="add-btn" type="button" data-add-product="4">Add</button></div></div></div>
-    </div>
-    <div class="product-card">
-      <div class="product-img-wrap"><div class="product-visual" style="--product-tone:#121217"><div class="product-visual-inner">Fadeaway</div></div><div class="product-badge drop">Drop 01</div></div>
-      <div class="product-info"><div class="product-name">Fadeaway Cargo</div><div class="product-desc">Ripstop nylon. Clean utility profile.</div><div class="product-footer"><div class="product-price">319 <span>RON</span></div><div class="product-actions"><select class="product-size-select" data-product-size aria-label="Size for Fadeaway Cargo"><option value="XS">XS</option><option value="S">S</option><option value="M">M</option><option value="L">L</option><option value="XL">XL</option><option value="XXL">XXL</option></select><select class="qty-select" data-product-qty aria-label="Quantity for Fadeaway Cargo"><option value="1">1x</option><option value="2">2x</option><option value="3">3x</option><option value="4">4x</option><option value="5">5x</option></select><button class="add-btn" type="button" data-add-product="5">Add</button></div></div></div>
-    </div>
-    <div class="product-card">
-      <div class="product-img-wrap"><div class="product-visual" style="--product-tone:#1a171a"><div class="product-visual-inner">Chrome</div></div><div class="product-badge sold">Sold out</div></div>
-      <div class="product-info"><div class="product-name">Chrome Logo Tee</div><div class="product-desc">280gsm cotton. Regular fit.</div><div class="product-footer"><div class="product-price">139 <span>RON</span></div><span class="sold-label">Sold out</span></div></div>
-    </div>
-    <div class="product-card">
-      <div class="product-img-wrap"><div class="product-visual" style="--product-tone:#0e0e10"><div class="product-visual-inner">Spike</div></div><div class="product-badge limited">Limited</div></div>
-      <div class="product-info"><div class="product-name">Spike Collar</div><div class="product-desc">Zinc alloy. Adjustable polished finish.</div><div class="product-footer"><div class="product-price">79 <span>RON</span></div><div class="product-actions"><select class="product-size-select" data-product-size aria-label="Size for Spike Collar"><option value="OS">OS</option></select><select class="qty-select" data-product-qty aria-label="Quantity for Spike Collar"><option value="1">1x</option><option value="2">2x</option><option value="3">3x</option><option value="4">4x</option><option value="5">5x</option></select><button class="add-btn" type="button" data-add-product="7">Add</button></div></div></div>
-    </div>
-    <div class="product-card">
-      <div class="product-img-wrap"><div class="product-visual" style="--product-tone:#15151a"><div class="product-visual-inner">Reaper</div></div><div class="product-badge made">Made to order</div></div>
-      <div class="product-info"><div class="product-name">Reaper Shorts</div><div class="product-desc">360gsm cotton. Elastic waist.</div><div class="product-footer"><div class="product-price">169 <span>RON</span></div><div class="product-actions"><select class="product-size-select" data-product-size aria-label="Size for Reaper Shorts"><option value="XS">XS</option><option value="S">S</option><option value="M">M</option><option value="L">L</option><option value="XL">XL</option><option value="XXL">XXL</option></select><select class="qty-select" data-product-qty aria-label="Quantity for Reaper Shorts"><option value="1">1x</option><option value="2">2x</option><option value="3">3x</option><option value="4">4x</option><option value="5">5x</option></select><button class="add-btn" type="button" data-add-product="8">Add</button></div></div></div>
+    <div class="product-card chrome-product">
+      <div class="product-img-wrap"><div class="product-visual space-chrome-visual" style="--product-tone:#151417"><div class="product-visual-inner">Redline<br>Chrome</div></div><div class="product-badge limited">Accent</div></div>
+      <div class="product-info"><div class="product-name">Redline Chrome Tee</div><div class="product-desc">Black and silver tee concept with a controlled red detail for contrast.</div><div class="product-footer"><div class="product-price">179 <span>RON</span></div><div class="product-actions"><select class="product-size-select" data-product-size aria-label="Size for Redline Chrome Tee"><option value="XS">XS</option><option value="S">S</option><option value="M">M</option><option value="L">L</option><option value="XL">XL</option><option value="XXL">XXL</option></select><select class="qty-select" data-product-qty aria-label="Quantity for Redline Chrome Tee"><option value="1">1x</option><option value="2">2x</option><option value="3">3x</option><option value="4">4x</option><option value="5">5x</option></select><button class="add-btn" type="button" data-add-product="4">Add</button></div></div></div>
     </div>
   </div>
 </section>
@@ -3608,20 +3653,20 @@
   <div class="lookbook-header">
     <div class="section-header" style="padding:0;margin:0">
       <h2 class="section-title">Lookbook.</h2>
-      <span class="section-sub">Directie vizuala pentru colectia curenta.</span>
+      <span class="section-sub">Directie vizuala pentru colectia Space Chrome.</span>
       <div class="section-line"></div>
     </div>
   </div>
   <div class="lookbook-strip" id="strip" aria-label="Interactive lookbook carousel">
     <div class="lookbook-set">
-      <div class="look-item" data-look-product="1" role="button" tabindex="0" aria-label="Open Editorial look product"><div class="look-bg"><div class="look-overlay">Editorial</div></div></div>
-      <div class="look-item" data-look-product="3" role="button" tabindex="0" aria-label="Open 21 look product"><div class="look-bg"><div class="look-overlay">21</div></div></div>
+      <div class="look-item" data-look-product="1" role="button" tabindex="0" aria-label="Open Space look product"><div class="look-bg"><div class="look-overlay">Space</div></div></div>
       <div class="look-item" data-look-product="1" role="button" tabindex="0" aria-label="Open Chrome look product"><div class="look-bg"><div class="look-overlay">Chrome</div></div></div>
       <div class="look-item" data-look-product="2" role="button" tabindex="0" aria-label="Open Studio look product"><div class="look-bg"><div class="look-overlay">Studio</div></div></div>
-      <div class="look-item" data-look-product="5" role="button" tabindex="0" aria-label="Open Fade look product"><div class="look-bg"><div class="look-overlay">Fade</div></div></div>
-      <div class="look-item" data-look-product="8" role="button" tabindex="0" aria-label="Open Clean look product"><div class="look-bg"><div class="look-overlay">Clean</div></div></div>
+      <div class="look-item" data-look-product="2" role="button" tabindex="0" aria-label="Open Orbit look product"><div class="look-bg"><div class="look-overlay">Orbit</div></div></div>
+      <div class="look-item" data-look-product="3" role="button" tabindex="0" aria-label="Open Void look product"><div class="look-bg"><div class="look-overlay">Void</div></div></div>
+      <div class="look-item" data-look-product="3" role="button" tabindex="0" aria-label="Open Silver look product"><div class="look-bg"><div class="look-overlay">Silver</div></div></div>
       <div class="look-item" data-look-product="4" role="button" tabindex="0" aria-label="Open Drop look product"><div class="look-bg"><div class="look-overlay">Drop</div></div></div>
-      <div class="look-item" data-look-product="3" role="button" tabindex="0" aria-label="Open Essential look product"><div class="look-bg"><div class="look-overlay">Essential</div></div></div>
+      <div class="look-item" data-look-product="4" role="button" tabindex="0" aria-label="Open Redline look product"><div class="look-bg"><div class="look-overlay">Redline</div></div></div>
     </div>
   </div>
 </section>
@@ -3776,26 +3821,22 @@ const earlyAccessStorageKey = "21fadeawayEarlyAccess";
 const freeShippingTarget = 400;
 
 const products = [
-  { id: 1, name: "Chrome Reaper Tee", desc: "Heavyweight cotton. Oversized, clean silhouette.", price: 159, badge: "Drop 01", color: "#18181c", sizes: apparelSizes, story: "Built as the daily statement tee: clean front shape, dark graphic energy, easy to layer under hoodies or jackets.", material: "Heavy cotton", fit: "Oversized", weight: "280gsm" },
-  { id: 2, name: "Void Hoodie", desc: "450gsm fleece. Soft interior, structured hood.", price: 289, badge: "Limited", color: "#111114", sizes: apparelSizes, story: "A cold-weather core piece with a heavy handfeel, made to sit strong on the shoulders and keep the silhouette sharp.", material: "Fleece cotton", fit: "Boxy oversized", weight: "450gsm" },
-  { id: 3, name: "21 Logo Crewneck", desc: "Dropped shoulder. Minimal front mark.", price: 219, badge: "Made to order", color: "#1d1b20", sizes: apparelSizes, story: "Minimal from distance, intentional up close. A disciplined logo piece for everyday rotation.", material: "Brushed cotton", fit: "Relaxed", weight: "380gsm" },
-  { id: 4, name: "Metal Edge Cap", desc: "6-panel build. Adjustable matte hardware.", price: 89, badge: "Limited", color: "#171316", sizes: oneSize, story: "A quiet accessory with metal detail, designed to finish the outfit without shouting over it.", material: "Cotton twill", fit: "Adjustable", weight: "Structured" },
-  { id: 5, name: "Fadeaway Cargo", desc: "Ripstop nylon. Clean utility profile.", price: 319, badge: "Drop 01", color: "#121217", sizes: apparelSizes, story: "Utility pants with a controlled shape: enough function for the street, clean enough for a full black fit.", material: "Ripstop nylon", fit: "Relaxed straight", weight: "Midweight" },
-  { id: 6, name: "Chrome Logo Tee", desc: "280gsm cotton. Regular fit.", price: 139, badge: "Sold out", color: "#1a171a", sold: true, sizes: apparelSizes, story: "Archive logo tee from the first visual direction. Kept here as proof of the brand system evolving.", material: "Cotton jersey", fit: "Regular", weight: "280gsm" },
-  { id: 7, name: "Spike Collar", desc: "Zinc alloy. Adjustable polished finish.", price: 79, badge: "Limited", color: "#0e0e10", sizes: oneSize, story: "Neo-gothic accent piece for controlled aggression: small detail, strong attitude.", material: "Zinc alloy", fit: "Adjustable", weight: "Accessory" },
-  { id: 8, name: "Reaper Shorts", desc: "360gsm cotton. Elastic waist.", price: 169, badge: "Made to order", color: "#15151a", sizes: apparelSizes, story: "Heavy shorts built for movement, summer drops, and clean proportions with oversized tops.", material: "Heavy cotton", fit: "Relaxed", weight: "360gsm" }
+  { id: 1, name: "Space Chrome Tee", desc: "Black tee concept with silver chrome identity and clean oversized shape.", price: 159, badge: "Space Chrome", color: "#17191d", sizes: apparelSizes, story: "The anchor tee for the Space Chrome collection: black base, silver identity, and a controlled red reflection that keeps the brand edge alive.", material: "Heavy cotton", fit: "Oversized", weight: "280gsm" },
+  { id: 2, name: "Orbit Chrome Tee", desc: "Dark space-inspired tee placeholder for the first graphic direction.", price: 169, badge: "Chrome line", color: "#111216", sizes: apparelSizes, story: "A graphic direction built around orbit, distance, and motion. The final mockup can replace this blank frame when the product artwork is ready.", material: "Heavy cotton", fit: "Relaxed oversized", weight: "280gsm" },
+  { id: 3, name: "Void Silver Tee", desc: "Minimal black tee with cold silver treatment and quiet red reflection.", price: 169, badge: "Preview", color: "#1b1c20", sizes: apparelSizes, story: "A quieter Space Chrome piece: less aggressive, more luxury. Made to sit clean in the collection without losing the underground tone.", material: "Heavy cotton", fit: "Oversized", weight: "280gsm" },
+  { id: 4, name: "Redline Chrome Tee", desc: "Black and silver tee concept with a controlled red detail for contrast.", price: 179, badge: "Accent", color: "#151417", sizes: apparelSizes, story: "The red-accent piece in the collection: black and silver first, red only as a sharp line of energy.", material: "Heavy cotton", fit: "Oversized", weight: "280gsm" }
 ];
 
-const lookbookLabels = ["Editorial", "21", "Chrome", "Studio", "Fade", "Clean", "Drop", "Essential"];
+const lookbookLabels = ["Space", "Chrome", "Orbit", "Void", "Silver", "Redline", "Studio", "Drop"];
 const lookbookProductMap = {
-  Editorial: 1,
-  "21": 3,
+  Space: 1,
   Chrome: 1,
+  Orbit: 2,
+  Void: 3,
+  Silver: 3,
+  Redline: 4,
   Studio: 2,
-  Fade: 5,
-  Clean: 8,
   Drop: 4,
-  Essential: 3
 };
 let cart = [];
 let activeModalProductId = null;
@@ -4887,8 +4928,8 @@ function getAiAssistantReply(message) {
     return "Momentan poti alege ramburs sau card. Cardul este pregatit ca optiune, iar plata prin Stripe/payment link se conecteaza cand contul Stripe este gata.";
   }
 
-  if (text.includes("recomand") || text.includes("produs") || text.includes("hoodie") || text.includes("tee")) {
-    return "Pentru primul outfit as merge pe Void Hoodie sau Chrome Reaper Tee. Hoodie-ul e piesa statement, tee-ul e mai usor de purtat zilnic.";
+  if (text.includes("recomand") || text.includes("produs") || text.includes("space") || text.includes("chrome") || text.includes("tee")) {
+    return "Pentru Space Chrome as incepe cu Space Chrome Tee daca vrei piesa principala, sau Void Silver Tee daca vrei ceva mai minimalist si premium.";
   }
 
   if (text.includes("brand") || text.includes("21") || text.includes("fadeaway")) {
