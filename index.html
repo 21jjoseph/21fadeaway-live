@@ -3809,6 +3809,96 @@
     overflow-x: auto;
   }
 
+  .nav-cart,
+  .btn-primary,
+  .btn-ghost,
+  .add-btn,
+  .checkout-btn,
+  .modal-add-btn,
+  .modal-close,
+  .early-access-btn,
+  .ai-chat-send,
+  .ai-chip,
+  .cart-close,
+  .cart-item-remove,
+  .mobile-tabbar a,
+  .mobile-tabbar button {
+    box-shadow: none !important;
+    transform: translateZ(0);
+    transition: transform 0.16s var(--motion-ease), color 0.16s var(--motion-ease), border-color 0.16s var(--motion-ease), opacity 0.16s var(--motion-ease) !important;
+    will-change: auto;
+  }
+
+  .nav-cart:hover,
+  .nav-cart.has-items:hover,
+  .btn-primary:hover,
+  .btn-ghost:hover,
+  .add-btn:hover,
+  .checkout-btn:hover,
+  .modal-add-btn:hover,
+  .modal-close:hover,
+  .early-access-btn:hover,
+  .ai-chat-send:hover,
+  .ai-chip:hover,
+  .cart-close:hover,
+  .cart-item-remove:hover,
+  .mobile-tabbar button:hover,
+  .mobile-tabbar .is-primary:hover,
+  .add-btn.is-added,
+  .modal-add-btn.is-added {
+    background: var(--action-red) !important;
+    border-color: hsl(355 82% 58% / 0.72) !important;
+    color: #fff !important;
+    box-shadow: none !important;
+    transform: translate3d(0, -1px, 0) !important;
+  }
+
+  .nav-cart:active,
+  .btn-primary:active,
+  .btn-ghost:active,
+  .add-btn:active,
+  .checkout-btn:active,
+  .modal-add-btn:active,
+  .modal-close:active,
+  .early-access-btn:active,
+  .ai-chat-send:active,
+  .ai-chip:active,
+  .cart-close:active,
+  .cart-item-remove:active,
+  .mobile-tabbar a:active,
+  .mobile-tabbar button:active {
+    transform: translate3d(0, 0, 0) scale(0.995) !important;
+  }
+
+  .cart-badge,
+  .mobile-bag-count,
+  .nav-cart.has-items {
+    box-shadow: none !important;
+  }
+
+  @keyframes cartPulse {
+    0%,
+    100% {
+      transform: translateZ(0) scale(1);
+    }
+
+    45% {
+      transform: translateZ(0) scale(1.025);
+    }
+  }
+
+  @keyframes productAdded {
+    0%,
+    100% {
+      box-shadow: none;
+    }
+
+    45% {
+      border-color: hsl(353 76% 46% / 0.5);
+      box-shadow: none;
+    }
+  }
+
   @media (hover: none), (pointer: coarse) {
     .product-card:hover,
     .space-chrome .chrome-product:hover,
