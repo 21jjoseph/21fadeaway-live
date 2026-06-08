@@ -3899,6 +3899,64 @@
     }
   }
 
+  .products-grid .product-card:has(.product-actions:hover),
+  .products-grid .product-card:has(.product-actions:focus-within) {
+    transform: none !important;
+    border-color: var(--hairline-soft) !important;
+    box-shadow: 0 1px 0 rgba(244, 241, 234, 0.06) inset !important;
+  }
+
+  .products-grid .product-card:has(.product-actions:hover)::before,
+  .products-grid .product-card:has(.product-actions:focus-within)::before {
+    box-shadow: none !important;
+  }
+
+  .products-grid .product-card:has(.product-actions:hover) .product-visual,
+  .products-grid .product-card:has(.product-actions:focus-within) .product-visual,
+  .products-grid .product-card:has(.product-actions:hover) .product-visual-inner,
+  .products-grid .product-card:has(.product-actions:focus-within) .product-visual-inner,
+  .products-grid .product-card:has(.product-actions:hover) .product-badge,
+  .products-grid .product-card:has(.product-actions:focus-within) .product-badge {
+    transform: none !important;
+    box-shadow: none !important;
+  }
+
+  .products-grid .product-visual::after {
+    animation: none !important;
+    opacity: 0 !important;
+  }
+
+  .products-grid .product-actions,
+  .products-grid .product-actions *,
+  .products-grid .add-btn,
+  .products-grid .product-size-select,
+  .products-grid .qty-select {
+    will-change: auto !important;
+  }
+
+  .products-grid .add-btn {
+    contain: paint;
+    box-shadow: none !important;
+    transform: none !important;
+    transition: color 0.08s var(--motion-ease), border-color 0.08s var(--motion-ease), opacity 0.08s var(--motion-ease) !important;
+  }
+
+  .products-grid .add-btn:hover,
+  .products-grid .add-btn:active,
+  .products-grid .add-btn.is-added {
+    background: var(--action-red) !important;
+    border-color: hsl(355 82% 58% / 0.72) !important;
+    color: #fff !important;
+    transform: none !important;
+    box-shadow: none !important;
+  }
+
+  .products-grid .product-size-select,
+  .products-grid .qty-select {
+    transition: border-color 0.08s var(--motion-ease), color 0.08s var(--motion-ease) !important;
+    box-shadow: none !important;
+  }
+
   @media (hover: none), (pointer: coarse) {
     .product-card:hover,
     .space-chrome .chrome-product:hover,
