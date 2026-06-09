@@ -4734,19 +4734,48 @@
 
   .modal-product-gallery.is-carousel .modal-product-frame {
     aspect-ratio: 0.82;
-    overflow: visible;
+    overflow: hidden;
     border-color: transparent;
+    border-radius: 8px;
     background: transparent;
     box-shadow: none;
   }
 
   .modal-product-gallery.is-carousel .modal-product-frame img {
-    width: clamp(16rem, 33vw, 34rem) !important;
-    max-width: none !important;
-    height: auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 100% !important;
     border-radius: 0;
     background: transparent;
-    filter: drop-shadow(0 24px 30px rgba(0, 0, 0, 0.44)) brightness(1.08);
+    object-fit: cover;
+    filter: brightness(1.08);
+  }
+
+  .modal-blank.has-gallery::after {
+    content: none !important;
+  }
+
+  .modal-product-gallery.is-carousel .modal-product-frame::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    background: linear-gradient(108deg, transparent 0%, rgba(255, 255, 255, 0) 35%, rgba(255, 255, 255, 0.18) 47%, rgba(245, 246, 247, 0.26) 50%, rgba(255, 255, 255, 0.08) 56%, transparent 68%);
+    mix-blend-mode: screen;
+    transform: translate3d(-135%, 0, 0);
+    animation: modalImageShine 2.8s linear infinite;
+    opacity: 0.68;
+  }
+
+  @keyframes modalImageShine {
+    from {
+      transform: translate3d(-135%, 0, 0);
+    }
+
+    to {
+      transform: translate3d(135%, 0, 0);
+    }
   }
 
   .modal-gallery-arrow {
@@ -5128,8 +5157,10 @@
     }
 
     .modal-product-gallery.is-carousel .modal-product-frame img {
-      width: clamp(14.5rem, 74vw, 18.25rem) !important;
-      filter: drop-shadow(0 1.25rem 1.45rem rgba(0, 0, 0, 0.42)) brightness(1.14);
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: cover;
+      filter: brightness(1.12);
     }
 
     .modal-gallery-arrow {
