@@ -4426,6 +4426,276 @@
     }
   }
 
+  .space-chrome .section-sub {
+    max-width: min(720px, calc(100vw - 32px));
+    margin-inline: auto;
+  }
+
+  .products-grid.is-single-product {
+    width: min(100%, 980px);
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .product-card.feature-product {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(300px, 0.85fr);
+    min-height: clamp(520px, 62vw, 680px);
+    border-color: rgba(226, 231, 234, 0.16);
+    background:
+      radial-gradient(ellipse 62% 48% at 35% 14%, rgba(226, 231, 234, 0.13), transparent 68%),
+      radial-gradient(ellipse 48% 38% at 74% 76%, rgba(216, 28, 38, 0.1), transparent 72%),
+      linear-gradient(145deg, rgba(19, 20, 23, 0.98), rgba(5, 5, 6, 0.99));
+  }
+
+  .product-card.feature-product::before {
+    inset: 10px;
+    border-color: rgba(226, 231, 234, 0.075);
+  }
+
+  .feature-product .product-img-wrap {
+    aspect-ratio: auto;
+    min-height: 100%;
+    background:
+      radial-gradient(ellipse 72% 52% at 50% 42%, rgba(244, 241, 234, 0.11), transparent 68%),
+      radial-gradient(ellipse 64% 46% at 52% 82%, rgba(0, 0, 0, 0.52), transparent 70%),
+      linear-gradient(145deg, #141519, #050506 74%);
+  }
+
+  .feature-product .product-visual {
+    padding: clamp(18px, 4vw, 44px);
+    background:
+      linear-gradient(112deg, transparent 8%, rgba(226, 231, 234, 0.12) 27%, transparent 43%, rgba(216, 28, 38, 0.06) 64%, transparent 82%),
+      radial-gradient(ellipse 82% 54% at 50% 38%, rgba(226, 231, 234, 0.15), transparent 68%),
+      linear-gradient(145deg, var(--product-tone, #101113), #050506 78%);
+  }
+
+  .feature-product .product-photo-stage {
+    width: min(100%, 660px);
+    aspect-ratio: auto;
+    display: grid;
+    place-items: center;
+    isolation: isolate;
+  }
+
+  .feature-product .product-photo-stage::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    width: 76%;
+    height: 24%;
+    bottom: 4%;
+    border-radius: 999px;
+    background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.72), transparent 72%);
+    filter: blur(18px);
+  }
+
+  .feature-product .product-photo {
+    width: clamp(22rem, 44vw, 38rem) !important;
+    max-width: none !important;
+    height: auto !important;
+    object-fit: contain;
+    filter: drop-shadow(0 32px 42px rgba(0, 0, 0, 0.56));
+    transform: translate3d(0, 0, 0);
+  }
+
+  .feature-product .product-info {
+    display: grid;
+    align-content: center;
+    gap: clamp(12px, 2vw, 18px);
+    padding: clamp(28px, 5vw, 56px);
+  }
+
+  .feature-product .product-name {
+    font-size: clamp(2rem, 5vw, 4.6rem);
+    line-height: 0.92;
+    letter-spacing: -0.01em;
+  }
+
+  .feature-product .product-desc {
+    min-height: 0;
+    max-width: 34rem;
+    font-size: clamp(0.92rem, 1.6vw, 1.08rem);
+    line-height: 1.65;
+  }
+
+  .product-card-colors,
+  .modal-color-options {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 9px;
+  }
+
+  .product-color-chip,
+  .modal-color-chip {
+    min-height: 34px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid rgba(226, 231, 234, 0.14);
+    border-radius: 999px;
+    background: rgba(244, 241, 234, 0.045);
+    color: rgba(244, 241, 234, 0.82);
+    padding: 0 12px 0 7px;
+    font: inherit;
+    font-size: 0.72rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    touch-action: manipulation;
+    transition: transform 0.18s var(--ease), border-color 0.18s ease, background 0.18s ease, color 0.18s ease;
+  }
+
+  .product-color-chip::before,
+  .modal-color-chip::before {
+    content: "";
+    width: 18px;
+    height: 18px;
+    border-radius: 999px;
+    background: var(--swatch, #111);
+    border: 1px solid rgba(244, 241, 234, 0.38);
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.18);
+  }
+
+  .product-color-chip.is-active,
+  .modal-color-chip.is-active {
+    color: #fff;
+    border-color: rgba(216, 28, 38, 0.72);
+    background: rgba(216, 28, 38, 0.16);
+  }
+
+  .modal-product-gallery.is-carousel {
+    position: relative;
+    width: min(100%, 620px);
+    display: grid;
+    grid-template-columns: 46px minmax(0, 1fr) 46px;
+    align-items: center;
+    gap: clamp(8px, 1.5vw, 16px);
+  }
+
+  .modal-product-gallery.is-carousel .modal-product-frame {
+    aspect-ratio: 0.82;
+    background:
+      radial-gradient(ellipse 78% 58% at 50% 40%, rgba(244, 241, 234, 0.2), rgba(244, 241, 234, 0.06) 46%, transparent 74%),
+      linear-gradient(145deg, rgba(235, 238, 240, 0.07), rgba(6, 6, 7, 0.82));
+  }
+
+  .modal-product-gallery.is-carousel .modal-product-frame img {
+    width: clamp(16rem, 33vw, 34rem) !important;
+    max-width: none !important;
+    height: auto !important;
+    filter: drop-shadow(0 24px 30px rgba(0, 0, 0, 0.44)) brightness(1.08);
+  }
+
+  .modal-gallery-arrow {
+    width: 46px;
+    height: 46px;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(226, 231, 234, 0.14);
+    border-radius: 999px;
+    background: rgba(5, 5, 6, 0.58);
+    color: #fff;
+    font: inherit;
+    font-size: 1.55rem;
+    line-height: 1;
+    cursor: pointer;
+    touch-action: manipulation;
+    transition: transform 0.18s var(--ease), border-color 0.18s ease, background 0.18s ease;
+  }
+
+  .modal-gallery-arrow:hover,
+  .modal-gallery-arrow:focus-visible {
+    transform: translate3d(0, -1px, 0);
+    border-color: rgba(216, 28, 38, 0.64);
+    background: rgba(216, 28, 38, 0.18);
+  }
+
+  .modal-product-label {
+    right: 12px;
+    width: fit-content;
+    padding: 5px 9px;
+    border: 1px solid rgba(226, 231, 234, 0.12);
+    border-radius: 999px;
+    background: rgba(5, 5, 6, 0.58);
+  }
+
+  .modal-color-options {
+    margin-top: 2px;
+  }
+
+  @media (max-width: 900px) {
+    .product-card.feature-product {
+      grid-template-columns: 1fr;
+      min-height: 0;
+    }
+
+    .feature-product .product-img-wrap {
+      min-height: clamp(360px, 74vw, 560px);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .products-grid.is-single-product {
+      grid-template-columns: 1fr;
+    }
+
+    .feature-product .product-photo-stage {
+      width: min(98%, 26rem);
+    }
+
+    .feature-product .product-photo {
+      width: clamp(17rem, 84vw, 26rem) !important;
+    }
+
+    .modal-product-gallery.is-carousel {
+      width: min(100%, 22rem);
+      grid-template-columns: 38px minmax(0, 1fr) 38px;
+    }
+
+    .modal-product-gallery.is-carousel .modal-product-frame img {
+      width: clamp(14rem, 78vw, 21rem) !important;
+    }
+
+    .modal-gallery-arrow {
+      width: 38px;
+      height: 38px;
+      font-size: 1.3rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .feature-product .product-img-wrap {
+      min-height: clamp(320px, 92vw, 430px);
+    }
+
+    .feature-product .product-info {
+      padding: 22px;
+    }
+
+    .modal-product-gallery.is-carousel {
+      grid-template-columns: 1fr;
+      width: min(100%, 19rem);
+    }
+
+    .modal-gallery-arrow {
+      position: absolute;
+      z-index: 3;
+      top: 50%;
+      transform: translate3d(0, -50%, 0);
+      background: rgba(5, 5, 6, 0.72);
+    }
+
+    .modal-gallery-arrow[data-modal-gallery-prev] {
+      left: 8px;
+    }
+
+    .modal-gallery-arrow[data-modal-gallery-next] {
+      right: 8px;
+    }
+  }
+
 </style>
 </head>
 <body>
@@ -4685,48 +4955,49 @@
 <section class="products space-chrome" id="products">
   <div class="section-header">
     <h2 class="section-title">Space Chrome.</h2>
-    <span class="section-sub">8 tricouri concept in negru si alb cu accente de argintiu controlat, din haos se face arta</span>
+    <span class="section-sub">Un test curat pentru primul produs Space Chrome: acelasi model, doua culori, front/back preview si integrare premium pe fundal dark chrome.</span>
     <div class="section-line"></div>
   </div>
 
-  <div class="product-filter-row" aria-label="Product categories">
-    <button class="product-filter-btn is-active" type="button" data-product-filter="all">All</button>
-    <button class="product-filter-btn" type="button" data-product-filter="white">White</button>
-    <button class="product-filter-btn" type="button" data-product-filter="black">Black</button>
-  </div>
-
-  <div class="products-grid" id="productsGrid">
-    <div class="product-card chrome-product white-product" data-category="white">
-      <div class="product-img-wrap"><div class="product-visual space-chrome-visual" style="--product-tone:#17191d"><div class="product-photo-stage" aria-hidden="true"><div class="product-photo-frame is-front"><img loading="lazy" decoding="async" class="product-photo" src="assets/products/space-chrome-white-01-front.png" alt=""><span class="product-photo-label">Front</span></div><div class="product-photo-frame is-back"><img loading="lazy" decoding="async" class="product-photo" src="assets/products/space-chrome-white-01-back.png" alt=""><span class="product-photo-label">Back</span></div></div></div><div class="product-badge drop">White / Space Chrome</div></div>
-      <div class="product-info"><div class="product-name">Space Chrome White Tee</div><div class="product-desc">White oversized tee with small chest mark and full chrome back artwork.</div><div class="product-footer"><div class="product-price">150 <span>RON</span></div><div class="product-actions"><select class="product-size-select" data-product-size aria-label="Size for Space Chrome White Tee"><option value="XS">XS</option><option value="S">S</option><option value="M">M</option><option value="L">L</option><option value="XL">XL</option><option value="XXL">XXL</option></select><select class="qty-select" data-product-qty aria-label="Quantity for Space Chrome White Tee"><option value="1">1x</option><option value="2">2x</option><option value="3">3x</option><option value="4">4x</option><option value="5">5x</option></select><button class="add-btn" type="button" data-add-product="1">Add</button></div></div></div>
-    </div>
-    <div class="product-card chrome-product white-product" data-category="white">
-      <div class="product-img-wrap"><div class="product-visual space-chrome-visual" style="--product-tone:#111216"><div class="product-photo-stage" aria-hidden="true"><div class="product-photo-frame is-front"><img loading="lazy" decoding="async" class="product-photo" src="assets/products/space-chrome-white-02-front.png" alt=""><span class="product-photo-label">Front</span></div><div class="product-photo-frame is-back"><img loading="lazy" decoding="async" class="product-photo" src="assets/products/space-chrome-white-02-back.png" alt=""><span class="product-photo-label">Back</span></div></div></div><div class="product-badge limited">White / Space Chrome</div></div>
-      <div class="product-info"><div class="product-name">Orbit Chrome White Tee</div><div class="product-desc">White tee with orbit chrome chest hit and sharp full back composition.</div><div class="product-footer"><div class="product-price">150 <span>RON</span></div><div class="product-actions"><select class="product-size-select" data-product-size aria-label="Size for Orbit Chrome White Tee"><option value="XS">XS</option><option value="S">S</option><option value="M">M</option><option value="L">L</option><option value="XL">XL</option><option value="XXL">XXL</option></select><select class="qty-select" data-product-qty aria-label="Quantity for Orbit Chrome White Tee"><option value="1">1x</option><option value="2">2x</option><option value="3">3x</option><option value="4">4x</option><option value="5">5x</option></select><button class="add-btn" type="button" data-add-product="2">Add</button></div></div></div>
-    </div>
-    <div class="product-card chrome-product white-product" data-category="white">
-      <div class="product-img-wrap"><div class="product-visual space-chrome-visual" style="--product-tone:#1b1c20"><div class="product-photo-stage" aria-hidden="true"><div class="product-photo-frame is-front"><img loading="lazy" decoding="async" class="product-photo" src="assets/products/space-chrome-white-03-front.png" alt=""><span class="product-photo-label">Front</span></div><div class="product-photo-frame is-back"><img loading="lazy" decoding="async" class="product-photo" src="assets/products/space-chrome-white-03-back.png" alt=""><span class="product-photo-label">Back</span></div></div></div><div class="product-badge made">White / Space Chrome</div></div>
-      <div class="product-info"><div class="product-name">Void Silver White Tee</div><div class="product-desc">Clean white tee with compass chest detail and vertical chrome back mark.</div><div class="product-footer"><div class="product-price">150 <span>RON</span></div><div class="product-actions"><select class="product-size-select" data-product-size aria-label="Size for Void Silver White Tee"><option value="XS">XS</option><option value="S">S</option><option value="M">M</option><option value="L">L</option><option value="XL">XL</option><option value="XXL">XXL</option></select><select class="qty-select" data-product-qty aria-label="Quantity for Void Silver White Tee"><option value="1">1x</option><option value="2">2x</option><option value="3">3x</option><option value="4">4x</option><option value="5">5x</option></select><button class="add-btn" type="button" data-add-product="3">Add</button></div></div></div>
-    </div>
-    <div class="product-card chrome-product white-product" data-category="white">
-      <div class="product-img-wrap"><div class="product-visual space-chrome-visual" style="--product-tone:#151417"><div class="product-photo-stage" aria-hidden="true"><div class="product-photo-frame is-front"><img loading="lazy" decoding="async" class="product-photo" src="assets/products/space-chrome-white-04-front.png" alt=""><span class="product-photo-label">Front</span></div><div class="product-photo-frame is-back"><img loading="lazy" decoding="async" class="product-photo" src="assets/products/space-chrome-white-04-back.png" alt=""><span class="product-photo-label">Back</span></div></div></div><div class="product-badge limited">White / Space Chrome</div></div>
-      <div class="product-info"><div class="product-name">Redline Chrome White Tee</div><div class="product-desc">White tee with minimal chest compass and aggressive chrome back artwork.</div><div class="product-footer"><div class="product-price">150 <span>RON</span></div><div class="product-actions"><select class="product-size-select" data-product-size aria-label="Size for Redline Chrome White Tee"><option value="XS">XS</option><option value="S">S</option><option value="M">M</option><option value="L">L</option><option value="XL">XL</option><option value="XXL">XXL</option></select><select class="qty-select" data-product-qty aria-label="Quantity for Redline Chrome White Tee"><option value="1">1x</option><option value="2">2x</option><option value="3">3x</option><option value="4">4x</option><option value="5">5x</option></select><button class="add-btn" type="button" data-add-product="4">Add</button></div></div></div>
-    </div>
-    <div class="product-card chrome-product" data-category="black">
-      <div class="product-img-wrap"><div class="product-visual space-chrome-visual" style="--product-tone:#191a1f"><div class="product-visual-inner">Lunar<br>Chrome</div></div><div class="product-badge drop">Space Chrome</div></div>
-      <div class="product-info"><div class="product-name">Lunar Chrome Tee</div><div class="product-desc">Black tee concept with moonlit silver shine and quiet chrome depth.</div><div class="product-footer"><div class="product-price">150 <span>RON</span></div><div class="product-actions"><select class="product-size-select" data-product-size aria-label="Size for Lunar Chrome Tee"><option value="XS">XS</option><option value="S">S</option><option value="M">M</option><option value="L">L</option><option value="XL">XL</option><option value="XXL">XXL</option></select><select class="qty-select" data-product-qty aria-label="Quantity for Lunar Chrome Tee"><option value="1">1x</option><option value="2">2x</option><option value="3">3x</option><option value="4">4x</option><option value="5">5x</option></select><button class="add-btn" type="button" data-add-product="5">Add</button></div></div></div>
-    </div>
-    <div class="product-card chrome-product" data-category="black">
-      <div class="product-img-wrap"><div class="product-visual space-chrome-visual" style="--product-tone:#101115"><div class="product-visual-inner">Eclipse<br>Black</div></div><div class="product-badge made">Space Chrome</div></div>
-      <div class="product-info"><div class="product-name">Eclipse Black Tee</div><div class="product-desc">The darkest concept in the collection, built around black-on-black chrome contrast.</div><div class="product-footer"><div class="product-price">150 <span>RON</span></div><div class="product-actions"><select class="product-size-select" data-product-size aria-label="Size for Eclipse Black Tee"><option value="XS">XS</option><option value="S">S</option><option value="M">M</option><option value="L">L</option><option value="XL">XL</option><option value="XXL">XXL</option></select><select class="qty-select" data-product-qty aria-label="Quantity for Eclipse Black Tee"><option value="1">1x</option><option value="2">2x</option><option value="3">3x</option><option value="4">4x</option><option value="5">5x</option></select><button class="add-btn" type="button" data-add-product="6">Add</button></div></div></div>
-    </div>
-    <div class="product-card chrome-product" data-category="black">
-      <div class="product-img-wrap"><div class="product-visual space-chrome-visual" style="--product-tone:#1d1f24"><div class="product-visual-inner">Satellite<br>Silver</div></div><div class="product-badge limited">Space Chrome</div></div>
-      <div class="product-info"><div class="product-name">Satellite Silver Tee</div><div class="product-desc">Chrome-heavy tee concept with a cleaner silver direction for premium contrast.</div><div class="product-footer"><div class="product-price">150 <span>RON</span></div><div class="product-actions"><select class="product-size-select" data-product-size aria-label="Size for Satellite Silver Tee"><option value="XS">XS</option><option value="S">S</option><option value="M">M</option><option value="L">L</option><option value="XL">XL</option><option value="XXL">XXL</option></select><select class="qty-select" data-product-qty aria-label="Quantity for Satellite Silver Tee"><option value="1">1x</option><option value="2">2x</option><option value="3">3x</option><option value="4">4x</option><option value="5">5x</option></select><button class="add-btn" type="button" data-add-product="7">Add</button></div></div></div>
-    </div>
-    <div class="product-card chrome-product" data-category="black">
-      <div class="product-img-wrap"><div class="product-visual space-chrome-visual" style="--product-tone:#14161b"><div class="product-visual-inner">Zero<br>Gravity</div></div><div class="product-badge drop">Space Chrome</div></div>
-      <div class="product-info"><div class="product-name">Zero Gravity Tee</div><div class="product-desc">Space Chrome tee concept with a floating graphic direction and sharper red energy.</div><div class="product-footer"><div class="product-price">150 <span>RON</span></div><div class="product-actions"><select class="product-size-select" data-product-size aria-label="Size for Zero Gravity Tee"><option value="XS">XS</option><option value="S">S</option><option value="M">M</option><option value="L">L</option><option value="XL">XL</option><option value="XXL">XXL</option></select><select class="qty-select" data-product-qty aria-label="Quantity for Zero Gravity Tee"><option value="1">1x</option><option value="2">2x</option><option value="3">3x</option><option value="4">4x</option><option value="5">5x</option></select><button class="add-btn" type="button" data-add-product="8">Add</button></div></div></div>
+  <div class="products-grid is-single-product" id="productsGrid">
+    <div class="product-card chrome-product feature-product" data-category="space-chrome">
+      <div class="product-img-wrap">
+        <div class="product-visual space-chrome-visual" style="--product-tone:#101113">
+          <div class="product-photo-stage" aria-hidden="true">
+            <img loading="lazy" decoding="async" class="product-photo" src="assets/products/space-chrome-tee-black-back.png" alt="">
+          </div>
+        </div>
+        <div class="product-badge drop">Space Chrome</div>
+      </div>
+      <div class="product-info">
+        <div class="product-card-colors" aria-label="Available colors">
+          <span class="product-color-chip is-active" style="--swatch:#101113">Black</span>
+          <span class="product-color-chip" style="--swatch:#f4f4f1">White</span>
+        </div>
+        <div class="product-name">Space Chrome Tee</div>
+        <div class="product-desc">Oversized tee with clean chest mark and the full chrome artwork on the back. Tap the product to choose Black or White and preview front/back.</div>
+        <div class="product-footer">
+          <div class="product-price">150 <span>RON</span></div>
+          <div class="product-actions">
+            <select class="product-size-select" data-product-size aria-label="Size for Space Chrome Tee">
+              <option value="XS">XS</option>
+              <option value="S">S</option>
+              <option value="M">M</option>
+              <option value="L">L</option>
+              <option value="XL">XL</option>
+              <option value="XXL">XXL</option>
+            </select>
+            <select class="qty-select" data-product-qty aria-label="Quantity for Space Chrome Tee">
+              <option value="1">1x</option>
+              <option value="2">2x</option>
+              <option value="3">3x</option>
+              <option value="4">4x</option>
+              <option value="5">5x</option>
+            </select>
+            <button class="add-btn" type="button" data-add-product="1">Add</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -4930,29 +5201,24 @@ const earlyAccessStorageKey = "21fadeawayEarlyAccess";
 const freeShippingTarget = 400;
 
 const products = [
-  { id: 1, name: "Space Chrome White Tee", desc: "White oversized tee with small chest mark and full chrome back artwork.", price: 150, badge: "White / Space Chrome", color: "#17191d", sizes: apparelSizes, category: "white", images: { front: "assets/products/space-chrome-white-01-front.png", back: "assets/products/space-chrome-white-01-back.png" }, story: "The first white Space Chrome piece: clean front presence, heavy chrome back graphic, and a dark industrial frame that keeps the drop premium.", material: "Heavy cotton", fit: "Oversized", weight: "280gsm" },
-  { id: 2, name: "Orbit Chrome White Tee", desc: "White tee with orbit chrome chest hit and sharp full back composition.", price: 150, badge: "White / Space Chrome", color: "#111216", sizes: apparelSizes, category: "white", images: { front: "assets/products/space-chrome-white-02-front.png", back: "assets/products/space-chrome-white-02-back.png" }, story: "Built around orbit lines and polished chrome energy. The white base gives the graphic more air while staying inside the Space Chrome universe.", material: "Heavy cotton", fit: "Relaxed oversized", weight: "280gsm" },
-  { id: 3, name: "Void Silver White Tee", desc: "Clean white tee with compass chest detail and vertical chrome back mark.", price: 150, badge: "White / Space Chrome", color: "#1b1c20", sizes: apparelSizes, category: "white", images: { front: "assets/products/space-chrome-white-03-front.png", back: "assets/products/space-chrome-white-03-back.png" }, story: "A cleaner white direction with a sharper center mark on the back. It feels more controlled, more vertical, and easier to style.", material: "Heavy cotton", fit: "Oversized", weight: "280gsm" },
-  { id: 4, name: "Redline Chrome White Tee", desc: "White tee with minimal chest compass and aggressive chrome back artwork.", price: 150, badge: "White / Space Chrome", color: "#151417", sizes: apparelSizes, category: "white", images: { front: "assets/products/space-chrome-white-04-front.png", back: "assets/products/space-chrome-white-04-back.png" }, story: "The loudest white back graphic in this first capsule: chrome shape, space motion, and a front that stays clean enough to feel premium.", material: "Heavy cotton", fit: "Oversized", weight: "280gsm" },
-  { id: 5, name: "Lunar Chrome Tee", desc: "Black tee concept with moonlit silver shine and quiet chrome depth.", price: 150, badge: "Space Chrome", color: "#191a1f", sizes: apparelSizes, category: "black", story: "A colder Space Chrome direction, inspired by moonlight on black fabric. Premium, quiet, and easy to style.", material: "Heavy cotton", fit: "Oversized", weight: "280gsm" },
-  { id: 6, name: "Eclipse Black Tee", desc: "The darkest concept in the collection, built around black-on-black chrome contrast.", price: 150, badge: "Space Chrome", color: "#101115", sizes: apparelSizes, category: "black", story: "The stealth piece: almost all black, with chrome detail meant to appear only when light hits the graphic.", material: "Heavy cotton", fit: "Relaxed oversized", weight: "280gsm" },
-  { id: 7, name: "Satellite Silver Tee", desc: "Chrome-heavy tee concept with a cleaner silver direction for premium contrast.", price: 150, badge: "Space Chrome", color: "#1d1f24", sizes: apparelSizes, category: "black", story: "A brighter silver concept for the collection, made to feel more premium while still staying dark and wearable.", material: "Heavy cotton", fit: "Oversized", weight: "280gsm" },
-  { id: 8, name: "Zero Gravity Tee", desc: "Space Chrome tee concept with a floating graphic direction and sharper red energy.", price: 150, badge: "Space Chrome", color: "#14161b", sizes: apparelSizes, category: "black", story: "The most energetic tee in Space Chrome: silver base language, black body, and a red detail that gives motion.", material: "Heavy cotton", fit: "Oversized", weight: "280gsm" }
+  { id: 1, family: "space-chrome-tee", name: "Space Chrome Tee", colorName: "Black", swatch: "#101113", desc: "Black oversized tee with clean chest mark and full chrome artwork on the back.", price: 150, badge: "Black / Space Chrome", color: "#101113", sizes: apparelSizes, category: "black", images: { front: "assets/products/space-chrome-tee-black-front.png", back: "assets/products/space-chrome-tee-black-back.png" }, story: "The black Space Chrome version keeps the product dark, premium, and sharp. The front stays minimal while the back carries the visual impact.", material: "Heavy cotton", fit: "Oversized", weight: "280gsm" },
+  { id: 2, family: "space-chrome-tee", name: "Space Chrome Tee", colorName: "White", swatch: "#f4f4f1", desc: "White oversized tee with clean chest mark and full chrome artwork on the back.", price: 150, badge: "White / Space Chrome", color: "#17191d", sizes: apparelSizes, category: "white", images: { front: "assets/products/space-chrome-tee-white-front.png", back: "assets/products/space-chrome-tee-white-back.png" }, story: "The white Space Chrome version gives the chrome artwork more air and contrast, keeping the front clean and the back loud.", material: "Heavy cotton", fit: "Oversized", weight: "280gsm" }
 ];
 
 const lookbookLabels = ["Space", "Chrome", "Orbit", "Void", "Lunar", "Eclipse", "Satellite", "Redline"];
 const lookbookProductMap = {
   Space: 1,
   Chrome: 1,
-  Orbit: 2,
-  Void: 3,
-  Lunar: 5,
-  Eclipse: 6,
-  Satellite: 7,
-  Redline: 4,
+  Orbit: 1,
+  Void: 1,
+  Lunar: 1,
+  Eclipse: 1,
+  Satellite: 1,
+  Redline: 1,
 };
 let cart = [];
 let activeModalProductId = null;
+let activeModalView = "front";
 let activeCheckoutStep = 0;
 
 const grid = document.getElementById("productsGrid");
@@ -5467,16 +5733,17 @@ function addToCart(id, quantity = 1, size) {
   const qty = Math.max(1, Math.min(20, Number(quantity) || 1));
   const selectedSize = product.sizes.includes(size) ? size : getProductFallbackSize(product);
   const existing = cart.find((item) => item.id === id && item.size === selectedSize);
+  const displayName = product.colorName ? `${product.name} - ${product.colorName}` : product.name;
   if (existing) {
     existing.qty += qty;
   } else {
-    cart.push({ uid: createCartUid(product.id, selectedSize), id: product.id, name: product.name, price: product.price, qty, size: selectedSize, sizes: product.sizes });
+    cart.push({ uid: createCartUid(product.id, selectedSize), id: product.id, name: displayName, price: product.price, qty, size: selectedSize, sizes: product.sizes });
   }
 
   resetOrderState();
   renderCart();
   pulseCartButton();
-  showNotif(qty > 1 ? `${qty} x ${product.name} added to bag` : `${product.name} added to bag`);
+  showNotif(qty > 1 ? `${qty} x ${displayName} added to bag` : `${displayName} added to bag`);
   return true;
 }
 
@@ -5522,12 +5789,17 @@ function syncCardSize(id, size) {
   }
 }
 
-function openProductModal(id) {
-  const product = getProductById(id);
-  if (!product || product.sold) return;
+function getProductVariants(product) {
+  if (!product?.family) return product ? [product] : [];
 
-  const modal = document.getElementById("productModal");
-  const overlay = document.getElementById("productModalOverlay");
+  return products.filter((item) => item.family === product.family && !item.sold);
+}
+
+function getModalViewLabel() {
+  return activeModalView === "back" ? "Back" : "Front";
+}
+
+function renderProductModalContent(product, selectedSize, selectedQty) {
   const modalMedia = document.getElementById("modalMedia");
   const modalVisual = document.getElementById("modalVisual");
   const modalBadge = document.getElementById("modalBadge");
@@ -5541,28 +5813,30 @@ function openProductModal(id) {
   const modalSize = document.getElementById("modalSize");
   const modalQty = document.getElementById("modalQty");
 
-  if (!modal || !overlay || !modalSize || !modalQty) return;
+  if (!product || !modalSize || !modalQty) return;
 
-  const card = getProductCardById(id);
-  const cardSize = card?.querySelector("[data-product-size]")?.value;
-  const cardQty = card?.querySelector("[data-product-qty]")?.value;
-  const selectedSize = product.sizes.includes(cardSize) ? cardSize : getProductFallbackSize(product);
-
-  activeModalProductId = id;
   modalMedia.style.setProperty("--modal-tone", product.color);
   if (modalVisual) {
     if (product.images?.front && product.images?.back) {
+      const variants = getProductVariants(product);
+      const imageSrc = product.images[activeModalView] || product.images.front;
+      const imageLabel = getModalViewLabel();
       modalVisual.classList.add("has-gallery");
       modalVisual.innerHTML = `
-        <div class="modal-product-gallery">
+        <div class="modal-product-gallery is-carousel" data-modal-product-gallery>
+          <button class="modal-gallery-arrow" type="button" data-modal-gallery-prev aria-label="Show previous product view">‹</button>
           <div class="modal-product-frame">
-            <img loading="lazy" decoding="async" src="${escapeHtml(product.images.front)}" alt="${escapeHtml(product.name)} front view">
-            <span class="modal-product-label">Front</span>
+            <img loading="lazy" decoding="async" src="${escapeHtml(imageSrc)}" alt="${escapeHtml(product.name)} ${escapeHtml(product.colorName || "")} ${escapeHtml(imageLabel.toLowerCase())} view">
+            <span class="modal-product-label">${imageLabel}</span>
           </div>
-          <div class="modal-product-frame">
-            <img loading="lazy" decoding="async" src="${escapeHtml(product.images.back)}" alt="${escapeHtml(product.name)} back view">
-            <span class="modal-product-label">Back</span>
-          </div>
+          <button class="modal-gallery-arrow" type="button" data-modal-gallery-next aria-label="Show next product view">›</button>
+        </div>
+        <div class="modal-color-options" aria-label="Choose product color">
+          ${variants.map((variant) => `
+            <button class="modal-color-chip ${variant.id === product.id ? "is-active" : ""}" type="button" data-modal-color-product="${variant.id}" style="--swatch:${escapeHtml(variant.swatch || variant.color)}">
+              ${escapeHtml(variant.colorName || variant.badge)}
+            </button>
+          `).join("")}
         </div>
       `;
     } else {
@@ -5580,12 +5854,53 @@ function openProductModal(id) {
   if (modalWeight) modalWeight.textContent = product.weight || "Midweight";
   modalSize.innerHTML = product.sizes.map((size) => `<option value="${size}">${size}</option>`).join("");
   modalSize.value = selectedSize;
-  modalQty.value = cardQty || "1";
+  modalQty.value = selectedQty || "1";
+}
+
+function openProductModal(id) {
+  const product = getProductById(id);
+  if (!product || product.sold) return;
+
+  const modal = document.getElementById("productModal");
+  const overlay = document.getElementById("productModalOverlay");
+  const modalSize = document.getElementById("modalSize");
+  const modalQty = document.getElementById("modalQty");
+
+  if (!modal || !overlay || !modalSize || !modalQty) return;
+
+  const card = getProductCardById(id) || getProductCardById(1);
+  const cardSize = card?.querySelector("[data-product-size]")?.value;
+  const cardQty = card?.querySelector("[data-product-qty]")?.value;
+  const selectedSize = product.sizes.includes(cardSize) ? cardSize : getProductFallbackSize(product);
+
+  activeModalProductId = id;
+  activeModalView = "front";
+  renderProductModalContent(product, selectedSize, cardQty || "1");
 
   modal.classList.add("open");
   overlay.classList.add("open");
   modal.setAttribute("aria-hidden", "false");
   document.body.classList.add("modal-lock");
+}
+
+function selectModalProductVariant(id) {
+  const product = getProductById(id);
+  const modalSize = document.getElementById("modalSize");
+  const modalQty = document.getElementById("modalQty");
+  if (!product || !modalSize || !modalQty) return;
+
+  activeModalProductId = id;
+  renderProductModalContent(product, modalSize.value, modalQty.value);
+}
+
+function shiftModalProductView(direction = 1) {
+  const product = getProductById(activeModalProductId);
+  const modalSize = document.getElementById("modalSize");
+  const modalQty = document.getElementById("modalQty");
+  if (!product || !modalSize || !modalQty) return;
+
+  activeModalView = activeModalView === "front" ? "back" : "front";
+  renderProductModalContent(product, modalSize.value, modalQty.value);
 }
 
 function closeProductModal() {
@@ -5599,6 +5914,7 @@ function closeProductModal() {
   modal.setAttribute("aria-hidden", "true");
   document.body.classList.remove("modal-lock");
   activeModalProductId = null;
+  activeModalView = "front";
 }
 
 function addModalProductToCart() {
@@ -6654,9 +6970,67 @@ if (modalAddButton && modalAddButton.addEventListener) {
   modalAddButton.addEventListener("click", addModalProductToCart);
 }
 
+document.addEventListener("click", (event) => {
+  const colorButton = event.target.closest("[data-modal-color-product]");
+  if (colorButton) {
+    event.preventDefault();
+    selectModalProductVariant(Number(colorButton.dataset.modalColorProduct));
+    return;
+  }
+
+  if (event.target.closest("[data-modal-gallery-prev]")) {
+    event.preventDefault();
+    shiftModalProductView(-1);
+    return;
+  }
+
+  if (event.target.closest("[data-modal-gallery-next]")) {
+    event.preventDefault();
+    shiftModalProductView(1);
+  }
+});
+
+let modalGallerySwipeStart = null;
+
+document.addEventListener("pointerdown", (event) => {
+  if (!event.target.closest("[data-modal-product-gallery]")) return;
+
+  modalGallerySwipeStart = {
+    x: event.clientX,
+    y: event.clientY,
+    id: event.pointerId
+  };
+}, { passive: true });
+
+document.addEventListener("pointerup", (event) => {
+  if (!modalGallerySwipeStart || event.pointerId !== modalGallerySwipeStart.id) return;
+
+  const deltaX = event.clientX - modalGallerySwipeStart.x;
+  const deltaY = event.clientY - modalGallerySwipeStart.y;
+  modalGallerySwipeStart = null;
+
+  if (Math.abs(deltaX) < 42 || Math.abs(deltaX) < Math.abs(deltaY) * 1.25) return;
+  shiftModalProductView(deltaX < 0 ? 1 : -1);
+}, { passive: true });
+
+document.addEventListener("pointercancel", () => {
+  modalGallerySwipeStart = null;
+}, { passive: true });
+
 document.addEventListener("keydown", (event) => {
-  if (event.key !== "Escape") return;
-  closeProductModal();
+  if (event.key === "Escape") {
+    closeProductModal();
+    return;
+  }
+
+  const modal = document.getElementById("productModal");
+  if (!modal?.classList.contains("open")) return;
+
+  if (event.key === "ArrowLeft") {
+    shiftModalProductView(-1);
+  } else if (event.key === "ArrowRight") {
+    shiftModalProductView(1);
+  }
 });
 
 window.addToCart = addToCart;
