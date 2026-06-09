@@ -4706,6 +4706,294 @@
     }
   }
 
+  @media (max-width: 600px) {
+    #products {
+      scroll-margin-top: 5.25rem;
+      padding-top: clamp(3.1rem, 12vw, 4.5rem);
+      padding-bottom: clamp(6.5rem, 18vw, 8rem);
+    }
+
+    #products .section-header {
+      margin-bottom: 1.25rem;
+      padding-inline: 0.35rem;
+    }
+
+    #products .section-title {
+      font-size: clamp(2.55rem, 13vw, 3.7rem);
+      line-height: 0.9;
+      max-width: 10ch;
+      margin-inline: auto;
+    }
+
+    #products .section-title::before,
+    #products .section-title::after {
+      font-size: 0.2em;
+      margin: 0 0.18em;
+    }
+
+    #products .section-sub {
+      max-width: 21rem;
+      font-size: 0.78rem;
+      line-height: 1.45;
+      opacity: 0.82;
+    }
+
+    .products-grid.is-single-product {
+      width: min(100%, 23rem);
+      margin-inline: auto;
+    }
+
+    .product-card.feature-product {
+      min-height: 0;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .product-card.feature-product::before {
+      inset: 8px;
+    }
+
+    .feature-product .product-img-wrap {
+      min-height: clamp(14.25rem, 62vw, 17.5rem);
+      padding-top: 0.65rem;
+    }
+
+    .feature-product .product-visual {
+      padding: 0.8rem 0.55rem 0.15rem;
+      align-items: end;
+    }
+
+    .feature-product .product-photo-stage {
+      width: 100%;
+      transform: translate3d(0, 0, 0);
+    }
+
+    .feature-product .product-photo-stage::before {
+      width: 58%;
+      height: 10%;
+      bottom: 1%;
+      opacity: 0.72;
+    }
+
+    .feature-product .product-photo {
+      width: clamp(14.25rem, 65vw, 17.75rem) !important;
+      filter: drop-shadow(0 1.4rem 1.6rem rgba(0, 0, 0, 0.42)) brightness(1.08);
+    }
+
+    .product-badge {
+      left: 0.9rem;
+      top: 0.9rem;
+      font-size: 0.62rem;
+      padding: 0.45rem 0.7rem;
+    }
+
+    .feature-product .product-info {
+      gap: 0.75rem;
+      padding: 1.05rem 1rem 1.15rem;
+    }
+
+    .product-card-colors {
+      gap: 0.55rem;
+    }
+
+    .product-color-chip,
+    .modal-color-chip {
+      min-height: 2.3rem;
+      padding: 0 0.75rem 0 0.45rem;
+      font-size: 0.68rem;
+      letter-spacing: 0.06em;
+    }
+
+    .product-color-chip::before,
+    .modal-color-chip::before {
+      width: 1rem;
+      height: 1rem;
+    }
+
+    .feature-product .product-name {
+      font-size: clamp(1.9rem, 8.7vw, 2.38rem);
+      line-height: 0.95;
+      max-width: 12ch;
+    }
+
+    .feature-product .product-desc {
+      max-width: 100%;
+      display: -webkit-box;
+      overflow: hidden;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      font-size: 0.84rem;
+      line-height: 1.42;
+      opacity: 0.78;
+    }
+
+    .feature-product .product-footer {
+      order: 3;
+      gap: 0.8rem;
+    }
+
+    .feature-product .product-desc {
+      order: 4;
+    }
+
+    .feature-product .product-actions {
+      grid-template-columns: minmax(0, 1fr) minmax(4.1rem, 0.44fr) minmax(5.9rem, 0.72fr);
+      gap: 0.45rem;
+    }
+
+    .feature-product .product-size-select,
+    .feature-product .qty-select,
+    .feature-product .add-btn {
+      min-height: 2.9rem;
+    }
+
+    .feature-product .add-btn {
+      grid-column: auto;
+      position: relative;
+      z-index: 3;
+    }
+
+    .product-modal {
+      width: calc(100vw - 1rem);
+      max-height: calc(100svh - 1rem);
+      border-radius: 8px;
+    }
+
+    .product-modal:has(.modal-product-gallery) {
+      width: calc(100vw - 1rem);
+    }
+
+    .modal-close {
+      top: 0.65rem;
+      right: 0.65rem;
+      width: 2.45rem;
+      height: 2.45rem;
+    }
+
+    .modal-media {
+      min-height: clamp(16.5rem, 63svh, 20.5rem);
+      padding: 2.35rem 1rem 0.55rem;
+    }
+
+    .modal-blank.has-gallery {
+      width: 100%;
+    }
+
+    .modal-product-gallery.is-carousel {
+      width: min(100%, 20.5rem);
+    }
+
+    .modal-product-gallery.is-carousel .modal-product-frame {
+      aspect-ratio: 1.02;
+      display: grid;
+      place-items: center;
+    }
+
+    .modal-product-gallery.is-carousel .modal-product-frame img {
+      width: clamp(14.5rem, 74vw, 18.25rem) !important;
+      filter: drop-shadow(0 1.25rem 1.45rem rgba(0, 0, 0, 0.42)) brightness(1.14);
+    }
+
+    .modal-gallery-arrow {
+      width: 2.25rem;
+      height: 2.25rem;
+      font-size: 1.15rem;
+    }
+
+    .modal-product-label {
+      left: 0.75rem;
+      bottom: 0.5rem;
+      font-size: 0.56rem;
+    }
+
+    .modal-color-options {
+      justify-content: center;
+      margin-top: -0.1rem;
+    }
+
+    .modal-copy {
+      gap: 0.7rem;
+      padding: 1rem 1rem 1.3rem;
+    }
+
+    .modal-title {
+      font-size: clamp(2rem, 10vw, 2.65rem);
+      line-height: 0.95;
+      max-width: 11ch;
+    }
+
+    .modal-desc {
+      font-size: 0.86rem;
+      line-height: 1.45;
+    }
+
+    .modal-price {
+      font-size: 1.05rem;
+    }
+
+    .modal-controls {
+      order: 4;
+      grid-template-columns: minmax(0, 1fr) minmax(4.4rem, 0.45fr);
+      gap: 0.6rem;
+    }
+
+    .modal-add-btn {
+      order: 5;
+      min-height: 2.9rem;
+    }
+
+    .modal-story {
+      order: 6;
+      padding: 0.85rem;
+    }
+
+    .modal-story-copy {
+      font-size: 0.78rem;
+      line-height: 1.45;
+    }
+
+    .modal-story-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.45rem;
+    }
+
+    .modal-story-cell {
+      padding: 0.58rem;
+    }
+
+    .modal-story-label {
+      font-size: 0.54rem;
+    }
+
+    .modal-story-value {
+      font-size: 0.68rem;
+    }
+
+    .modal-note {
+      display: none;
+    }
+
+    .ai-chat {
+      top: 4.75rem;
+      right: 0.75rem;
+      bottom: auto;
+      width: min(21.5rem, calc(100vw - 1.5rem));
+    }
+
+    .ai-chat-toggle {
+      width: 2.85rem;
+      height: 2.85rem;
+      font-size: 0.64rem;
+      box-shadow: 0 1rem 2.4rem rgba(0, 0, 0, 0.42), 0 0 1.25rem rgba(218, 222, 226, 0.16);
+    }
+
+    .ai-chat-panel {
+      top: 3.35rem;
+      bottom: auto;
+      max-height: calc(100svh - 8.75rem);
+    }
+  }
+
 </style>
 </head>
 <body>
