@@ -1259,6 +1259,7 @@
   }
 
   .look-bg {
+    position: relative;
     width: 100%;
     height: 100%;
     display: grid;
@@ -1269,9 +1270,35 @@
       linear-gradient(145deg, #18181b 0%, #101013 44%, #070708 78%, #060606 100%);
   }
 
+  .look-bg img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.9;
+    transform: translate3d(0, 0, 0) scale(1.01);
+    filter: saturate(0.98) contrast(1.04);
+    pointer-events: none;
+  }
+
+  .look-bg::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(180deg, rgba(5, 5, 6, 0.04), rgba(5, 5, 6, 0.34) 72%, rgba(5, 5, 6, 0.7));
+    pointer-events: none;
+  }
+
   .look-overlay {
+    position: relative;
+    z-index: 2;
+    align-self: end;
+    justify-self: start;
+    margin: 0 0 18px 18px;
     color: rgba(244, 241, 234, 0.8);
-    font-size: clamp(2rem, 4vw, 4.4rem);
+    font-size: clamp(1.55rem, 3vw, 3.1rem);
     font-weight: 850;
     letter-spacing: 0;
   }
@@ -3325,11 +3352,7 @@
     }
 
     .nav-cart {
-      width: 42px;
-      height: 42px;
-      min-height: 42px;
-      padding: 0;
-      border-radius: 50%;
+      display: none;
     }
 
     .cart-label {
@@ -4559,7 +4582,25 @@
     height: 100%;
     aspect-ratio: auto;
     display: block;
+    overflow: hidden;
     transform: translate3d(0, 0, 0);
+  }
+
+  .collection-product .product-visual::after {
+    content: none !important;
+  }
+
+  .collection-product .product-photo-stage::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    background: linear-gradient(108deg, transparent 0%, rgba(255, 255, 255, 0) 38%, rgba(244, 245, 245, 0.18) 48%, rgba(244, 245, 245, 0.06) 56%, transparent 68%);
+    transform: translate3d(-135%, 0, 0);
+    animation: productImageShine 3.6s linear infinite;
+    opacity: 0.72;
+    mix-blend-mode: screen;
   }
 
   .collection-product .product-photo {
@@ -4585,7 +4626,7 @@
 
   .collection-product .product-name {
     font-size: clamp(1.08rem, 1.45vw, 1.34rem);
-    text-transform: lowercase;
+    text-transform: none;
   }
 
   .collection-product .product-desc {
@@ -4619,6 +4660,20 @@
     height: 100% !important;
     object-fit: cover;
     filter: none;
+  }
+
+  .modal-note {
+    display: none;
+  }
+
+  @keyframes productImageShine {
+    from {
+      transform: translate3d(-135%, 0, 0);
+    }
+
+    to {
+      transform: translate3d(135%, 0, 0);
+    }
   }
 
   .product-card-colors,
@@ -5115,24 +5170,23 @@
     }
 
     .modal-controls {
-      order: 4;
+      order: 5;
       grid-template-columns: minmax(0, 1fr) minmax(4.4rem, 0.45fr);
       gap: 0.6rem;
     }
 
     .modal-add-btn {
-      order: 5;
+      order: 6;
       min-height: 2.9rem;
     }
 
     .modal-story {
-      order: 6;
+      order: 4;
       padding: 0.85rem;
     }
 
     .modal-story-copy {
-      font-size: 0.78rem;
-      line-height: 1.45;
+      display: none;
     }
 
     .modal-story-grid {
@@ -5445,22 +5499,22 @@
       <div class="product-img-wrap">
         <div class="product-visual space-chrome-visual" style="--product-tone:#101113">
           <div class="product-photo-stage" aria-hidden="true">
-            <img loading="lazy" decoding="async" class="product-photo" src="assets/products/space-chrome-angelic-black-back.webp" alt="">
+            <img loading="lazy" decoding="async" class="product-photo" src="assets/products/space-chrome-angelic-white-back.webp" alt="">
           </div>
         </div>
         <div class="product-badge drop">Space Chrome</div>
       </div>
       <div class="product-info">
         <div class="product-card-colors" aria-label="Available colors">
-          <span class="product-color-chip is-active" style="--swatch:#101113">Black</span>
-          <span class="product-color-chip" style="--swatch:#f4f4f1">White</span>
+          <span class="product-color-chip" style="--swatch:#101113">Black</span>
+          <span class="product-color-chip is-active" style="--swatch:#f4f4f1">White</span>
         </div>
-        <div class="product-name">angelic</div>
+        <div class="product-name">Angelic</div>
         <div class="product-desc">Oversized Space Chrome tee with minimal front mark and full chrome back artwork.</div>
         <div class="product-footer">
           <div class="product-price">150 <span>RON</span></div>
           <div class="product-actions">
-            <select class="product-size-select" data-product-size aria-label="Size for angelic">
+            <select class="product-size-select" data-product-size aria-label="Size for Angelic">
               <option value="XS">XS</option>
               <option value="S">S</option>
               <option value="M">M</option>
@@ -5468,88 +5522,88 @@
               <option value="XL">XL</option>
               <option value="XXL">XXL</option>
             </select>
-            <select class="qty-select" data-product-qty aria-label="Quantity for angelic">
+            <select class="qty-select" data-product-qty aria-label="Quantity for Angelic">
               <option value="1">1x</option>
               <option value="2">2x</option>
               <option value="3">3x</option>
               <option value="4">4x</option>
               <option value="5">5x</option>
             </select>
-            <button class="add-btn" type="button" data-add-product="1">Add</button>
+            <button class="add-btn" type="button" data-add-product="2">Add</button>
           </div>
         </div>
       </div>
     </div>
     <div class="product-card chrome-product collection-product" data-category="space-chrome">
       <div class="product-img-wrap">
-        <div class="product-visual space-chrome-visual" style="--product-tone:#101113"><div class="product-photo-stage" aria-hidden="true"><img loading="lazy" decoding="async" class="product-photo" src="assets/products/space-chrome-eclipse-black-back.webp" alt=""></div></div>
+        <div class="product-visual space-chrome-visual" style="--product-tone:#101113"><div class="product-photo-stage" aria-hidden="true"><img loading="lazy" decoding="async" class="product-photo" src="assets/products/space-chrome-eclipse-white-back.webp" alt=""></div></div>
         <div class="product-badge drop">Space Chrome</div>
       </div>
       <div class="product-info">
-        <div class="product-card-colors" aria-label="Available colors"><span class="product-color-chip is-active" style="--swatch:#101113">Black</span><span class="product-color-chip" style="--swatch:#f4f4f1">White</span></div>
-        <div class="product-name">eclipse</div>
+        <div class="product-card-colors" aria-label="Available colors"><span class="product-color-chip" style="--swatch:#101113">Black</span><span class="product-color-chip is-active" style="--swatch:#f4f4f1">White</span></div>
+        <div class="product-name">Eclipse</div>
         <div class="product-desc">Oversized Space Chrome tee with minimal front mark and full chrome back artwork.</div>
-        <div class="product-footer"><div class="product-price">150 <span>RON</span></div><div class="product-actions"><select class="product-size-select" data-product-size aria-label="Size for eclipse"><option value="XS">XS</option><option value="S">S</option><option value="M">M</option><option value="L">L</option><option value="XL">XL</option><option value="XXL">XXL</option></select><select class="qty-select" data-product-qty aria-label="Quantity for eclipse"><option value="1">1x</option><option value="2">2x</option><option value="3">3x</option><option value="4">4x</option><option value="5">5x</option></select><button class="add-btn" type="button" data-add-product="3">Add</button></div></div>
+        <div class="product-footer"><div class="product-price">150 <span>RON</span></div><div class="product-actions"><select class="product-size-select" data-product-size aria-label="Size for Eclipse"><option value="XS">XS</option><option value="S">S</option><option value="M">M</option><option value="L">L</option><option value="XL">XL</option><option value="XXL">XXL</option></select><select class="qty-select" data-product-qty aria-label="Quantity for Eclipse"><option value="1">1x</option><option value="2">2x</option><option value="3">3x</option><option value="4">4x</option><option value="5">5x</option></select><button class="add-btn" type="button" data-add-product="4">Add</button></div></div>
       </div>
     </div>
     <div class="product-card chrome-product collection-product" data-category="space-chrome">
       <div class="product-img-wrap">
-        <div class="product-visual space-chrome-visual" style="--product-tone:#101113"><div class="product-photo-stage" aria-hidden="true"><img loading="lazy" decoding="async" class="product-photo" src="assets/products/space-chrome-lunar-black-back.webp" alt=""></div></div>
+        <div class="product-visual space-chrome-visual" style="--product-tone:#101113"><div class="product-photo-stage" aria-hidden="true"><img loading="lazy" decoding="async" class="product-photo" src="assets/products/space-chrome-lunar-white-back.webp" alt=""></div></div>
         <div class="product-badge drop">Space Chrome</div>
       </div>
       <div class="product-info">
-        <div class="product-card-colors" aria-label="Available colors"><span class="product-color-chip is-active" style="--swatch:#101113">Black</span><span class="product-color-chip" style="--swatch:#f4f4f1">White</span></div>
-        <div class="product-name">lunar</div>
+        <div class="product-card-colors" aria-label="Available colors"><span class="product-color-chip" style="--swatch:#101113">Black</span><span class="product-color-chip is-active" style="--swatch:#f4f4f1">White</span></div>
+        <div class="product-name">Lunar</div>
         <div class="product-desc">Oversized Space Chrome tee with minimal front mark and full chrome back artwork.</div>
-        <div class="product-footer"><div class="product-price">150 <span>RON</span></div><div class="product-actions"><select class="product-size-select" data-product-size aria-label="Size for lunar"><option value="XS">XS</option><option value="S">S</option><option value="M">M</option><option value="L">L</option><option value="XL">XL</option><option value="XXL">XXL</option></select><select class="qty-select" data-product-qty aria-label="Quantity for lunar"><option value="1">1x</option><option value="2">2x</option><option value="3">3x</option><option value="4">4x</option><option value="5">5x</option></select><button class="add-btn" type="button" data-add-product="5">Add</button></div></div>
+        <div class="product-footer"><div class="product-price">150 <span>RON</span></div><div class="product-actions"><select class="product-size-select" data-product-size aria-label="Size for Lunar"><option value="XS">XS</option><option value="S">S</option><option value="M">M</option><option value="L">L</option><option value="XL">XL</option><option value="XXL">XXL</option></select><select class="qty-select" data-product-qty aria-label="Quantity for Lunar"><option value="1">1x</option><option value="2">2x</option><option value="3">3x</option><option value="4">4x</option><option value="5">5x</option></select><button class="add-btn" type="button" data-add-product="6">Add</button></div></div>
       </div>
     </div>
     <div class="product-card chrome-product collection-product" data-category="space-chrome">
       <div class="product-img-wrap">
-        <div class="product-visual space-chrome-visual" style="--product-tone:#101113"><div class="product-photo-stage" aria-hidden="true"><img loading="lazy" decoding="async" class="product-photo" src="assets/products/space-chrome-orbit-black-back.webp" alt=""></div></div>
+        <div class="product-visual space-chrome-visual" style="--product-tone:#101113"><div class="product-photo-stage" aria-hidden="true"><img loading="lazy" decoding="async" class="product-photo" src="assets/products/space-chrome-orbit-white-back.webp" alt=""></div></div>
         <div class="product-badge drop">Space Chrome</div>
       </div>
       <div class="product-info">
-        <div class="product-card-colors" aria-label="Available colors"><span class="product-color-chip is-active" style="--swatch:#101113">Black</span><span class="product-color-chip" style="--swatch:#f4f4f1">White</span></div>
-        <div class="product-name">orbit</div>
+        <div class="product-card-colors" aria-label="Available colors"><span class="product-color-chip" style="--swatch:#101113">Black</span><span class="product-color-chip is-active" style="--swatch:#f4f4f1">White</span></div>
+        <div class="product-name">Orbit</div>
         <div class="product-desc">Oversized Space Chrome tee with minimal front mark and full chrome back artwork.</div>
-        <div class="product-footer"><div class="product-price">150 <span>RON</span></div><div class="product-actions"><select class="product-size-select" data-product-size aria-label="Size for orbit"><option value="XS">XS</option><option value="S">S</option><option value="M">M</option><option value="L">L</option><option value="XL">XL</option><option value="XXL">XXL</option></select><select class="qty-select" data-product-qty aria-label="Quantity for orbit"><option value="1">1x</option><option value="2">2x</option><option value="3">3x</option><option value="4">4x</option><option value="5">5x</option></select><button class="add-btn" type="button" data-add-product="7">Add</button></div></div>
+        <div class="product-footer"><div class="product-price">150 <span>RON</span></div><div class="product-actions"><select class="product-size-select" data-product-size aria-label="Size for Orbit"><option value="XS">XS</option><option value="S">S</option><option value="M">M</option><option value="L">L</option><option value="XL">XL</option><option value="XXL">XXL</option></select><select class="qty-select" data-product-qty aria-label="Quantity for Orbit"><option value="1">1x</option><option value="2">2x</option><option value="3">3x</option><option value="4">4x</option><option value="5">5x</option></select><button class="add-btn" type="button" data-add-product="8">Add</button></div></div>
       </div>
     </div>
     <div class="product-card chrome-product collection-product" data-category="space-chrome">
       <div class="product-img-wrap">
-        <div class="product-visual space-chrome-visual" style="--product-tone:#101113"><div class="product-photo-stage" aria-hidden="true"><img loading="lazy" decoding="async" class="product-photo" src="assets/products/space-chrome-rage-black-back.webp" alt=""></div></div>
+        <div class="product-visual space-chrome-visual" style="--product-tone:#101113"><div class="product-photo-stage" aria-hidden="true"><img loading="lazy" decoding="async" class="product-photo" src="assets/products/space-chrome-rage-white-back.webp" alt=""></div></div>
         <div class="product-badge drop">Space Chrome</div>
       </div>
       <div class="product-info">
-        <div class="product-card-colors" aria-label="Available colors"><span class="product-color-chip is-active" style="--swatch:#101113">Black</span><span class="product-color-chip" style="--swatch:#f4f4f1">White</span></div>
-        <div class="product-name">rage</div>
+        <div class="product-card-colors" aria-label="Available colors"><span class="product-color-chip" style="--swatch:#101113">Black</span><span class="product-color-chip is-active" style="--swatch:#f4f4f1">White</span></div>
+        <div class="product-name">Rage</div>
         <div class="product-desc">Oversized Space Chrome tee with minimal front mark and full chrome back artwork.</div>
-        <div class="product-footer"><div class="product-price">150 <span>RON</span></div><div class="product-actions"><select class="product-size-select" data-product-size aria-label="Size for rage"><option value="XS">XS</option><option value="S">S</option><option value="M">M</option><option value="L">L</option><option value="XL">XL</option><option value="XXL">XXL</option></select><select class="qty-select" data-product-qty aria-label="Quantity for rage"><option value="1">1x</option><option value="2">2x</option><option value="3">3x</option><option value="4">4x</option><option value="5">5x</option></select><button class="add-btn" type="button" data-add-product="9">Add</button></div></div>
+        <div class="product-footer"><div class="product-price">150 <span>RON</span></div><div class="product-actions"><select class="product-size-select" data-product-size aria-label="Size for Rage"><option value="XS">XS</option><option value="S">S</option><option value="M">M</option><option value="L">L</option><option value="XL">XL</option><option value="XXL">XXL</option></select><select class="qty-select" data-product-qty aria-label="Quantity for Rage"><option value="1">1x</option><option value="2">2x</option><option value="3">3x</option><option value="4">4x</option><option value="5">5x</option></select><button class="add-btn" type="button" data-add-product="10">Add</button></div></div>
       </div>
     </div>
     <div class="product-card chrome-product collection-product" data-category="space-chrome">
       <div class="product-img-wrap">
-        <div class="product-visual space-chrome-visual" style="--product-tone:#101113"><div class="product-photo-stage" aria-hidden="true"><img loading="lazy" decoding="async" class="product-photo" src="assets/products/space-chrome-satellite-black-back.webp" alt=""></div></div>
+        <div class="product-visual space-chrome-visual" style="--product-tone:#101113"><div class="product-photo-stage" aria-hidden="true"><img loading="lazy" decoding="async" class="product-photo" src="assets/products/space-chrome-satellite-white-back.webp" alt=""></div></div>
         <div class="product-badge drop">Space Chrome</div>
       </div>
       <div class="product-info">
-        <div class="product-card-colors" aria-label="Available colors"><span class="product-color-chip is-active" style="--swatch:#101113">Black</span><span class="product-color-chip" style="--swatch:#f4f4f1">White</span></div>
-        <div class="product-name">satellite</div>
+        <div class="product-card-colors" aria-label="Available colors"><span class="product-color-chip" style="--swatch:#101113">Black</span><span class="product-color-chip is-active" style="--swatch:#f4f4f1">White</span></div>
+        <div class="product-name">Satellite</div>
         <div class="product-desc">Oversized Space Chrome tee with minimal front mark and full chrome back artwork.</div>
-        <div class="product-footer"><div class="product-price">150 <span>RON</span></div><div class="product-actions"><select class="product-size-select" data-product-size aria-label="Size for satellite"><option value="XS">XS</option><option value="S">S</option><option value="M">M</option><option value="L">L</option><option value="XL">XL</option><option value="XXL">XXL</option></select><select class="qty-select" data-product-qty aria-label="Quantity for satellite"><option value="1">1x</option><option value="2">2x</option><option value="3">3x</option><option value="4">4x</option><option value="5">5x</option></select><button class="add-btn" type="button" data-add-product="11">Add</button></div></div>
+        <div class="product-footer"><div class="product-price">150 <span>RON</span></div><div class="product-actions"><select class="product-size-select" data-product-size aria-label="Size for Satellite"><option value="XS">XS</option><option value="S">S</option><option value="M">M</option><option value="L">L</option><option value="XL">XL</option><option value="XXL">XXL</option></select><select class="qty-select" data-product-qty aria-label="Quantity for Satellite"><option value="1">1x</option><option value="2">2x</option><option value="3">3x</option><option value="4">4x</option><option value="5">5x</option></select><button class="add-btn" type="button" data-add-product="12">Add</button></div></div>
       </div>
     </div>
     <div class="product-card chrome-product collection-product" data-category="space-chrome">
       <div class="product-img-wrap">
-        <div class="product-visual space-chrome-visual" style="--product-tone:#101113"><div class="product-photo-stage" aria-hidden="true"><img loading="lazy" decoding="async" class="product-photo" src="assets/products/space-chrome-void-black-back.webp" alt=""></div></div>
+        <div class="product-visual space-chrome-visual" style="--product-tone:#101113"><div class="product-photo-stage" aria-hidden="true"><img loading="lazy" decoding="async" class="product-photo" src="assets/products/space-chrome-void-white-back.webp" alt=""></div></div>
         <div class="product-badge drop">Space Chrome</div>
       </div>
       <div class="product-info">
-        <div class="product-card-colors" aria-label="Available colors"><span class="product-color-chip is-active" style="--swatch:#101113">Black</span><span class="product-color-chip" style="--swatch:#f4f4f1">White</span></div>
-        <div class="product-name">void</div>
+        <div class="product-card-colors" aria-label="Available colors"><span class="product-color-chip" style="--swatch:#101113">Black</span><span class="product-color-chip is-active" style="--swatch:#f4f4f1">White</span></div>
+        <div class="product-name">Void</div>
         <div class="product-desc">Oversized Space Chrome tee with minimal front mark and full chrome back artwork.</div>
-        <div class="product-footer"><div class="product-price">150 <span>RON</span></div><div class="product-actions"><select class="product-size-select" data-product-size aria-label="Size for void"><option value="XS">XS</option><option value="S">S</option><option value="M">M</option><option value="L">L</option><option value="XL">XL</option><option value="XXL">XXL</option></select><select class="qty-select" data-product-qty aria-label="Quantity for void"><option value="1">1x</option><option value="2">2x</option><option value="3">3x</option><option value="4">4x</option><option value="5">5x</option></select><button class="add-btn" type="button" data-add-product="13">Add</button></div></div>
+        <div class="product-footer"><div class="product-price">150 <span>RON</span></div><div class="product-actions"><select class="product-size-select" data-product-size aria-label="Size for Void"><option value="XS">XS</option><option value="S">S</option><option value="M">M</option><option value="L">L</option><option value="XL">XL</option><option value="XXL">XXL</option></select><select class="qty-select" data-product-qty aria-label="Quantity for Void"><option value="1">1x</option><option value="2">2x</option><option value="3">3x</option><option value="4">4x</option><option value="5">5x</option></select><button class="add-btn" type="button" data-add-product="14">Add</button></div></div>
       </div>
     </div>
   </div>
@@ -5754,33 +5808,31 @@ const earlyAccessStorageKey = "21fadeawayEarlyAccess";
 const freeShippingTarget = 400;
 
 const products = [
-  { id: 1, family: "angelic", name: "angelic", colorName: "Black", swatch: "#101113", desc: "Black oversized Space Chrome tee with clean chest mark and full chrome artwork on the back.", price: 150, badge: "Black / Space Chrome", color: "#101113", sizes: apparelSizes, category: "black", images: { front: "assets/products/space-chrome-angelic-black-front.webp", back: "assets/products/space-chrome-angelic-black-back.webp" }, story: "angelic keeps the silhouette dark and controlled, with the back artwork carrying the full chrome energy.", material: "Heavy cotton", fit: "Oversized", weight: "280gsm" },
-  { id: 2, family: "angelic", name: "angelic", colorName: "White", swatch: "#f4f4f1", desc: "White oversized Space Chrome tee with clean chest mark and full chrome artwork on the back.", price: 150, badge: "White / Space Chrome", color: "#17191d", sizes: apparelSizes, category: "white", images: { front: "assets/products/space-chrome-angelic-white-front.webp", back: "assets/products/space-chrome-angelic-white-back.webp" }, story: "angelic in white gives the chrome artwork more air, keeping the front minimal and the back loud.", material: "Heavy cotton", fit: "Oversized", weight: "280gsm" },
-  { id: 3, family: "eclipse", name: "eclipse", colorName: "Black", swatch: "#101113", desc: "Black oversized Space Chrome tee with clean chest mark and full chrome artwork on the back.", price: 150, badge: "Black / Space Chrome", color: "#101113", sizes: apparelSizes, category: "black", images: { front: "assets/products/space-chrome-eclipse-black-front.webp", back: "assets/products/space-chrome-eclipse-black-back.webp" }, story: "eclipse brings a darker orbital composition with a sharp chrome center and clean front balance.", material: "Heavy cotton", fit: "Oversized", weight: "280gsm" },
-  { id: 4, family: "eclipse", name: "eclipse", colorName: "White", swatch: "#f4f4f1", desc: "White oversized Space Chrome tee with clean chest mark and full chrome artwork on the back.", price: 150, badge: "White / Space Chrome", color: "#17191d", sizes: apparelSizes, category: "white", images: { front: "assets/products/space-chrome-eclipse-white-front.webp", back: "assets/products/space-chrome-eclipse-white-back.webp" }, story: "eclipse in white makes the back graphic feel brighter and more architectural.", material: "Heavy cotton", fit: "Oversized", weight: "280gsm" },
-  { id: 5, family: "lunar", name: "lunar", colorName: "Black", swatch: "#101113", desc: "Black oversized Space Chrome tee with clean chest mark and full chrome artwork on the back.", price: 150, badge: "Black / Space Chrome", color: "#101113", sizes: apparelSizes, category: "black", images: { front: "assets/products/space-chrome-lunar-black-front.webp", back: "assets/products/space-chrome-lunar-black-back.webp" }, story: "lunar has a vertical chrome structure inspired by pressure, motion, and controlled chaos.", material: "Heavy cotton", fit: "Oversized", weight: "280gsm" },
-  { id: 6, family: "lunar", name: "lunar", colorName: "White", swatch: "#f4f4f1", desc: "White oversized Space Chrome tee with clean chest mark and full chrome artwork on the back.", price: 150, badge: "White / Space Chrome", color: "#17191d", sizes: apparelSizes, category: "white", images: { front: "assets/products/space-chrome-lunar-white-front.webp", back: "assets/products/space-chrome-lunar-white-back.webp" }, story: "lunar in white keeps the shape clean while the back print becomes the focus.", material: "Heavy cotton", fit: "Oversized", weight: "280gsm" },
-  { id: 7, family: "orbit", name: "orbit", colorName: "Black", swatch: "#101113", desc: "Black oversized Space Chrome tee with clean chest mark and full chrome artwork on the back.", price: 150, badge: "Black / Space Chrome", color: "#101113", sizes: apparelSizes, category: "black", images: { front: "assets/products/space-chrome-orbit-black-front.webp", back: "assets/products/space-chrome-orbit-black-back.webp" }, story: "orbit is the most aggressive motion piece in the drop, built around chrome speed and impact.", material: "Heavy cotton", fit: "Oversized", weight: "280gsm" },
-  { id: 8, family: "orbit", name: "orbit", colorName: "White", swatch: "#f4f4f1", desc: "White oversized Space Chrome tee with clean chest mark and full chrome artwork on the back.", price: 150, badge: "White / Space Chrome", color: "#17191d", sizes: apparelSizes, category: "white", images: { front: "assets/products/space-chrome-orbit-white-front.webp", back: "assets/products/space-chrome-orbit-white-back.webp" }, story: "orbit in white makes the kinetic back graphic feel lighter and more technical.", material: "Heavy cotton", fit: "Oversized", weight: "280gsm" },
-  { id: 9, family: "rage", name: "rage", colorName: "Black", swatch: "#101113", desc: "Black oversized Space Chrome tee with clean chest mark and full chrome artwork on the back.", price: 150, badge: "Black / Space Chrome", color: "#101113", sizes: apparelSizes, category: "black", images: { front: "assets/products/space-chrome-rage-black-front.webp", back: "assets/products/space-chrome-rage-black-back.webp" }, story: "rage is the sharpest vertical artwork, made to feel intense without losing premium control.", material: "Heavy cotton", fit: "Oversized", weight: "280gsm" },
-  { id: 10, family: "rage", name: "rage", colorName: "White", swatch: "#f4f4f1", desc: "White oversized Space Chrome tee with clean chest mark and full chrome artwork on the back.", price: 150, badge: "White / Space Chrome", color: "#17191d", sizes: apparelSizes, category: "white", images: { front: "assets/products/space-chrome-rage-white-front.webp", back: "assets/products/space-chrome-rage-white-back.webp" }, story: "rage in white gives the chrome spikes more contrast and a cleaner streetwear read.", material: "Heavy cotton", fit: "Oversized", weight: "280gsm" },
-  { id: 11, family: "satellite", name: "satellite", colorName: "Black", swatch: "#101113", desc: "Black oversized Space Chrome tee with clean chest mark and full chrome artwork on the back.", price: 150, badge: "Black / Space Chrome", color: "#101113", sizes: apparelSizes, category: "black", images: { front: "assets/products/space-chrome-satellite-black-front.webp", back: "assets/products/space-chrome-satellite-black-back.webp" }, story: "satellite uses vertical orbit lines and a centered chrome mark for a composed futuristic look.", material: "Heavy cotton", fit: "Oversized", weight: "280gsm" },
-  { id: 12, family: "satellite", name: "satellite", colorName: "White", swatch: "#f4f4f1", desc: "White oversized Space Chrome tee with clean chest mark and full chrome artwork on the back.", price: 150, badge: "White / Space Chrome", color: "#17191d", sizes: apparelSizes, category: "white", images: { front: "assets/products/space-chrome-satellite-white-front.webp", back: "assets/products/space-chrome-satellite-white-back.webp" }, story: "satellite in white keeps the piece clean while the back graphic adds movement and depth.", material: "Heavy cotton", fit: "Oversized", weight: "280gsm" },
-  { id: 13, family: "void", name: "void", colorName: "Black", swatch: "#101113", desc: "Black oversized Space Chrome tee with clean chest mark and full chrome artwork on the back.", price: 150, badge: "Black / Space Chrome", color: "#101113", sizes: apparelSizes, category: "black", images: { front: "assets/products/space-chrome-void-black-front.webp", back: "assets/products/space-chrome-void-black-back.webp" }, story: "void is the most minimal aggressive piece, with a tighter back mark and a quieter front.", material: "Heavy cotton", fit: "Oversized", weight: "280gsm" },
-  { id: 14, family: "void", name: "void", colorName: "White", swatch: "#f4f4f1", desc: "White oversized Space Chrome tee with clean chest mark and full chrome artwork on the back.", price: 150, badge: "White / Space Chrome", color: "#17191d", sizes: apparelSizes, category: "white", images: { front: "assets/products/space-chrome-void-white-front.webp", back: "assets/products/space-chrome-void-white-back.webp" }, story: "void in white turns the back artwork into a clean chrome sketch with premium negative space.", material: "Heavy cotton", fit: "Oversized", weight: "280gsm" }
+  { id: 1, family: "angelic", name: "Angelic", colorName: "Black", swatch: "#101113", desc: "Black oversized Space Chrome tee with clean chest mark and full chrome artwork on the back.", price: 150, badge: "Black / Space Chrome", color: "#101113", sizes: apparelSizes, category: "black", images: { front: "assets/products/space-chrome-angelic-black-front.webp", back: "assets/products/space-chrome-angelic-black-back.webp" }, story: "angelic keeps the silhouette dark and controlled, with the back artwork carrying the full chrome energy.", material: "Recycled cotton", fit: "Oversized", weight: "200 gsm" },
+  { id: 2, family: "angelic", name: "Angelic", colorName: "White", swatch: "#f4f4f1", desc: "White oversized Space Chrome tee with clean chest mark and full chrome artwork on the back.", price: 150, badge: "White / Space Chrome", color: "#17191d", sizes: apparelSizes, category: "white", images: { front: "assets/products/space-chrome-angelic-white-front.webp", back: "assets/products/space-chrome-angelic-white-back.webp" }, story: "angelic in white gives the chrome artwork more air, keeping the front minimal and the back loud.", material: "Recycled cotton", fit: "Oversized", weight: "200 gsm" },
+  { id: 3, family: "eclipse", name: "Eclipse", colorName: "Black", swatch: "#101113", desc: "Black oversized Space Chrome tee with clean chest mark and full chrome artwork on the back.", price: 150, badge: "Black / Space Chrome", color: "#101113", sizes: apparelSizes, category: "black", images: { front: "assets/products/space-chrome-eclipse-black-front.webp", back: "assets/products/space-chrome-eclipse-black-back.webp" }, story: "eclipse brings a darker orbital composition with a sharp chrome center and clean front balance.", material: "Recycled cotton", fit: "Oversized", weight: "200 gsm" },
+  { id: 4, family: "eclipse", name: "Eclipse", colorName: "White", swatch: "#f4f4f1", desc: "White oversized Space Chrome tee with clean chest mark and full chrome artwork on the back.", price: 150, badge: "White / Space Chrome", color: "#17191d", sizes: apparelSizes, category: "white", images: { front: "assets/products/space-chrome-eclipse-white-front.webp", back: "assets/products/space-chrome-eclipse-white-back.webp" }, story: "eclipse in white makes the back graphic feel brighter and more architectural.", material: "Recycled cotton", fit: "Oversized", weight: "200 gsm" },
+  { id: 5, family: "lunar", name: "Lunar", colorName: "Black", swatch: "#101113", desc: "Black oversized Space Chrome tee with clean chest mark and full chrome artwork on the back.", price: 150, badge: "Black / Space Chrome", color: "#101113", sizes: apparelSizes, category: "black", images: { front: "assets/products/space-chrome-lunar-black-front.webp", back: "assets/products/space-chrome-lunar-black-back.webp" }, story: "lunar has a vertical chrome structure inspired by pressure, motion, and controlled chaos.", material: "Recycled cotton", fit: "Oversized", weight: "200 gsm" },
+  { id: 6, family: "lunar", name: "Lunar", colorName: "White", swatch: "#f4f4f1", desc: "White oversized Space Chrome tee with clean chest mark and full chrome artwork on the back.", price: 150, badge: "White / Space Chrome", color: "#17191d", sizes: apparelSizes, category: "white", images: { front: "assets/products/space-chrome-lunar-white-front.webp", back: "assets/products/space-chrome-lunar-white-back.webp" }, story: "lunar in white keeps the shape clean while the back print becomes the focus.", material: "Recycled cotton", fit: "Oversized", weight: "200 gsm" },
+  { id: 7, family: "orbit", name: "Orbit", colorName: "Black", swatch: "#101113", desc: "Black oversized Space Chrome tee with clean chest mark and full chrome artwork on the back.", price: 150, badge: "Black / Space Chrome", color: "#101113", sizes: apparelSizes, category: "black", images: { front: "assets/products/space-chrome-orbit-black-front.webp", back: "assets/products/space-chrome-orbit-black-back.webp" }, story: "orbit is the most aggressive motion piece in the drop, built around chrome speed and impact.", material: "Recycled cotton", fit: "Oversized", weight: "200 gsm" },
+  { id: 8, family: "orbit", name: "Orbit", colorName: "White", swatch: "#f4f4f1", desc: "White oversized Space Chrome tee with clean chest mark and full chrome artwork on the back.", price: 150, badge: "White / Space Chrome", color: "#17191d", sizes: apparelSizes, category: "white", images: { front: "assets/products/space-chrome-orbit-white-front.webp", back: "assets/products/space-chrome-orbit-white-back.webp" }, story: "orbit in white makes the kinetic back graphic feel lighter and more technical.", material: "Recycled cotton", fit: "Oversized", weight: "200 gsm" },
+  { id: 9, family: "rage", name: "Rage", colorName: "Black", swatch: "#101113", desc: "Black oversized Space Chrome tee with clean chest mark and full chrome artwork on the back.", price: 150, badge: "Black / Space Chrome", color: "#101113", sizes: apparelSizes, category: "black", images: { front: "assets/products/space-chrome-rage-black-front.webp", back: "assets/products/space-chrome-rage-black-back.webp" }, story: "rage is the sharpest vertical artwork, made to feel intense without losing premium control.", material: "Recycled cotton", fit: "Oversized", weight: "200 gsm" },
+  { id: 10, family: "rage", name: "Rage", colorName: "White", swatch: "#f4f4f1", desc: "White oversized Space Chrome tee with clean chest mark and full chrome artwork on the back.", price: 150, badge: "White / Space Chrome", color: "#17191d", sizes: apparelSizes, category: "white", images: { front: "assets/products/space-chrome-rage-white-front.webp", back: "assets/products/space-chrome-rage-white-back.webp" }, story: "rage in white gives the chrome spikes more contrast and a cleaner streetwear read.", material: "Recycled cotton", fit: "Oversized", weight: "200 gsm" },
+  { id: 11, family: "satellite", name: "Satellite", colorName: "Black", swatch: "#101113", desc: "Black oversized Space Chrome tee with clean chest mark and full chrome artwork on the back.", price: 150, badge: "Black / Space Chrome", color: "#101113", sizes: apparelSizes, category: "black", images: { front: "assets/products/space-chrome-satellite-black-front.webp", back: "assets/products/space-chrome-satellite-black-back.webp" }, story: "satellite uses vertical orbit lines and a centered chrome mark for a composed futuristic look.", material: "Recycled cotton", fit: "Oversized", weight: "200 gsm" },
+  { id: 12, family: "satellite", name: "Satellite", colorName: "White", swatch: "#f4f4f1", desc: "White oversized Space Chrome tee with clean chest mark and full chrome artwork on the back.", price: 150, badge: "White / Space Chrome", color: "#17191d", sizes: apparelSizes, category: "white", images: { front: "assets/products/space-chrome-satellite-white-front.webp", back: "assets/products/space-chrome-satellite-white-back.webp" }, story: "satellite in white keeps the piece clean while the back graphic adds movement and depth.", material: "Recycled cotton", fit: "Oversized", weight: "200 gsm" },
+  { id: 13, family: "void", name: "Void", colorName: "Black", swatch: "#101113", desc: "Black oversized Space Chrome tee with clean chest mark and full chrome artwork on the back.", price: 150, badge: "Black / Space Chrome", color: "#101113", sizes: apparelSizes, category: "black", images: { front: "assets/products/space-chrome-void-black-front.webp", back: "assets/products/space-chrome-void-black-back.webp" }, story: "void is the most minimal aggressive piece, with a tighter back mark and a quieter front.", material: "Recycled cotton", fit: "Oversized", weight: "200 gsm" },
+  { id: 14, family: "void", name: "Void", colorName: "White", swatch: "#f4f4f1", desc: "White oversized Space Chrome tee with clean chest mark and full chrome artwork on the back.", price: 150, badge: "White / Space Chrome", color: "#17191d", sizes: apparelSizes, category: "white", images: { front: "assets/products/space-chrome-void-white-front.webp", back: "assets/products/space-chrome-void-white-back.webp" }, story: "void in white turns the back artwork into a clean chrome sketch with premium negative space.", material: "Recycled cotton", fit: "Oversized", weight: "200 gsm" }
 ];
 
-const lookbookLabels = ["Space", "Chrome", "Orbit", "Void", "Lunar", "Eclipse", "Satellite", "Redline"];
-const lookbookProductMap = {
-  Space: 1,
-  Chrome: 1,
-  Orbit: 7,
-  Void: 13,
-  Lunar: 5,
-  Eclipse: 3,
-  Satellite: 11,
-  Redline: 9,
-};
+const lookbookItems = [
+  { label: "Angelic", productId: 2, image: "assets/products/space-chrome-angelic-white-back.webp" },
+  { label: "Eclipse", productId: 4, image: "assets/products/space-chrome-eclipse-white-back.webp" },
+  { label: "Lunar", productId: 6, image: "assets/products/space-chrome-lunar-white-back.webp" },
+  { label: "Orbit", productId: 8, image: "assets/products/space-chrome-orbit-white-back.webp" },
+  { label: "Rage", productId: 10, image: "assets/products/space-chrome-rage-white-back.webp" },
+  { label: "Satellite", productId: 12, image: "assets/products/space-chrome-satellite-white-back.webp" },
+  { label: "Void", productId: 14, image: "assets/products/space-chrome-void-white-back.webp" }
+];
 let cart = [];
 let activeModalProductId = null;
 let activeModalView = "front";
@@ -5863,10 +5915,11 @@ function setupLookbookMarquee() {
 
   lookbookMarqueeStarted = true;
 
-  const itemMarkup = lookbookLabels.map((label) => `
-    <div class="look-item" data-look-product="${lookbookProductMap[label] || 1}" role="button" tabindex="0" aria-label="Open ${label} look product">
+  const itemMarkup = lookbookItems.map((item) => `
+    <div class="look-item" data-look-product="${item.productId}" role="button" tabindex="0" aria-label="Open ${item.label} look product">
       <div class="look-bg">
-        <div class="look-overlay">${label}</div>
+        <img loading="lazy" decoding="async" src="${escapeHtml(item.image)}" alt="">
+        <div class="look-overlay">${escapeHtml(item.label)}</div>
       </div>
     </div>
   `).join("");
