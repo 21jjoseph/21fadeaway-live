@@ -1198,6 +1198,10 @@
     -webkit-tap-highlight-color: transparent;
   }
 
+  .lookbook-strip * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
   .lookbook-strip.is-dragging {
     cursor: grabbing;
   }
@@ -1218,8 +1222,9 @@
     background: var(--surface-solid);
     border: 1px solid var(--hairline-soft);
     cursor: pointer;
-    contain: paint;
+    contain: layout style paint;
     backface-visibility: hidden;
+    transform: translate3d(0, 0, 0);
   }
 
   .look-bg,
@@ -1280,6 +1285,7 @@
     transform: translate3d(0, 0, 0) scale(1.01);
     filter: saturate(0.98) contrast(1.04);
     pointer-events: none;
+    backface-visibility: hidden;
   }
 
   .look-bg::before {
@@ -3889,7 +3895,7 @@
     transition: background 0.22s var(--motion-ease), border-color 0.22s var(--motion-ease), transform 0.22s var(--motion-ease);
   }
 
-  .nav-menu-toggle span {
+  .nav-menu-toggle .menu-line {
     display: block;
     width: 18px;
     height: 2px;
@@ -3898,16 +3904,21 @@
     transition: transform 0.22s var(--motion-ease), opacity 0.22s var(--motion-ease);
   }
 
+  .mobile-top-bag-icon,
+  .mobile-top-bag-count {
+    display: none;
+  }
+
   nav.menu-open .nav-menu-toggle {
     background: linear-gradient(180deg, var(--action-red), var(--action-red-dark));
     border-color: hsl(355 82% 58% / 0.72);
   }
 
-  nav.menu-open .nav-menu-toggle span:first-child {
+  nav.menu-open .nav-menu-toggle .menu-line:first-child {
     transform: translateY(3.5px) rotate(45deg);
   }
 
-  nav.menu-open .nav-menu-toggle span:last-child {
+  nav.menu-open .nav-menu-toggle .menu-line:last-child {
     transform: translateY(-3.5px) rotate(-45deg);
   }
 
@@ -4273,12 +4284,61 @@
     nav {
       height: 3.5rem;
       display: grid;
-      grid-template-columns: 1fr var(--tap-target) var(--tap-target);
+      grid-template-columns: 1fr var(--tap-target);
       gap: 0.5rem;
     }
 
     .nav-menu-toggle {
+      position: relative;
       display: grid;
+      justify-self: end;
+      border-radius: 999px;
+      background: linear-gradient(180deg, rgba(244, 241, 234, 0.13), rgba(244, 241, 234, 0.04));
+      color: var(--ink);
+    }
+
+    .nav-menu-toggle .menu-line {
+      display: none;
+    }
+
+    .mobile-top-bag-icon {
+      position: relative;
+      display: inline-block;
+      width: 16px;
+      height: 18px;
+      border: 1.8px solid currentColor;
+      border-radius: 4px 4px 5px 5px;
+    }
+
+    .mobile-top-bag-icon::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: -7px;
+      width: 8px;
+      height: 7px;
+      border: 1.8px solid currentColor;
+      border-bottom: 0;
+      border-radius: 7px 7px 0 0;
+      transform: translateX(-50%);
+    }
+
+    .mobile-top-bag-count {
+      position: absolute;
+      right: -5px;
+      top: -5px;
+      display: inline-grid;
+      place-items: center;
+      min-width: 18px;
+      height: 18px;
+      padding: 0 5px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.66rem;
+      font-weight: 850;
+      line-height: 1;
+      box-shadow: 0 8px 18px rgba(157, 16, 26, 0.34);
     }
 
     .nav-links {
@@ -4616,6 +4676,11 @@
     transform: translate3d(0, 0, 0);
   }
 
+  .look-bg::after {
+    content: none !important;
+    animation: none !important;
+  }
+
   .collection-product .product-info {
     display: flex;
     flex: 1;
@@ -4840,6 +4905,19 @@
       grid-template-columns: 1fr;
     }
 
+    .collection-product .product-img-wrap {
+      aspect-ratio: 1 / 1.22;
+    }
+
+    .collection-product .product-photo-stage {
+      background: transparent;
+    }
+
+    .collection-product .product-photo {
+      object-fit: contain;
+      object-position: center;
+    }
+
     .feature-product .product-photo-stage {
       width: min(98%, 26rem);
     }
@@ -4855,6 +4933,7 @@
 
     .modal-product-gallery.is-carousel .modal-product-frame img {
       width: clamp(14rem, 78vw, 21rem) !important;
+      object-fit: contain;
     }
 
     .modal-gallery-arrow {
@@ -5262,6 +5341,83 @@
     }
   }
 
+  .ai-chat {
+    display: none !important;
+  }
+
+  .cookie-banner {
+    position: fixed;
+    left: clamp(1rem, 3vw, 2rem);
+    right: clamp(1rem, 3vw, 2rem);
+    bottom: clamp(1rem, 3vw, 2rem);
+    z-index: 260;
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    max-width: 48rem;
+    margin: 0 auto;
+    padding: 0.9rem 1rem;
+    border: 1px solid rgba(244, 241, 234, 0.14);
+    border-radius: 10px;
+    background: linear-gradient(145deg, rgba(18, 18, 20, 0.94), rgba(7, 7, 8, 0.96));
+    box-shadow: 0 22px 64px rgba(0, 0, 0, 0.56), 0 0 0 1px rgba(244, 241, 234, 0.04);
+    color: var(--ink);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+  }
+
+  .cookie-banner.show {
+    display: flex;
+  }
+
+  .cookie-copy {
+    display: grid;
+    gap: 0.2rem;
+    color: rgba(244, 241, 234, 0.72);
+    font-size: clamp(0.78rem, 0.32vw + 0.72rem, 0.9rem);
+    line-height: 1.5;
+  }
+
+  .cookie-copy strong {
+    color: var(--ink);
+    font-size: 0.82rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .cookie-accept {
+    min-height: 44px;
+    border: 1px solid rgba(157, 16, 26, 0.58);
+    border-radius: 999px;
+    background: linear-gradient(180deg, var(--action-red), var(--action-red-dark));
+    color: #fff;
+    padding: 0.72rem 1rem;
+    font-size: 0.78rem;
+    font-weight: 850;
+    cursor: pointer;
+    transition: transform 0.2s var(--motion-ease), box-shadow 0.2s var(--motion-ease);
+  }
+
+  .cookie-accept:hover {
+    transform: translate3d(0, -1px, 0);
+    box-shadow: 0 14px 28px rgba(157, 16, 26, 0.26);
+  }
+
+  @media (max-width: 720px) {
+    .cookie-banner {
+      bottom: 6.1rem;
+      align-items: stretch;
+      flex-direction: column;
+      padding: 0.85rem;
+    }
+
+    .collection-product .product-photo,
+    .modal-product-gallery.is-carousel .modal-product-frame img {
+      object-fit: contain !important;
+    }
+  }
+
 </style>
 </head>
 <body>
@@ -5293,6 +5449,15 @@
       <button class="ai-chat-send" type="submit">Send</button>
     </form>
   </div>
+</div>
+
+<!-- COOKIE BANNER -->
+<div class="cookie-banner" id="cookieBanner" role="dialog" aria-live="polite" aria-label="Cookie notice">
+  <div class="cookie-copy">
+    <strong>Cookies</strong>
+    <span>Folosim cookies pentru functionalitatea cosului, preferinte si o experienta mai fluida pe site.</span>
+  </div>
+  <button class="cookie-accept" id="cookieAccept" type="button">Accept</button>
 </div>
 
 <!-- CART OVERLAY -->
@@ -5336,7 +5501,7 @@
           <span class="checkout-step-label">Confirm</span>
         </div>
       </div>
-      <p class="checkout-note">Complete the order request in steps. Stripe card payment will be connected later.</p>
+      <p class="checkout-note">Complete the order request in steps. Plata se face ramburs la livrare.</p>
       <div class="order-success" id="orderSuccess"></div>
       <form class="checkout-form" id="checkoutForm">
         <div class="checkout-step-panel is-active" data-checkout-panel="1">
@@ -5382,7 +5547,7 @@
         </div>
 
         <div class="checkout-step-panel" data-checkout-panel="2">
-          <div class="checkout-stage-title">Payment method</div>
+          <div class="checkout-stage-title">Payment</div>
           <div class="checkout-field">
             <label>Payment method</label>
             <div class="payment-methods">
@@ -5391,13 +5556,6 @@
                 <span>
                   <span class="payment-title">Ramburs</span>
                   <span class="payment-copy">Clientul plătește cash la livrare. Recomandat pentru testele de acum.</span>
-                </span>
-              </label>
-              <label class="payment-method">
-                <input type="radio" name="paymentMethod" value="Card">
-                <span>
-                  <span class="payment-title">Card</span>
-                  <span class="payment-copy">Comanda se trimite acum, iar plata cu cardul va fi confirmată prin Stripe/payment link.</span>
                 </span>
               </label>
             </div>
@@ -5470,9 +5628,11 @@
 <!-- NAV -->
 <nav>
   <a href="#" class="nav-logo">21fadeaway</a>
-  <button class="nav-menu-toggle" id="navMenuToggle" type="button" aria-label="Open navigation" aria-controls="primaryNav" aria-expanded="false">
-    <span></span>
-    <span></span>
+  <button class="nav-menu-toggle" id="navMenuToggle" type="button" aria-label="Open bag. 0 items" aria-controls="cartDrawer" aria-expanded="false">
+    <span class="menu-line"></span>
+    <span class="menu-line"></span>
+    <span class="mobile-top-bag-icon" aria-hidden="true"></span>
+    <span class="mobile-top-bag-count" id="mobileTopCartCount">0</span>
   </button>
   <ul class="nav-links" id="primaryNav">
     <li><a href="#products">Drop</a></li>
@@ -5957,12 +6117,12 @@ function setupLookbookMarquee() {
 
   strip.innerHTML = Array.from({ length: 3 }, () => `<div class="lookbook-set">${itemMarkup}</div>`).join("");
 
-  const speed = 0.014;
-  const dragResumeDelay = 180;
-  const smoothFactor = 0.18;
-  const dragVelocityWeight = 0.82;
-  const maxDragVelocity = 0.42;
-  const friction = 0.965;
+  const speed = 0.009;
+  const dragResumeDelay = 260;
+  const smoothFactor = 0.32;
+  const dragVelocityWeight = 0.58;
+  const maxDragVelocity = 0.24;
+  const friction = 0.94;
   let setWidth = 0;
   let offset = 0;
   let displayOffset = 0;
@@ -6316,7 +6476,9 @@ function scheduleLookbookMarquee() {
 function updateCartButton(count) {
   const cartCount = document.getElementById("cartCount");
   const mobileCartCount = document.getElementById("mobileCartCount");
+  const mobileTopCartCount = document.getElementById("mobileTopCartCount");
   const navCart = document.getElementById("navCart");
+  const navMenuToggle = document.getElementById("navMenuToggle");
 
   if (cartCount) {
     cartCount.textContent = count;
@@ -6326,9 +6488,18 @@ function updateCartButton(count) {
     mobileCartCount.textContent = count;
   }
 
+  if (mobileTopCartCount) {
+    mobileTopCartCount.textContent = count;
+  }
+
   if (navCart) {
     navCart.classList.toggle("has-items", count > 0);
     navCart.setAttribute("aria-label", `Open bag. ${count} ${count === 1 ? "item" : "items"}`);
+  }
+
+  if (navMenuToggle) {
+    navMenuToggle.classList.toggle("has-items", count > 0);
+    navMenuToggle.setAttribute("aria-label", `Open bag. ${count} ${count === 1 ? "item" : "items"}`);
   }
 }
 
@@ -6770,7 +6941,7 @@ function getSelectedPaymentMethod(form) {
 }
 
 function getPaymentStatus(paymentMethod) {
-  return paymentMethod === "Card" ? "card_payment_pending" : "cash_on_delivery";
+  return "cash_on_delivery";
 }
 
 function buildOrderLines(items) {
@@ -6783,9 +6954,7 @@ function buildOrderConfirmationHtml(order, options = {}) {
   const copy = isFallback
     ? `Email service may need first-time confirmation. <a href="${options.fallbackUrl}">Open email fallback</a>.`
     : `Your order request was sent to ${escapeHtml(orderEmailAddress)}.`;
-  const nextStep = order.payment.method === "Card"
-    ? "Next step: we will confirm the order and send the Stripe/payment link when card payment is connected."
-    : "Next step: we will confirm availability and delivery details before shipping with ramburs.";
+  const nextStep = "Next step: we will confirm availability and delivery details before shipping with ramburs.";
 
   return `
     <div class="order-confirm">
@@ -6986,9 +7155,7 @@ async function submitOrder(event) {
   const formData = new FormData(form);
   const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
   const paymentMethod = getSelectedPaymentMethod(form);
-  const paymentNote = paymentMethod === "Card"
-    ? "Card selected. Stripe/payment link pending manual confirmation."
-    : "Ramburs selected. Client pays cash on delivery.";
+  const paymentNote = "Ramburs selected. Client pays cash on delivery.";
   const order = {
     id: "21F-" + Date.now().toString(36).toUpperCase(),
     createdAt: new Date().toISOString(),
@@ -7048,6 +7215,7 @@ function setCartOpen(isOpen) {
   const drawer = document.getElementById("cartDrawer");
   const overlay = document.getElementById("cartOverlay");
   const navCart = document.getElementById("navCart");
+  const navMenuToggle = document.getElementById("navMenuToggle");
 
   if (!drawer || !overlay) return;
 
@@ -7056,6 +7224,10 @@ function setCartOpen(isOpen) {
 
   if (navCart) {
     navCart.setAttribute("aria-expanded", isOpen ? "true" : "false");
+  }
+
+  if (navMenuToggle) {
+    navMenuToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
   }
 }
 
@@ -7136,7 +7308,7 @@ function getAiAssistantReply(message) {
   }
 
   if (text.includes("plata") || text.includes("card") || text.includes("ramburs") || text.includes("stripe")) {
-    return "Momentan poti alege ramburs sau card. Cardul este pregatit ca optiune, iar plata prin Stripe/payment link se conecteaza cand contul Stripe este gata.";
+    return "Momentan plata este ramburs. Trimiti comanda, noi o confirmam pe email, iar clientul plateste cash la livrare.";
   }
 
   if (text.includes("recomand") || text.includes("produs") || text.includes("space") || text.includes("chrome") || text.includes("tee")) {
@@ -7537,6 +7709,13 @@ if (navMenuToggle && navMenuToggle.addEventListener) {
   navMenuToggle.addEventListener("click", (event) => {
     event.preventDefault();
     event.stopPropagation();
+    if (window.matchMedia("(max-width: 720px)").matches) {
+      openCart();
+      if (navElement) {
+        navElement.classList.remove("menu-open");
+      }
+      return;
+    }
     setNavMenuOpen(!(navElement && navElement.classList.contains("menu-open")));
   });
 }
@@ -7747,10 +7926,7 @@ function updatePaymentHint() {
   const paymentHint = document.getElementById("paymentHint");
   if (!paymentHint || !checkoutForm) return;
 
-  const paymentMethod = getSelectedPaymentMethod(checkoutForm);
-  paymentHint.textContent = paymentMethod === "Card"
-    ? "Payment: card selected. Order will be emailed now; Stripe/payment link is pending manual setup."
-    : "Payment: ramburs. Order request will be emailed for manual confirmation.";
+  paymentHint.textContent = "Payment: ramburs. Order request will be emailed for manual confirmation.";
 
   updateCheckoutReview();
 }
@@ -7759,7 +7935,33 @@ document.querySelectorAll('input[name="paymentMethod"]').forEach((input) => {
   input.addEventListener("change", updatePaymentHint);
 });
 
+function setupCookieBanner() {
+  const banner = document.getElementById("cookieBanner");
+  const acceptButton = document.getElementById("cookieAccept");
+  if (!banner || !acceptButton) return;
+
+  const storageKey = "21fadeawayCookieConsent";
+  let isAccepted = false;
+
+  try {
+    isAccepted = localStorage.getItem(storageKey) === "accepted";
+  } catch (error) {}
+
+  if (!isAccepted) {
+    banner.classList.add("show");
+  }
+
+  acceptButton.addEventListener("click", () => {
+    try {
+      localStorage.setItem(storageKey, "accepted");
+    } catch (error) {}
+
+    banner.classList.remove("show");
+  });
+}
+
 updatePaymentHint();
+setupCookieBanner();
 updateFitFinder();
 
 renderCart();
